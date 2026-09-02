@@ -6,6 +6,11 @@ summary: "ARISE overall/global lead, as supplied for this demonstrator, and Full
 profileLinks:
   - label: "NYU Tandon profile"
     url: "https://engineering.nyu.edu/faculty/debra-laefer"
+photo:
+  url: "https://engineering.nyu.edu/sites/default/files/styles/square_large_default_1x/public/2020-04/erc_pic_1.jpg?h=ea43beda&itok=FOy9KPVq"
+  alt: "Portrait of Debra Laefer"
+  sourceUrl: "https://engineering.nyu.edu/faculty/debra-laefer"
+  sourceLabel: "NYU Tandon profile"
 order: 1
 ---
 

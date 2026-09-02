@@ -6,6 +6,11 @@ summary: "Short approved profile summary."
 profileLinks:
   - label: "Institutional profile"
     url: "https://example.edu/profile"
+photo:
+  url: "https://example.edu/verified-profile-photo.jpg"
+  alt: "Portrait of Full name"
+  sourceUrl: "https://example.edu/profile"
+  sourceLabel: "Institutional profile"
 demo: false
 order: 10
 ---

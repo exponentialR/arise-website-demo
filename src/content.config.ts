@@ -7,6 +7,13 @@ const profileLink = z.object({
   url: z.url(),
 });
 
+const profilePhoto = z.object({
+  url: z.url(),
+  alt: z.string(),
+  sourceUrl: z.url(),
+  sourceLabel: z.string(),
+});
+
 const people = defineCollection({
   loader: glob({ base: "./src/content/people", pattern: "**/*.md" }),
   schema: z.object({
@@ -17,6 +24,7 @@ const people = defineCollection({
     projects: z.array(reference("projects")).optional(),
     publications: z.array(reference("publications")).optional(),
     profileLinks: z.array(profileLink).default([]),
+    photo: profilePhoto.optional(),
     demo: z.boolean().default(false),
     order: z.number().int().optional(),
   }),

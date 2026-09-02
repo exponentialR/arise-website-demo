@@ -42,6 +42,10 @@ As a result, adding `src/content/publications/a-paper.md` updates:
 
 Project and person schemas also permit optional curated forward references. Detail pages merge those with reverse relationships and remove duplicate records. Ordinary publication maintenance should use the publication record as the source of truth.
 
+## Profile photographs
+
+A person record may include an optional `photo` block with `url`, `alt`, `sourceUrl` and `sourceLabel`. The source fields make the image's public institutional origin visible on the profile page. If no appropriate verified photograph is available, the templates render the person's initials instead of inventing or substituting a likeness. Image selection and reuse permission must be confirmed before an official launch.
+
 ## Demonstration records
 
 Every intentionally fictional record has `demo: true` and visible wording such as `[DEMONSTRATION RECORD]`. Real supplied facts are kept deliberately concise where approved copy has not been provided.

@@ -58,7 +58,31 @@ const initials = person.data.name
 <BaseLayout title={person.data.name} description={person.data.summary}>
   <section class="profile-hero">
     <div class="shell profile-hero__grid">
-      <div class="profile-hero__portrait" aria-hidden="true">{initials}</div>
+      {
+        person.data.photo ? (
+          <figure class="profile-hero__media">
+            <img
+              class="profile-hero__portrait profile-hero__portrait--image"
+              src={person.data.photo.url}
+              alt={person.data.photo.alt}
+              width="640"
+              height="640"
+              decoding="async"
+              fetchpriority="high"
+            />
+            <figcaption>
+              Photo source:{" "}
+              <a href={person.data.photo.sourceUrl}>
+                {person.data.photo.sourceLabel}
+              </a>
+            </figcaption>
+          </figure>
+        ) : (
+          <div class="profile-hero__portrait" aria-hidden="true">
+            {initials}
+          </div>
+        )
+      }
       <div>
         <p class="breadcrumb">
           <a href={sitePath("/people/")}>People</a><span aria-hidden="true"

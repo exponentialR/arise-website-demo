@@ -91,7 +91,7 @@ Each filename is its stable record ID. For example, `src/content/projects/isc-xr
 cp src/content/people/_template.md.example src/content/people/given-family.md
 ```
 
-Add only verified name, role, affiliation, biography and profile links. Set `institution` to the filename ID of an existing institution record.
+Add only verified name, role, affiliation, biography and profile links. Set `institution` to the filename ID of an existing institution record. The optional `photo` block records the image URL, descriptive alt text and the public institutional page used as its source; omit it to use the initials fallback.
 
 ### Add an institution
 

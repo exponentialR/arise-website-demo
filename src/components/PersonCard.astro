@@ -17,7 +17,23 @@ const initials = person.data.name
 ---
 
 <article class="person-card">
-  <div class="person-card__portrait" aria-hidden="true">{initials}</div>
+  {
+    person.data.photo ? (
+      <img
+        class="person-card__portrait person-card__portrait--image"
+        src={person.data.photo.url}
+        alt=""
+        width="640"
+        height="640"
+        loading="lazy"
+        decoding="async"
+      />
+    ) : (
+      <div class="person-card__portrait" aria-hidden="true">
+        {initials}
+      </div>
+    )
+  }
   <div>
     {person.data.demo && <DemoBadge />}
     <h3><a href={sitePath(`/people/${person.id}/`)}>{person.data.name}</a></h3>

@@ -6,6 +6,11 @@ summary: "Professor and Head of Queen's University Belfast's School of Electroni
 profileLinks:
   - label: "Queen's University Belfast profile"
     url: "https://pure.qub.ac.uk/en/persons/karen-rafferty/"
+photo:
+  url: "https://pure.qub.ac.uk/files-asset/132418471/Parkway_5041_2_.jpg?w=640&f=jpg"
+  alt: "Portrait of Karen Rafferty"
+  sourceUrl: "https://pure.qub.ac.uk/en/persons/karen-rafferty/"
+  sourceLabel: "Queen's University Belfast profile"
 order: 5
 ---
 

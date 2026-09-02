@@ -6,6 +6,11 @@ summary: "Professor in Queen's University Belfast's School of Natural and Built 
 profileLinks:
   - label: "Queen's University Belfast profile"
     url: "https://pure.qub.ac.uk/en/persons/david-hester/"
+photo:
+  url: "https://pure.qub.ac.uk/files-asset/2178348/095d477c2074ce841d461be0553b575c.jpg?w=640&f=jpg"
+  alt: "Portrait of David Hester"
+  sourceUrl: "https://pure.qub.ac.uk/en/persons/david-hester/"
+  sourceLabel: "Queen's University Belfast profile"
 order: 3
 ---
 

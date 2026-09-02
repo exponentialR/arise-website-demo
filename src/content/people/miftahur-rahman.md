@@ -6,6 +6,11 @@ summary: "Lecturer in Robotics at Kingston University whose research interests i
 profileLinks:
   - label: "Kingston University profile"
     url: "https://www.kingston.ac.uk/about/staff/dr-miftahur-rahman"
+photo:
+  url: "https://www.kingston.ac.uk/sites/default/files/styles/1_1_media_lg/public/2025-03/Rahman-Miftahur.jpg?h=a8c6e9bd&itok=4BL6s7hY"
+  alt: "Portrait of Miftahur Rahman"
+  sourceUrl: "https://www.kingston.ac.uk/about/staff/dr-miftahur-rahman"
+  sourceLabel: "Kingston University profile"
 order: 6
 ---
 

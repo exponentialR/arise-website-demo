@@ -6,6 +6,11 @@ summary: "Associate Professor at UT San Antonio and Division Leader of Construct
 profileLinks:
   - label: "UT San Antonio profile"
     url: "https://klesse.utsa.edu/faculty/profiles/awolusi-ibukun.html"
+photo:
+  url: "https://klesse.utsa.edu/faculty/headshots/civil/ibukun-awolusi.png"
+  alt: "Portrait of Ibukun Awolusi"
+  sourceUrl: "https://klesse.utsa.edu/faculty/profiles/awolusi-ibukun.html"
+  sourceLabel: "UT San Antonio profile"
 order: 7
 ---
 
