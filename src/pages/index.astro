@@ -1,6 +1,33 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import PublicationItem from '../components/PublicationItem.astro';
+import NewsCard from '../components/NewsCard.astro';
+import DemoBadge from '../components/DemoBadge.astro';
 import { sitePath } from '../lib/site';
+
+const [projects, publications, people, news, resources, institutions] = await Promise.all([
+  getCollection('projects'),
+  getCollection('publications'),
+  getCollection('people'),
+  getCollection('news'),
+  getCollection('resources'),
+  getCollection('institutions'),
+]);
+
+const featuredProjects = projects
+  .filter((project) => project.data.featured)
+  .sort((a, b) => (a.data.order ?? 999) - (b.data.order ?? 999))
+  .slice(0, 3);
+const latestPublications = publications
+  .sort((a, b) => b.data.year - a.data.year || a.data.title.localeCompare(b.data.title))
+  .slice(0, 3);
+const latestNews = news.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 3);
+const featuredResources = resources.slice(0, 3);
+const peopleById = new Map(people.map((person) => [person.id, person]));
+const projectsById = new Map(projects.map((project) => [project.id, project]));
+const orderedInstitutions = institutions.sort((a, b) => (a.data.order ?? 999) - (b.data.order ?? 999));
 ---
 
 <BaseLayout
@@ -43,25 +70,118 @@ import { sitePath } from '../lib/site';
         <h2 id="context-heading">Institutions and collaboration context</h2>
       </div>
       <div class="name-grid">
-        <span>Queen's University Belfast</span>
-        <span>New York University</span>
-        <span>Universities in Texas</span>
-        <span>NSF</span>
-        <span>DfE</span>
-        <span>SFI</span>
+        {orderedInstitutions.map((institution) => (
+          <a href={sitePath(`/institutions/${institution.id}/`)}>{institution.data.shortName ?? institution.data.name}</a>
+        ))}
       </div>
       <p class="verification-note">Official roles, relationships and naming are to be confirmed before launch.</p>
     </div>
   </section>
 
-  <section class="section">
-    <div class="shell narrow">
-      <p class="eyebrow">A public front door for the programme</p>
-      <h2>Designed for research, not for selling a product.</h2>
-      <p class="lede">
-        The full demonstrator will make research activity legible to academic collaborators, public audiences and
-        future partners—without introducing a database, application server or paid content platform.
-      </p>
+  <section class="section" aria-labelledby="research-heading">
+    <div class="shell">
+      <div class="section-heading section-heading--row">
+        <div>
+          <p class="eyebrow">Featured research</p>
+          <h2 id="research-heading">Research in focus</h2>
+        </div>
+        <div>
+          <p class="section-note">One representative project demonstrates the richer project experience.</p>
+          <a class="text-link" href={sitePath('/research/')}>View all research <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <div class="project-grid">
+        {featuredProjects.map((project) => <ProjectCard project={project} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tint" aria-labelledby="publications-heading">
+    <div class="shell">
+      <div class="section-heading section-heading--row">
+        <div>
+          <p class="eyebrow">Latest research outputs</p>
+          <h2 id="publications-heading">Publications</h2>
+        </div>
+        <a class="text-link" href={sitePath('/publications/')}>Browse all publications <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="publication-list">
+        {latestPublications.map((publication) => (
+          <PublicationItem
+            publication={publication}
+            authorNames={publication.data.authors.map(
+              (reference) => peopleById.get(reference.id)?.data.name ?? reference.id,
+            )}
+            projectNames={publication.data.projects.map(
+              (reference) => projectsById.get(reference.id)?.data.title ?? reference.id,
+            )}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="news-heading">
+    <div class="shell">
+      <div class="section-heading section-heading--row">
+        <div>
+          <p class="eyebrow">From the programme</p>
+          <h2 id="news-heading">Latest news</h2>
+        </div>
+        <a class="text-link" href={sitePath('/news/')}>All news <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="news-grid">{latestNews.map((item) => <NewsCard item={item} />)}</div>
+    </div>
+  </section>
+
+  <section class="section section--navy" aria-labelledby="resources-heading">
+    <div class="shell">
+      <div class="section-heading section-heading--row section-heading--light">
+        <div>
+          <p class="eyebrow">Beyond the publication</p>
+          <h2 id="resources-heading">Research resources</h2>
+        </div>
+        <div>
+          <p class="section-note">A catalogue linking outward to the right repository, archive or platform.</p>
+          <a class="text-link text-link--light" href={sitePath('/resources/')}>Browse resources <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <div class="resource-grid">
+        {featuredResources.map((resource) => (
+          <article class="resource-card resource-card--dark">
+            <div class="card-meta">
+              <span>{resource.data.type}</span>
+              {resource.data.demo && <DemoBadge />}
+            </div>
+            <h3>{resource.data.title}</h3>
+            <p>{resource.data.summary}</p>
+            {resource.data.externalUrl ? (
+              <a href={resource.data.externalUrl}>Open resource <span aria-hidden="true">↗</span></a>
+            ) : (
+              <span class="pending-link">Link pending verification</span>
+            )}
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section home-final">
+    <div class="shell home-final__grid">
+      <div>
+        <p class="eyebrow">A public front door</p>
+        <h2>Built for a research programme—and for the people who will maintain it.</h2>
+      </div>
+      <div>
+        <p class="lede">
+          Content is entered once, checked into the repository and reused wherever its relationships matter. The
+          resulting site is fast, accessible and entirely static.
+        </p>
+        <div class="button-row">
+          <a class="button" href={sitePath('/people/')}>Explore people</a>
+          <a class="text-link" href={sitePath('/demo/architecture/')}>See how it works <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
     </div>
   </section>
 </BaseLayout>

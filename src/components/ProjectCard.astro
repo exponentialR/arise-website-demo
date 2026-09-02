@@ -1,0 +1,26 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import DemoBadge from './DemoBadge.astro';
+import { sitePath } from '../lib/site';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+---
+
+<article class="project-card">
+  <div class="project-card__visual" role="img" aria-label={project.data.imageAlt ?? 'Project image placeholder'}>
+    <span>{project.data.shortTitle ?? project.data.title}</span>
+  </div>
+  <div class="project-card__body">
+    <div class="card-meta">
+      <span>{project.data.status}</span>
+      {project.data.demo && <DemoBadge />}
+    </div>
+    <h3><a href={sitePath(`/research/${project.id}/`)}>{project.data.title}</a></h3>
+    <p>{project.data.summary}</p>
+    <a class="card-link" href={sitePath(`/research/${project.id}/`)}>View project <span aria-hidden="true">→</span></a>
+  </div>
+</article>

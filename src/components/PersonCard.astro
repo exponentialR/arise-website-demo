@@ -1,0 +1,29 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import DemoBadge from './DemoBadge.astro';
+import { sitePath } from '../lib/site';
+
+interface Props {
+  person: CollectionEntry<'people'>;
+  institutionName?: string;
+}
+
+const { person, institutionName } = Astro.props;
+const initials = person.data.name
+  .split(' ')
+  .map((part) => part[0])
+  .join('')
+  .slice(0, 2);
+---
+
+<article class="person-card">
+  <div class="person-card__portrait" aria-hidden="true">{initials}</div>
+  <div>
+    {person.data.demo && <DemoBadge />}
+    <h3><a href={sitePath(`/people/${person.id}/`)}>{person.data.name}</a></h3>
+    <p class="person-card__role">{person.data.role}</p>
+    {institutionName && <p class="person-card__institution">{institutionName}</p>}
+    <p>{person.data.summary}</p>
+    <a class="card-link" href={sitePath(`/people/${person.id}/`)}>View profile <span aria-hidden="true">→</span></a>
+  </div>
+</article>

@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { sitePath } from '../lib/site';
+---
+
+<BaseLayout title="Page not found" description="The requested page could not be found.">
+  <section class="page-hero page-hero--compact">
+    <div class="shell page-hero__inner">
+      <p class="eyebrow">404</p>
+      <h1>That page is not in the research catalogue.</h1>
+      <p class="page-hero__intro">It may have moved, or the address may be incomplete.</p>
+      <a class="button" href={sitePath('/')}>Return home</a>
+    </div>
+  </section>
+</BaseLayout>

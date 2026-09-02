@@ -1,0 +1,20 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import DemoBadge from './DemoBadge.astro';
+import { formatDate } from '../lib/content';
+import { sitePath } from '../lib/site';
+
+interface Props {
+  item: CollectionEntry<'news'>;
+}
+
+const { item } = Astro.props;
+---
+
+<article class="news-card">
+  <p class="news-card__date"><time datetime={item.data.date.toISOString()}>{formatDate(item.data.date)}</time></p>
+  {item.data.demo && <DemoBadge />}
+  <h3><a href={sitePath(`/news/${item.id}/`)}>{item.data.title}</a></h3>
+  <p>{item.data.summary}</p>
+  <a class="card-link" href={sitePath(`/news/${item.id}/`)}>Read article <span aria-hidden="true">→</span></a>
+</article>
