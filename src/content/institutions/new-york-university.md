@@ -3,9 +3,10 @@ name: "New York University"
 shortName: "NYU"
 kind: "University"
 countryOrRegion: "United States"
-summary: "Institution included in the ARISE context supplied for this demonstrator. Its official programme role and approved description are still to be confirmed."
-statusNote: "Programme relationship wording pending consortium approval."
+summary: "Debra Laefer's affiliation with NYU Tandon is verified through her official university profile and the publisher records catalogued here. Formal programme relationship wording remains subject to consortium approval."
+website: "https://www.nyu.edu/"
+statusNote: "Researcher affiliation is verified; programme-level wording is pending consortium approval."
 order: 2
 ---
 
-This profile intentionally contains no unverified programme claims. An approved institutional description and web link can be added after consortium review.
+New York University is represented here through verified researcher affiliation and publication metadata. This page does not attempt to define the university's complete or formal ARISE role.

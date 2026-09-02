@@ -1,9 +1,12 @@
 ---
 name: "Debra Laefer"
-role: "Overall global lead"
-summary: "Identified as the overall global lead in the supplied ARISE context. Biography, affiliation and profile links are awaiting verified programme content."
-profileLinks: []
+role: "Overall/global lead · Full Professor"
+institution: "new-york-university"
+summary: "ARISE overall/global lead, as supplied for this demonstrator, and Full Professor at NYU Tandon. Her verified research interests include urban informatics, remote sensing, geospatial data management and geotechnical engineering."
+profileLinks:
+  - label: "NYU Tandon profile"
+    url: "https://engineering.nyu.edu/faculty/debra-laefer"
 order: 1
 ---
 
-An approved biography has not yet been supplied. This profile is intentionally concise for the demonstrator.
+Debra Laefer is a Full Professor in Civil, Urban, and Environmental Engineering at NYU Tandon and a faculty member of the Center for Urban Science + Progress. Her wider ARISE leadership description on this page is limited to the role supplied for the demonstrator; fuller programme wording remains subject to consortium approval.

@@ -1,9 +1,12 @@
 ---
 name: "Samuel Adebayo"
 role: "Research Fellow"
-summary: "Research Fellow involved in ARISE. Detailed biography, institutional affiliation and project relationships are awaiting verified programme content."
-profileLinks: []
+institution: "queens-university-belfast"
+summary: "Research Fellow at Queen's University Belfast working on machine learning and computer vision, robotics, and perception for intermeshed steel connection assembly."
+profileLinks:
+  - label: "Queen's University Belfast profile"
+    url: "https://pure.qub.ac.uk/en/persons/samuel-adebayo-2/"
 order: 2
 ---
 
-This demonstrator does not include a detailed biography because approved profile text has not yet been supplied.
+Samuel Adebayo's research context in this demonstrator is machine learning and computer vision, robotics, and perception for intermeshed steel connection assembly. Publications below are generated automatically from verified author references in the publication records.

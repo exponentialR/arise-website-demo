@@ -61,7 +61,17 @@ const requiredPages = [
   "about/index.html",
   "research/isc-xr/index.html",
   "people/samuel-adebayo/index.html",
+  "people/debra-laefer/index.html",
+  "people/david-hester/index.html",
+  "people/daniel-mcpolin/index.html",
+  "people/karen-rafferty/index.html",
+  "people/miftahur-rahman/index.html",
+  "people/ibukun-awolusi/index.html",
+  "people/dorian-acevedo-mejia/index.html",
   "publications/index.html",
+  "publications/conpose/index.html",
+  "publications/isc-perception/index.html",
+  "publications/isarc-robotic-assembly-strategy/index.html",
   "news/index.html",
   "media/index.html",
   "resources/index.html",
@@ -74,14 +84,22 @@ for (const page of requiredPages) {
     errors.push(`missing required page: ${page}`);
 }
 
-for (const page of [
-  "research/isc-xr/index.html",
-  "people/example-researcher/index.html",
-  "publications/demo-linked-publication/index.html",
-]) {
+for (const page of ["research/isc-xr/index.html"]) {
   const html = readFileSync(join(outputDirectory, page), "utf8");
   if (!html.includes("Demonstration content"))
     errors.push(`${page}: demonstration label is not visible`);
+}
+
+for (const page of [
+  "publications/conpose/index.html",
+  "publications/isc-perception/index.html",
+  "publications/isarc-robotic-assembly-strategy/index.html",
+]) {
+  const html = readFileSync(join(outputDirectory, page), "utf8");
+  if (html.includes("Demonstration record"))
+    errors.push(
+      `${page}: verified publication is incorrectly labelled as demo`,
+    );
 }
 
 if (errors.length > 0) {

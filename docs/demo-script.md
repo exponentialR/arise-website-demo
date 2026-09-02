@@ -16,7 +16,7 @@ Use the hero and the sections below it to explain the public purpose: one cohere
 
 Open **Research → ISC-XR**.
 
-Explain that only the supplied fact—that ISC-XR is a representative ARISE-related project—is treated as real. Missing scope, aims, team and outputs are clearly labelled for verification.
+Explain that ISC-XR is the supplied representative ARISE-related project. Its linked publications and authors are now verified from publisher and proceedings records, while the project's complete scope, team and approved programme wording remain clearly labelled for consortium review.
 
 ## 4. Show the connected records
 
@@ -24,15 +24,15 @@ On the ISC-XR page, scroll through **Project people**, **Linked publications**, 
 
 ## 5. Open a person profile
 
-Open **Example Researcher** from the project page. State explicitly that it is a placeholder profile. Show how its related research and publication are derived from the project and publication records.
+Open **Samuel Adebayo** from the project page. Show that his institutional profile is concise, while the related research and publications are derived from project and publication records rather than copied into his profile.
 
 ## 6. Open Publications
 
-Open **Publications** and show the year grouping, output type and linked project. Reiterate that the visible record is labelled as demonstration content and is not a fake citation presented as fact.
+Open **Publications** and show the year grouping, output type and linked project. Open **ConPose** and point out its verified author list, journal, DOI and publisher link.
 
 ## 7. Show one raw content record
 
-Open [`src/content/publications/demo-linked-publication.md`](https://github.com/exponentialR/arise-website-demo/blob/main/src/content/publications/demo-linked-publication.md) in GitHub.
+Open [`src/content/publications/conpose.md`](https://github.com/exponentialR/arise-website-demo/blob/main/src/content/publications/conpose.md) in GitHub.
 
 Point to `authors` and `projects`. Explain the maintenance story:
 
@@ -50,7 +50,19 @@ Project and author pages update automatically
 
 ## 8. Explain “entered once, reused”
 
-The publication record owns its citation and references. The listing, detail page, project page, author profile and grouping views all query that one record.
+The ConPose record owns its citation metadata and references. The publication index, detail page, ISC-XR page, each author profile and grouping views all query that one record.
+
+The relationship to demonstrate is:
+
+```text
+one verified publication record
+        ↓
+publication index
+        ↓
+author profiles
+        ↓
+relevant project page
+```
 
 ## 9. Show automated deployment
 
