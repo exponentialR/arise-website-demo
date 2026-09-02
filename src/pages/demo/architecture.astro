@@ -1,0 +1,134 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import { sitePath } from '../../lib/site';
+
+const pipeline = ['Structured content', 'Astro', 'GitHub repository', 'Automated build', 'GitHub Pages', 'Public website'];
+const costItems = [
+  ['Hosting / server', '£0', 'Static site hosted by GitHub Pages for this public demonstrator.'],
+  ['Database', 'Not required', 'Content is compiled into the website at build time.'],
+  ['CMS licence', 'Not required', 'Editors maintain structured text records through the repository workflow.'],
+  ['SSL / HTTPS', 'Platform provided', 'GitHub Pages provides HTTPS for its published address.'],
+  ['Deployment', 'Automated', 'GitHub Actions builds and deploys approved changes.'],
+  ['Framework', 'Open source', 'Astro produces static HTML, CSS and minimal JavaScript.'],
+];
+---
+
+<BaseLayout title="Demo architecture" description="How the ARISE website demonstrator works and the infrastructure cost model it demonstrates.">
+  <PageHeader
+    eyebrow="Meeting view · internal demonstrator"
+    title="A serious public website without a continuously running application."
+    intro="ARISE publishes structured, relatively low-frequency content. This demonstrator turns those records into static web pages and deploys them automatically."
+  />
+
+  <section class="section" aria-labelledby="pipeline-heading">
+    <div class="shell">
+      <div class="section-heading section-heading--row">
+        <div>
+          <p class="eyebrow">How the site works</p>
+          <h2 id="pipeline-heading">From one source record to a public page</h2>
+        </div>
+        <p class="section-note">There is no live database or application server between the visitor and the published page.</p>
+      </div>
+      <ol class="architecture-flow">
+        {pipeline.map((item, index) => (
+          <li>
+            <span>{String(index + 1).padStart(2, '0')}</span>
+            <strong>{item}</strong>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section--tint" aria-labelledby="maintenance-heading">
+    <div class="shell architecture-maintenance">
+      <div>
+        <p class="eyebrow">Content maintenance</p>
+        <h2 id="maintenance-heading">Add it once. Reuse it everywhere.</h2>
+        <p class="lede">
+          A publication record links to its authors and projects. Astro reads those relationships and updates every
+          relevant page during the build.
+        </p>
+      </div>
+      <ol class="maintenance-flow">
+        <li><span>01</span><strong>Add or edit a publication record</strong></li>
+        <li><span>02</span><strong>Review and merge the change</strong></li>
+        <li><span>03</span><strong>GitHub Actions rebuilds the site</strong></li>
+        <li><span>04</span><strong>Publication, project and author pages update</strong></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="cost-heading">
+    <div class="shell">
+      <div class="section-heading">
+        <p class="eyebrow">Demonstrator cost model</p>
+        <h2 id="cost-heading">What does not require paid infrastructure</h2>
+      </div>
+      <div class="cost-table" role="table" aria-label="Demonstrator infrastructure cost model">
+        {costItems.map(([item, cost, explanation]) => (
+          <div class="cost-table__row" role="row">
+            <strong role="cell">{item}</strong>
+            <span role="cell">{cost}</span>
+            <p role="cell">{explanation}</p>
+          </div>
+        ))}
+      </div>
+      <p class="cost-caveat">
+        This describes the architecture and current cost model for this public demonstrator. It excludes staff time,
+        optional domain registration and any future services the consortium chooses to add, and remains subject to
+        third-party terms and policies.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--navy" aria-labelledby="domain-heading">
+    <div class="shell">
+      <div class="section-heading section-heading--light">
+        <p class="eyebrow">Three domain routes</p>
+        <h2 id="domain-heading">The hosting model stays the same; only the public address changes.</h2>
+      </div>
+      <div class="domain-grid">
+        <article>
+          <p class="domain-grid__option">Option A</p>
+          <h3>GitHub Pages address</h3>
+          <code>exponentialR.github.io/arise-website-demo/</code>
+          <p>Current demonstrator infrastructure cost: £0/year. The trade-off is a less polished URL.</p>
+        </article>
+        <article>
+          <p class="domain-grid__option">Option B · preferred zero-cost route</p>
+          <h3>Institutional subdomain</h3>
+          <code>arise.qub.ac.uk</code>
+          <p>Potentially £0/year to ARISE if an institution provides the subdomain and its IT team configures DNS.</p>
+        </article>
+        <article>
+          <p class="domain-grid__option">Option C</p>
+          <h3>Independent ARISE domain</h3>
+          <code>arise-research.org</code>
+          <p>GitHub Pages can still host the site; only domain registration would introduce a recurring charge.</p>
+        </article>
+      </div>
+      <p class="cost-caveat cost-caveat--dark">Examples are discussion options, not configured domains or guaranteed third-party prices.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell decision-panel">
+      <div>
+        <p class="eyebrow">Decisions for the consortium</p>
+        <h2>The technology is working. The next questions are about ownership.</h2>
+      </div>
+      <ul>
+        <li>What is the approved ARISE brand and programme description?</li>
+        <li>Where should the repository ultimately live?</li>
+        <li>Who can edit, review and approve public content?</li>
+        <li>Which domain route should the programme use?</li>
+      </ul>
+      <div class="button-row">
+        <a class="button" href={sitePath('/research/isc-xr/')}>Return to the ISC-XR example</a>
+        <a class="text-link" href="https://github.com/exponentialR/arise-website-demo">View the repository <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

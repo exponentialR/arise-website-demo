@@ -6,3 +6,5 @@
 4. Show the GitHub repository and automated deployment workflow.
 5. Explain the three URL/cost routes.
 6. Ask for decisions on branding, ownership, editorial responsibility and domain route.
+
+The working walkthrough is documented in [`demo-script.md`](demo-script.md).

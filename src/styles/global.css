@@ -1040,6 +1040,175 @@ h3 {
   text-transform: uppercase;
 }
 
+.architecture-flow {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  border-block: 1px solid var(--line);
+  list-style: none;
+}
+
+.architecture-flow li {
+  position: relative;
+  min-height: 11rem;
+  padding: 1.25rem;
+  border-right: 1px solid var(--line);
+}
+
+.architecture-flow li:last-child {
+  border-right: 0;
+}
+
+.architecture-flow li:not(:last-child)::after {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  right: -0.72rem;
+  display: grid;
+  width: 1.4rem;
+  height: 1.4rem;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--blue);
+  background: var(--white);
+  content: '→';
+  font-size: 0.76rem;
+  transform: translateY(-50%);
+}
+
+.architecture-flow span,
+.maintenance-flow span {
+  display: block;
+  margin-bottom: 3rem;
+  color: var(--blue);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.85rem;
+}
+
+.architecture-flow strong {
+  display: block;
+  color: var(--navy);
+  font-family: Georgia, "Times New Roman", serif;
+  line-height: 1.3;
+}
+
+.architecture-maintenance {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(3rem, 8vw, 7rem);
+}
+
+.maintenance-flow {
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+  list-style: none;
+}
+
+.maintenance-flow li {
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  padding-block: 1.1rem;
+  border-bottom: 1px solid var(--line);
+  gap: 1rem;
+}
+
+.maintenance-flow span {
+  margin: 0;
+}
+
+.cost-table {
+  border-top: 3px solid var(--navy);
+}
+
+.cost-table__row {
+  display: grid;
+  grid-template-columns: 0.65fr 0.5fr 1.4fr;
+  align-items: start;
+  padding: 1.25rem;
+  border-bottom: 1px solid var(--line);
+  gap: 2rem;
+}
+
+.cost-table__row:nth-child(even) {
+  background: var(--pale);
+}
+
+.cost-table__row > span {
+  color: var(--blue-deep);
+  font-weight: 800;
+}
+
+.cost-table__row p {
+  margin-bottom: 0;
+  color: var(--muted);
+}
+
+.cost-caveat {
+  max-width: 900px;
+  margin: 1.5rem 0 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.cost-caveat--dark {
+  color: #9fb7c3;
+}
+
+.domain-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.domain-grid article {
+  padding: 2rem;
+  color: #bdd0da;
+  background: var(--navy);
+}
+
+.domain-grid h3 {
+  color: var(--white);
+}
+
+.domain-grid code {
+  display: block;
+  overflow-wrap: anywhere;
+  margin-bottom: 1.5rem;
+  color: #e8f3f7;
+  font-size: 0.86rem;
+}
+
+.domain-grid__option {
+  color: #8fc2db;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.decision-panel {
+  padding-left: clamp(1.5rem, 4vw, 4rem);
+  border-left: 4px solid var(--blue);
+}
+
+.decision-panel > * {
+  max-width: 880px;
+}
+
+.decision-panel ul {
+  margin-block: 2rem;
+  padding-left: 1.25rem;
+  font-size: 1.08rem;
+}
+
+.decision-panel li + li {
+  margin-top: 0.75rem;
+}
+
 .site-footer {
   padding-block: 4rem 1.5rem;
   color: #d9e5eb;
@@ -1160,6 +1329,22 @@ h3 {
   .institution-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .architecture-flow {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .architecture-flow li:nth-child(3) {
+    border-right: 0;
+  }
+
+  .architecture-flow li:nth-child(-n + 3) {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .architecture-flow li:nth-child(3)::after {
+    display: none;
+  }
 }
 
 @media (max-width: 760px) {
@@ -1277,6 +1462,39 @@ h3 {
   .filter-panel,
   .media-item {
     grid-template-columns: 1fr;
+  }
+
+  .architecture-flow,
+  .architecture-maintenance,
+  .domain-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .architecture-flow li,
+  .architecture-flow li:nth-child(3) {
+    min-height: auto;
+    padding-block: 1.25rem;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .architecture-flow li:not(:last-child)::after,
+  .architecture-flow li:nth-child(3)::after {
+    top: auto;
+    right: 1rem;
+    bottom: -0.72rem;
+    display: grid;
+    content: '↓';
+    transform: none;
+  }
+
+  .architecture-flow span {
+    margin-bottom: 1rem;
+  }
+
+  .cost-table__row {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
   }
 
   .media-item {
