@@ -1,0 +1,78 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import DemoBadge from '../components/DemoBadge.astro';
+import { sitePath } from '../lib/site';
+
+const institutions = (await getCollection('institutions')).sort(
+  (a, b) => (a.data.order ?? 999) - (b.data.order ?? 999),
+);
+const universities = institutions.filter((item) => item.data.kind === 'University' || item.data.kind === 'Demonstration placeholder');
+const contextBodies = institutions.filter((item) => item.data.kind === 'Funding / collaboration context');
+---
+
+<BaseLayout title="Partners / Contact" description="Institutions, collaboration context and contact information for the ARISE website demonstrator.">
+  <PageHeader
+    eyebrow="Partners / Contact"
+    title="An international programme needs shared ownership and clear routes in."
+    intro="This page demonstrates how confirmed institutions, funders and collaborators can be represented once official roles and wording have been approved."
+  />
+
+  <section class="section">
+    <div class="shell">
+      <div class="section-heading">
+        <p class="eyebrow">Institutional context</p>
+        <h2>Universities named in the supplied context</h2>
+      </div>
+      <div class="institution-grid">
+        {universities.map((institution) => (
+          <article class="institution-card">
+            {institution.data.demo && <DemoBadge />}
+            <h3><a href={sitePath(`/institutions/${institution.id}/`)}>{institution.data.name}</a></h3>
+            {institution.data.countryOrRegion && <p class="institution-card__region">{institution.data.countryOrRegion}</p>}
+            <p>{institution.data.summary}</p>
+            <a class="card-link" href={sitePath(`/institutions/${institution.id}/`)}>View record <span aria-hidden="true">→</span></a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tint">
+    <div class="shell">
+      <div class="section-heading section-heading--row">
+        <div>
+          <p class="eyebrow">Funding / collaboration context</p>
+          <h2>Organisations named in the supplied brief</h2>
+        </div>
+        <p class="section-note">No detailed funding or contractual relationship is asserted here.</p>
+      </div>
+      <div class="context-card-grid">
+        {contextBodies.map((institution) => (
+          <article>
+            <h3>{institution.data.name}</h3>
+            <p>{institution.data.summary}</p>
+            {institution.data.statusNote && <p class="verification-note">{institution.data.statusNote}</p>}
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell contact-panel">
+      <div>
+        <p class="eyebrow">Contact</p>
+        <h2>Programme contact details to be confirmed.</h2>
+      </div>
+      <div>
+        <p>
+          The consortium should agree the public contact route and who owns responses before an email address or
+          contact form is published. This demonstrator deliberately does not invent one.
+        </p>
+        <p class="verification-note">Decision needed: programme contact, editorial owner and repository access model.</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,138 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import DemoBadge from '../../components/DemoBadge.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import PublicationItem from '../../components/PublicationItem.astro';
+import { refIds, uniqueById } from '../../lib/content';
+import { sitePath } from '../../lib/site';
+
+export async function getStaticPaths() {
+  const people = await getCollection('people');
+  return people.map((person) => ({ params: { id: person.id }, props: { person } }));
+}
+
+interface Props {
+  person: CollectionEntry<'people'>;
+}
+
+const { person } = Astro.props;
+const { Content } = await render(person);
+const [people, institutions, projects, publications] = await Promise.all([
+  getCollection('people'),
+  getCollection('institutions'),
+  getCollection('projects'),
+  getCollection('publications'),
+]);
+const forwardProjectIds = refIds(person.data.projects);
+const forwardPublicationIds = refIds(person.data.publications);
+const linkedProjects = uniqueById([
+  ...projects.filter((project) => project.data.people.some((reference) => reference.id === person.id)),
+  ...projects.filter((project) => forwardProjectIds.has(project.id)),
+]);
+const linkedPublications = uniqueById([
+  ...publications.filter((publication) => publication.data.authors.some((reference) => reference.id === person.id)),
+  ...publications.filter((publication) => forwardPublicationIds.has(publication.id)),
+]);
+const institution = person.data.institution
+  ? institutions.find((entry) => entry.id === person.data.institution?.id)
+  : undefined;
+const peopleById = new Map(people.map((entry) => [entry.id, entry]));
+const projectsById = new Map(projects.map((entry) => [entry.id, entry]));
+const initials = person.data.name
+  .split(' ')
+  .map((part) => part[0])
+  .join('')
+  .slice(0, 2);
+---
+
+<BaseLayout title={person.data.name} description={person.data.summary}>
+  <section class="profile-hero">
+    <div class="shell profile-hero__grid">
+      <div class="profile-hero__portrait" aria-hidden="true">{initials}</div>
+      <div>
+        <p class="breadcrumb"><a href={sitePath('/people/')}>People</a><span aria-hidden="true">/</span>{person.data.name}</p>
+        {person.data.demo && <DemoBadge />}
+        <h1>{person.data.name}</h1>
+        <p class="profile-role">{person.data.role}</p>
+        {institution && (
+          <p class="profile-institution"><a href={sitePath(`/institutions/${institution.id}/`)}>{institution.data.name}</a></p>
+        )}
+        <p class="page-hero__intro">{person.data.summary}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell detail-layout">
+      <article class="prose">
+        <h2>Profile</h2>
+        <Content />
+      </article>
+      <aside class="detail-sidebar" aria-label="Profile details">
+        <div class="detail-sidebar__block">
+          <p class="detail-label">Role</p>
+          <p>{person.data.role}</p>
+        </div>
+        <div class="detail-sidebar__block">
+          <p class="detail-label">Institution</p>
+          <p>{institution?.data.name ?? 'Affiliation to be confirmed.'}</p>
+        </div>
+        <div class="detail-sidebar__block">
+          <p class="detail-label">Profile links</p>
+          {person.data.profileLinks.length > 0 ? (
+            <ul class="plain-list">
+              {person.data.profileLinks.map((link) => <li><a href={link.url}>{link.label} <span aria-hidden="true">↗</span></a></li>)}
+            </ul>
+          ) : (
+            <p>Verified links have not yet been supplied.</p>
+          )}
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section section--tint" aria-labelledby="profile-projects-heading">
+    <div class="shell">
+      <div class="section-heading section-heading--row">
+        <div>
+          <p class="eyebrow">Connected automatically</p>
+          <h2 id="profile-projects-heading">Related research</h2>
+        </div>
+        <p class="section-note">Projects appear here when their content records reference this person.</p>
+      </div>
+      {linkedProjects.length > 0 ? (
+        <div class="project-grid">{linkedProjects.map((project) => <ProjectCard project={project} />)}</div>
+      ) : (
+        <p class="empty-state">No verified project relationship is currently recorded.</p>
+      )}
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="profile-publications-heading">
+    <div class="shell">
+      <div class="section-heading section-heading--row">
+        <div>
+          <p class="eyebrow">Research outputs</p>
+          <h2 id="profile-publications-heading">Related publications</h2>
+        </div>
+        <p class="section-note">Author links are read from each publication record; citation data is not copied into this profile.</p>
+      </div>
+      {linkedPublications.length > 0 ? (
+        <div class="publication-list">
+          {linkedPublications.map((publication) => (
+            <PublicationItem
+              publication={publication}
+              authorNames={publication.data.authors.map((reference) => peopleById.get(reference.id)?.data.name ?? reference.id)}
+              projectNames={publication.data.projects.map(
+                (reference) => projectsById.get(reference.id)?.data.title ?? reference.id,
+              )}
+            />
+          ))}
+        </div>
+      ) : (
+        <p class="empty-state">No verified publications are currently linked to this profile.</p>
+      )}
+    </div>
+  </section>
+</BaseLayout>

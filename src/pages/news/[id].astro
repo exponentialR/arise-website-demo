@@ -1,0 +1,50 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import DemoBadge from '../../components/DemoBadge.astro';
+import { formatDate } from '../../lib/content';
+import { sitePath } from '../../lib/site';
+
+export async function getStaticPaths() {
+  const news = await getCollection('news');
+  return news.map((item) => ({ params: { id: item.id }, props: { item } }));
+}
+
+interface Props {
+  item: CollectionEntry<'news'>;
+}
+
+const { item } = Astro.props;
+const { Content } = await render(item);
+const projects = await getCollection('projects');
+const projectsById = new Map(projects.map((project) => [project.id, project]));
+---
+
+<BaseLayout title={item.data.title} description={item.data.summary}>
+  <section class="page-hero page-hero--article">
+    <div class="shell page-hero__inner">
+      <p class="breadcrumb"><a href={sitePath('/news/')}>News</a><span aria-hidden="true">/</span>Article</p>
+      {item.data.demo && <DemoBadge />}
+      <h1>{item.data.title}</h1>
+      <p class="article-date"><time datetime={item.data.date.toISOString()}>{formatDate(item.data.date)}</time></p>
+      <p class="page-hero__intro">{item.data.summary}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell article-layout">
+      <article class="prose"><Content /></article>
+      {item.data.projects.length > 0 && (
+        <aside class="detail-sidebar" aria-label="Related research">
+          <p class="detail-label">Related research</p>
+          <ul class="plain-list">
+            {item.data.projects.map((reference) => {
+              const project = projectsById.get(reference.id);
+              return project ? <li><a href={sitePath(`/research/${project.id}/`)}>{project.data.title}</a></li> : null;
+            })}
+          </ul>
+        </aside>
+      )}
+    </div>
+  </section>
+</BaseLayout>

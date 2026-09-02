@@ -1,0 +1,38 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import PersonCard from '../../components/PersonCard.astro';
+
+const [people, institutions] = await Promise.all([getCollection('people'), getCollection('institutions')]);
+people.sort((a, b) => (a.data.order ?? 999) - (b.data.order ?? 999));
+const institutionsById = new Map(institutions.map((institution) => [institution.id, institution]));
+---
+
+<BaseLayout title="People" description="Meet the people represented in the ARISE website demonstrator.">
+  <PageHeader
+    eyebrow="People"
+    title="A research programme is a network of people."
+    intro="Profiles can connect each researcher to an institution, project and publication record while keeping approved biographical information in one place."
+  />
+
+  <section class="section">
+    <div class="shell">
+      <div class="section-heading section-heading--row">
+        <div>
+          <p class="eyebrow">Programme community</p>
+          <h2>People in this demonstrator</h2>
+        </div>
+        <p class="section-note">Placeholder profiles are visibly labelled. Affiliations are omitted where they have not been supplied.</p>
+      </div>
+      <div class="people-grid">
+        {people.map((person) => (
+          <PersonCard
+            person={person}
+            institutionName={person.data.institution ? institutionsById.get(person.data.institution.id)?.data.name : undefined}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

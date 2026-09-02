@@ -1,0 +1,51 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import DemoBadge from '../components/DemoBadge.astro';
+import { formatDate } from '../lib/content';
+import { sitePath } from '../lib/site';
+
+const [media, projects] = await Promise.all([getCollection('media'), getCollection('projects')]);
+media.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const projectsById = new Map(projects.map((project) => [project.id, project]));
+---
+
+<BaseLayout title="In the Media" description="A catalogue of external media coverage related to ARISE research.">
+  <PageHeader
+    eyebrow="In the Media"
+    title="A clear record of where the research is being discussed."
+    intro="The website can catalogue verified coverage and link readers to the original publisher without duplicating third-party articles."
+  />
+
+  <section class="section">
+    <div class="shell">
+      <div class="media-list">
+        {media.map((item) => {
+          const project = item.data.project ? projectsById.get(item.data.project.id) : undefined;
+          return (
+            <article class="media-item">
+              <div>
+                <p class="media-item__source">{item.data.source}</p>
+                <p class="media-item__date"><time datetime={item.data.date.toISOString()}>{formatDate(item.data.date)}</time></p>
+              </div>
+              <div>
+                {item.data.demo && <DemoBadge />}
+                <h2>{item.data.title}</h2>
+                {item.data.summary && <p>{item.data.summary}</p>}
+                {project && <p class="media-item__project">Related research: <a href={sitePath(`/research/${project.id}/`)}>{project.data.title}</a></p>}
+              </div>
+              <div class="media-item__action">
+                {item.data.externalUrl ? (
+                  <a class="text-link" href={item.data.externalUrl}>Read original <span aria-hidden="true">↗</span></a>
+                ) : (
+                  <span class="pending-link">External link pending verification</span>
+                )}
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
