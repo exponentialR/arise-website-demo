@@ -380,7 +380,8 @@ h3 {
 }
 
 .research-visual__label,
-.research-visual__axis-label {
+.research-visual__axis-label,
+.research-visual__lock-confirmation {
   fill: #b8d1dc;
   font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   font-size: 10px;
@@ -390,6 +391,13 @@ h3 {
 
 .research-visual__axis-label {
   fill: #e6c36a;
+}
+
+.research-visual__lock-confirmation {
+  fill: #e6c36a;
+  font-size: 8px;
+  opacity: 0;
+  animation: lock-confirmation 7s linear infinite;
 }
 
 .research-visual__copy {
@@ -428,9 +436,9 @@ h3 {
   0%,
   14%,
   100% {
-    transform: translateX(-22px);
+    transform: translateX(-44px);
   }
-  38%,
+  40%,
   76% {
     transform: translateX(0);
   }
@@ -440,9 +448,9 @@ h3 {
   0%,
   14%,
   100% {
-    transform: translateX(22px);
+    transform: translateX(44px);
   }
-  38%,
+  40%,
   76% {
     transform: translateX(0);
   }
@@ -477,6 +485,19 @@ h3 {
   }
   46%,
   68% {
+    opacity: 1;
+  }
+}
+
+@keyframes lock-confirmation {
+  0%,
+  36%,
+  82%,
+  100% {
+    opacity: 0;
+  }
+  43%,
+  74% {
     opacity: 1;
   }
 }
@@ -2033,7 +2054,12 @@ h3 {
   .research-visual__member--left,
   .research-visual__member--right,
   .research-visual__target,
-  .research-visual__scan {
+  .research-visual__scan,
+  .research-visual__lock-confirmation {
     animation: none;
+  }
+
+  .research-visual__lock-confirmation {
+    opacity: 1;
   }
 }
