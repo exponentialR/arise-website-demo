@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { sitePath } from '../lib/site';
+---
+
+<BaseLayout
+  title="ARISE"
+  description="A working demonstrator for the ARISE international research programme website."
+>
+  <section class="hero">
+    <div class="shell hero__grid">
+      <div class="hero__copy">
+        <p class="eyebrow">International research collaboration</p>
+        <h1>Research connected across disciplines, institutions and borders.</h1>
+        <p class="hero__intro">
+          ARISE brings together a multi-institutional research community. This demonstrator shows how its people,
+          projects, publications and public outputs can live in one clear, connected place.
+        </p>
+        <div class="button-row">
+          <a class="button" href={sitePath('/research/')}>Explore the research</a>
+          <a class="text-link" href={sitePath('/people/')}>Meet the research community <span aria-hidden="true">→</span></a>
+        </div>
+        <p class="verification-note">Programme wording and content shown here remain subject to consortium review.</p>
+      </div>
+      <aside class="network-panel" aria-label="How ARISE content connects">
+        <p class="network-panel__kicker">One programme · connected knowledge</p>
+        <div class="network-panel__focus">ARISE</div>
+        <div class="network-panel__links" aria-hidden="true">
+          <span>People</span>
+          <span>Projects</span>
+          <span>Institutions</span>
+          <span>Outputs</span>
+        </div>
+        <p class="network-panel__caption">Structured records keep every relationship consistent across the site.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="context-strip" aria-labelledby="context-heading">
+    <div class="shell">
+      <div class="section-heading compact">
+        <p class="eyebrow">Programme context supplied for this demonstrator</p>
+        <h2 id="context-heading">Institutions and collaboration context</h2>
+      </div>
+      <div class="name-grid">
+        <span>Queen's University Belfast</span>
+        <span>New York University</span>
+        <span>Universities in Texas</span>
+        <span>NSF</span>
+        <span>DfE</span>
+        <span>SFI</span>
+      </div>
+      <p class="verification-note">Official roles, relationships and naming are to be confirmed before launch.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell narrow">
+      <p class="eyebrow">A public front door for the programme</p>
+      <h2>Designed for research, not for selling a product.</h2>
+      <p class="lede">
+        The full demonstrator will make research activity legible to academic collaborators, public audiences and
+        future partners—without introducing a database, application server or paid content platform.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
