@@ -9,7 +9,7 @@ profileLinks:
 photo:
   url: "/images/people/david-hester.jpg"
   alt: "Portrait of David Hester"
-  sourceLabel: "supplied for this demonstrator"
+  sourceLabel: "Photograph supplied by David Hester"
 order: 2
 ---
 

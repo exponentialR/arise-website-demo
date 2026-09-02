@@ -9,8 +9,8 @@ profileLinks:
 photo:
   url: "/images/people/dorian-acevedo-mejia.png"
   alt: "Portrait of Dorian A. Acevedo-Mejia"
-  sourceLabel: "supplied for this demonstrator"
+  sourceLabel: "Photograph supplied by Dorian A. Acevedo-Mejia"
 order: 8
 ---
 
-Dorian A. Acevedo-Mejia's identity and publication affiliation are verified by the ISC-Perception publisher record. A current official institutional profile was not located, so this demonstrator does not assign a more specific role or broader research description.
+Dorian A. Acevedo-Mejia's identity and publication affiliation are verified by the ISC-Perception publisher record. A current official institutional profile was not located, so no more specific role or broader research description is assigned.

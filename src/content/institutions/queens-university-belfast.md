@@ -18,4 +18,4 @@ statusNote: "Named programme relationship and researcher affiliations are verifi
 order: 1
 ---
 
-Queen's University Belfast's public project listing describes ARISE as a US–Ireland collaboration and names the participating universities and funding routes. This demonstrator does not attempt to define the university's complete contractual role.
+Queen's University Belfast's public project listing describes ARISE as a US–Ireland collaboration and names the participating universities and funding routes. This record does not attempt to define the university's complete contractual role.

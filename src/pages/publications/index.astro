@@ -31,7 +31,7 @@ funders.sort((a, b) => (a.data.order ?? 999) - (b.data.order ?? 999));
   <PageHeader
     eyebrow="Publications"
     title="Research outputs, connected to the people and projects behind them."
-    intro="Each citation is maintained once. Structured author and project references allow it to appear wherever it is relevant across the site."
+    intro="Browse journal articles and conference papers connected to their authors, research areas and supporting awards."
   />
 
   <section class="section">
@@ -67,13 +67,14 @@ funders.sort((a, b) => (a.data.order ?? 999) - (b.data.order ?? 999));
         <div>
           <p class="eyebrow">Research catalogue</p>
           <h2>
-            {publications.length} record{publications.length === 1 ? "" : "s"} in
-            this demonstrator
+            {publications.length} research output{
+              publications.length === 1 ? "" : "s"
+            }
           </h2>
         </div>
         <p class="section-note">
           Publication metadata is drawn from publisher and official proceedings
-          records; programme-level wording remains subject to consortium review.
+          records and official proceedings.
         </p>
       </div>
 

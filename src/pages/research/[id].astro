@@ -1,7 +1,6 @@
 ---
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import DemoBadge from "../../components/DemoBadge.astro";
 import PersonCard from "../../components/PersonCard.astro";
 import PublicationItem from "../../components/PublicationItem.astro";
 import { refIds, uniqueById } from "../../lib/content";
@@ -46,13 +45,17 @@ const linkedPublications = uniqueById([
   ...publications.filter((publication) => publicationIds.has(publication.id)),
 ]);
 const linkedResources = uniqueById([
-  ...resources.filter((resource) =>
-    resource.data.projects.some((reference) => reference.id === project.id),
+  ...resources.filter(
+    (resource) =>
+      !resource.data.demo &&
+      resource.data.projects.some((reference) => reference.id === project.id),
   ),
-  ...resources.filter((resource) => resourceIds.has(resource.id)),
+  ...resources.filter(
+    (resource) => !resource.data.demo && resourceIds.has(resource.id),
+  ),
 ]);
 const linkedMedia = media.filter(
-  (item) => item.data.project?.id === project.id,
+  (item) => !item.data.demo && item.data.project?.id === project.id,
 );
 const projectNames = [project.data.title];
 ---
@@ -66,20 +69,17 @@ const projectNames = [project.data.title];
             >/</span
           >{project.data.title}
         </p>
-        <div class="card-meta">
-          <span>{project.data.status}</span>
-          {project.data.demo && <DemoBadge />}
-        </div>
         <h1>{project.data.title}</h1>
         <p class="page-hero__intro">{project.data.summary}</p>
       </div>
       <div
         class="project-image-placeholder"
         role="img"
-        aria-label={project.data.imageAlt ?? "Project image placeholder"}
+        aria-label={project.data.imageAlt ??
+          `${project.data.title} project visual`}
       >
         <span>{project.data.shortTitle ?? project.data.title}</span>
-        <small>Approved project imagery can be inserted here</small>
+        <small>Intermeshed steel connection research</small>
       </div>
     </div>
   </section>
@@ -90,10 +90,6 @@ const projectNames = [project.data.title];
         <Content />
       </article>
       <aside class="detail-sidebar" aria-label="Project details">
-        <div class="detail-sidebar__block">
-          <p class="detail-label">Status</p>
-          <p>{project.data.status}</p>
-        </div>
         <div class="detail-sidebar__block">
           <p class="detail-label">Institutions</p>
           {
@@ -112,16 +108,6 @@ const projectNames = [project.data.title];
             )
           }
         </div>
-        <div class="detail-sidebar__block">
-          <p class="detail-label">Content status</p>
-          <p>
-            {
-              project.data.demo
-                ? "Demonstration record requiring verification."
-                : "Approved record."
-            }
-          </p>
-        </div>
       </aside>
     </div>
   </section>
@@ -134,7 +120,7 @@ const projectNames = [project.data.title];
           <h2 id="team-heading">Project people</h2>
         </div>
         <p class="section-note">
-          These cards are generated from relationships in the project record.
+          Researchers represented through verified authorship and affiliation.
         </p>
       </div>
       {
@@ -154,7 +140,7 @@ const projectNames = [project.data.title];
           </div>
         ) : (
           <p class="empty-state">
-            Confirmed project participants have not yet been supplied.
+            No project participants are currently listed.
           </p>
         )
       }
@@ -202,8 +188,8 @@ const projectNames = [project.data.title];
           <h2 id="resources-heading">Resources and coverage</h2>
         </div>
         <p class="section-note">
-          The site catalogues external assets; it does not need to store large
-          datasets or videos.
+          Data, software and media are linked from their authoritative external
+          platforms.
         </p>
       </div>
       <div class="resource-grid">

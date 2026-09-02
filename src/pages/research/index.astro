@@ -15,8 +15,8 @@ const projects = (await getCollection("projects")).sort(
 >
   <PageHeader
     eyebrow="Research"
-    title="Projects are the meeting point for people, institutions and outputs."
-    intro="Each structured project record can bring together an approved description, team, partner institutions, publications and externally hosted resources."
+    title="Research advancing steel building assembly."
+    intro="ARISE research connects structural engineering, advanced manufacturing, robotics, perception and the human dimensions of technology adoption."
   />
 
   <section class="section">
@@ -24,18 +24,19 @@ const projects = (await getCollection("projects")).sort(
       <div class="section-heading section-heading--row">
         <div>
           <p class="eyebrow">Project directory</p>
-          <h2>
-            {projects.length} representative project{
-              projects.length === 1 ? "" : "s"
-            }
-          </h2>
+          <h2>Research projects</h2>
         </div>
         <p class="section-note">
-          Additional projects can be added as individual Markdown records after
-          content approval.
+          Each project brings together its researchers, institutions and related
+          outputs.
         </p>
       </div>
-      <div class="project-grid">
+      <div
+        class:list={[
+          "project-grid",
+          { "project-grid--single": projects.length === 1 },
+        ]}
+      >
         {projects.map((project) => <ProjectCard project={project} />)}
       </div>
     </div>

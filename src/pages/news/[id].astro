@@ -1,12 +1,11 @@
 ---
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import DemoBadge from "../../components/DemoBadge.astro";
 import { formatDate } from "../../lib/content";
 import { sitePath } from "../../lib/site";
 
 export async function getStaticPaths() {
-  const news = await getCollection("news");
+  const news = (await getCollection("news")).filter((item) => !item.data.demo);
   return news.map((item) => ({ params: { id: item.id }, props: { item } }));
 }
 
@@ -27,7 +26,6 @@ const projectsById = new Map(projects.map((project) => [project.id, project]));
         <a href={sitePath("/news/")}>News</a><span aria-hidden="true">/</span
         >Article
       </p>
-      {item.data.demo && <DemoBadge />}
       <h1>{item.data.title}</h1>
       <p class="article-date">
         <time datetime={item.data.date.toISOString()}

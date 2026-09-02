@@ -28,4 +28,4 @@ summary: "An experimental and finite-element study of the tensile response of to
 demo: false
 ---
 
-The publisher record acknowledges NSF award 2222815 together with several earlier awards and support routes. This demonstrator identifies the ARISE award relationship without implying that it was the only source of support or assigning the paper to ISC-XR.
+The publisher record acknowledges NSF award 2222815 together with several earlier awards and support routes. This catalogue identifies the ARISE award relationship without implying that it was the only source of support or assigning the paper to ISC-XR.

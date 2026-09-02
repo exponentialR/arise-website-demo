@@ -2,7 +2,6 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHeader from "../components/PageHeader.astro";
-import DemoBadge from "../components/DemoBadge.astro";
 import InstitutionMark from "../components/InstitutionMark.astro";
 import { sitePath } from "../lib/site";
 
@@ -19,12 +18,12 @@ const contributorInstitutions = institutions.filter(
 
 <BaseLayout
   title="Institutions / Contact"
-  description="Verified institutional relationships and contact information for the ARISE website demonstrator."
+  description="Institutions contributing to ARISE and programme contact information."
 >
   <PageHeader
     eyebrow="Institutions / Contact"
-    title="An international programme needs shared ownership and clear routes in."
-    intro="Universities are presented here through evidenced programme collaboration or researcher affiliation. Funding bodies have their own page so the two relationships are not conflated."
+    title="An international research collaboration."
+    intro="ARISE connects researchers and institutions across Northern Ireland, Ireland and the United States. Funding organisations are presented separately from university participation."
   />
 
   <section class="section">
@@ -37,8 +36,7 @@ const contributorInstitutions = institutions.filter(
         {
           programmeInstitutions.map((institution) => (
             <article class="institution-card">
-              <InstitutionMark institution={institution} showApprovalNote />
-              {institution.data.demo && <DemoBadge />}
+              <InstitutionMark institution={institution} />
               <h3>
                 <a href={sitePath(`/institutions/${institution.id}/`)}>
                   {institution.data.name}
@@ -78,16 +76,13 @@ const contributorInstitutions = institutions.filter(
         {
           contributorInstitutions.map((institution) => (
             <article class="institution-card">
-              <InstitutionMark institution={institution} showApprovalNote />
+              <InstitutionMark institution={institution} />
               <h3>
                 <a href={sitePath(`/institutions/${institution.id}/`)}>
                   {institution.data.name}
                 </a>
               </h3>
               <p>{institution.data.summary}</p>
-              {institution.data.statusNote && (
-                <p class="verification-note">{institution.data.statusNote}</p>
-              )}
               <a
                 class="card-link"
                 href={sitePath(`/institutions/${institution.id}/`)}
@@ -101,43 +96,17 @@ const contributorInstitutions = institutions.filter(
     </div>
   </section>
 
-  <section class="section">
-    <div class="shell logo-governance">
-      <div>
-        <p class="eyebrow">Institutional identity</p>
-        <h2>Official-source marks, included provisionally.</h2>
-      </div>
-      <div>
-        <p>
-          Each logo is stored with alt text, its official source and a short
-          usage note. The marks help this working demonstrator show how a
-          consortium identity could be presented; they do not replace each
-          institution's brand-approval process.
-        </p>
-        <p class="verification-note">
-          Before an official launch, the consortium must confirm permission,
-          approved variants, clear space and ordering with the relevant brand
-          owners.
-        </p>
-      </div>
-    </div>
-  </section>
-
   <section class="section section--tint">
     <div class="shell contact-panel">
       <div>
         <p class="eyebrow">Contact</p>
-        <h2>Programme contact details to be confirmed.</h2>
+        <h2>Connect with ARISE.</h2>
       </div>
       <div>
         <p>
-          The consortium should agree the public contact route and who owns
-          responses before an email address or contact form is published. This
-          demonstrator deliberately does not invent one.
-        </p>
-        <p class="verification-note">
-          Decision needed: programme contact, editorial owner and repository
-          access model.
+          A central programme contact will be published here once it has been
+          confirmed by the consortium. In the meantime, institutional profile
+          links provide routes to the researchers represented on this site.
         </p>
       </div>
     </div>

@@ -21,4 +21,4 @@ awards:
 order: 1
 ---
 
-The official award title is _FW-HTF-R: US-Ireland R&D Partnership: ARISE: Assembly and Robotics Innovation in Steel Building Erection_. Publications on this demonstrator distinguish between a paper-level acknowledgement and an output reported by NSF against the award.
+The official award title is _FW-HTF-R: US-Ireland R&D Partnership: ARISE: Assembly and Robotics Innovation in Steel Building Erection_. Publication records distinguish between a paper-level acknowledgement and an output reported by NSF against the award.

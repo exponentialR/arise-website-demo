@@ -2,16 +2,24 @@
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import "../styles/global.css";
+import { sitePath } from "../lib/site";
 
 interface Props {
   title: string;
   description: string;
   eyebrow?: string;
+  noindex?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, noindex = false } = Astro.props;
 const pageTitle = title === "ARISE" ? title : `${title} | ARISE`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
+const priorityRoutes = [
+  "/research/",
+  "/engagement/",
+  "/people/",
+  "/publications/",
+];
 ---
 
 <!doctype html>
@@ -21,8 +29,14 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
     <meta name="theme-color" content="#0d2a42" />
     <link rel="canonical" href={canonical} />
+    {
+      priorityRoutes.map((route) => (
+        <link rel="prefetch" href={sitePath(route)} />
+      ))
+    }
     <meta property="og:type" content="website" />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />

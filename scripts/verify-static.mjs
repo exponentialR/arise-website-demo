@@ -34,6 +34,15 @@ for (const file of htmlFiles) {
 
   scriptCount += (html.match(/<script(?:\s|>)/g) ?? []).length;
 
+  if (
+    !label.startsWith("demo/") &&
+    /working demonstrator|research programme demonstrator|demonstration content|not yet the official ARISE website|a research programme is a network of people/i.test(
+      html,
+    )
+  ) {
+    errors.push(`${label}: public-facing demonstrator language is visible`);
+  }
+
   const ids = [...html.matchAll(/\sid="([^"]+)"/g)].map((match) => match[1]);
   const duplicateIds = ids.filter((id, index) => ids.indexOf(id) !== index);
   if (duplicateIds.length > 0)
@@ -88,12 +97,6 @@ const requiredPages = [
 for (const page of requiredPages) {
   if (!existsSync(join(outputDirectory, page)))
     errors.push(`missing required page: ${page}`);
-}
-
-for (const page of ["research/isc-xr/index.html"]) {
-  const html = readFileSync(join(outputDirectory, page), "utf8");
-  if (!html.includes("Demonstration content"))
-    errors.push(`${page}: demonstration label is not visible`);
 }
 
 for (const page of [

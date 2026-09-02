@@ -55,7 +55,7 @@ const evidenceCounts = linkedPublications.reduce<Record<string, number>>(
           >/</span
         >{funder.data.shortName}
       </p>
-      <FunderMark funder={funder} showUsageNote />
+      <FunderMark funder={funder} />
       <p class="eyebrow">{funder.data.jurisdiction}</p>
       <h1>{funder.data.name}</h1>
       <p class="page-hero__intro">{funder.data.summary}</p>
@@ -68,7 +68,7 @@ const evidenceCounts = linkedPublications.reduce<Record<string, number>>(
         <Content />
         <h2>Evidence basis</h2>
         <p>
-          The catalogue currently contains {linkedPublications.length} output{
+          This page currently lists {linkedPublications.length} output{
             linkedPublications.length === 1 ? "" : "s"
           } linked to this funder.
         </p>
@@ -117,7 +117,7 @@ const evidenceCounts = linkedPublications.reduce<Record<string, number>>(
     <div class="shell">
       <div class="section-heading section-heading--row">
         <div>
-          <p class="eyebrow">Connected automatically</p>
+          <p class="eyebrow">Funding connections</p>
           <h2 id="funded-outputs-heading">Linked research outputs</h2>
         </div>
         <p class="section-note">

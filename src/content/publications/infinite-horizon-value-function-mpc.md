@@ -24,4 +24,4 @@ summary: "A robotics paper on approximating infinite-horizon value functions for
 demo: false
 ---
 
-The official NSF award record lists this publication as a research product reported against award 2222815. It is not assigned to ISC-XR in this demonstrator.
+The official NSF award record lists this publication as a research product reported against award 2222815. No ISC-XR relationship is assigned.

@@ -2,7 +2,6 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHeader from "../components/PageHeader.astro";
-import DemoBadge from "../components/DemoBadge.astro";
 import { formatDate } from "../lib/content";
 import { sitePath } from "../lib/site";
 
@@ -10,7 +9,9 @@ const [media, projects] = await Promise.all([
   getCollection("media"),
   getCollection("projects"),
 ]);
-media.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const publishedMedia = media
+  .filter((item) => !item.data.demo)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 const projectsById = new Map(projects.map((project) => [project.id, project]));
 ---
 
@@ -20,15 +21,15 @@ const projectsById = new Map(projects.map((project) => [project.id, project]));
 >
   <PageHeader
     eyebrow="In the Media"
-    title="A clear record of where the research is being discussed."
-    intro="The website can catalogue verified coverage and link readers to the original publisher without duplicating third-party articles."
+    title="ARISE research in the media."
+    intro="Coverage of ARISE research, with links to the original publishers."
   />
 
   <section class="section">
     <div class="shell">
       <div class="media-list">
         {
-          media.map((item) => {
+          publishedMedia.map((item) => {
             const project = item.data.project
               ? projectsById.get(item.data.project.id)
               : undefined;
@@ -43,7 +44,6 @@ const projectsById = new Map(projects.map((project) => [project.id, project]));
                   </p>
                 </div>
                 <div>
-                  {item.data.demo && <DemoBadge />}
                   <h2>{item.data.title}</h2>
                   {item.data.summary && <p>{item.data.summary}</p>}
                   {project && (
@@ -69,6 +69,11 @@ const projectsById = new Map(projects.map((project) => [project.id, project]));
               </article>
             );
           })
+        }
+        {
+          publishedMedia.length === 0 && (
+            <p class="empty-state">Verified media coverage will appear here.</p>
+          )
         }
       </div>
     </div>

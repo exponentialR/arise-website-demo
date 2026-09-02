@@ -18,4 +18,4 @@ statusNote: "Named collaboration and researcher affiliations are verified; detai
 order: 4
 ---
 
-UT San Antonio replaces the earlier generic Texas-university placeholder. The NSF record names Arturo Schultz and Ibukun Awolusi as co-principal investigators and the publication records verify their author affiliations. This page does not claim a complete contractual role.
+The NSF record names Arturo Schultz and Ibukun Awolusi as co-principal investigators, and publication records verify their author affiliations. This page does not claim a complete contractual role.

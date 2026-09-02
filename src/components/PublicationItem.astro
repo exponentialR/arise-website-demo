@@ -1,6 +1,5 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import DemoBadge from "./DemoBadge.astro";
 import { sitePath } from "../lib/site";
 
 interface Props {
@@ -23,7 +22,6 @@ const {
   <div class="publication-item__body">
     <div class="card-meta">
       <span>{publication.data.type}</span>
-      {publication.data.demo && <DemoBadge />}
     </div>
     <h3>
       <a href={sitePath(`/publications/${publication.id}/`)}

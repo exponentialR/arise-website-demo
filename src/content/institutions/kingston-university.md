@@ -18,4 +18,4 @@ statusNote: "Researcher affiliation is verified; any programme-level wording req
 order: 5
 ---
 
-Kingston University is included because an author of the catalogued ISC research is affiliated with the university. This demonstrator does not infer a broader institutional relationship beyond the available evidence.
+Kingston University is included because an author of the catalogued ISC research is affiliated with the university. No broader institutional relationship is inferred beyond the available evidence.

@@ -1,6 +1,5 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import DemoBadge from "./DemoBadge.astro";
 import { sitePath } from "../lib/site";
 
 interface Props {
@@ -40,7 +39,6 @@ const photoUrl = person.data.photo
     )
   }
   <div>
-    {person.data.demo && <DemoBadge />}
     <h3><a href={sitePath(`/people/${person.id}/`)}>{person.data.name}</a></h3>
     <p class="person-card__role">{person.data.role}</p>
     {
@@ -48,7 +46,7 @@ const photoUrl = person.data.photo
         <p class="person-card__institution">{institutionName}</p>
       )
     }
-    <p>{person.data.summary}</p>
+    <p class="person-card__summary">{person.data.summary}</p>
     <a class="card-link" href={sitePath(`/people/${person.id}/`)}
       >View profile <span aria-hidden="true">→</span></a
     >

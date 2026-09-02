@@ -2,14 +2,15 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHeader from "../components/PageHeader.astro";
-import DemoBadge from "../components/DemoBadge.astro";
 import { sitePath } from "../lib/site";
 
 const [resources, projects] = await Promise.all([
   getCollection("resources"),
   getCollection("projects"),
 ]);
-resources.sort((a, b) => a.data.title.localeCompare(b.data.title));
+const publishedResources = resources
+  .filter((resource) => !resource.data.demo)
+  .sort((a, b) => a.data.title.localeCompare(b.data.title));
 const projectsById = new Map(projects.map((project) => [project.id, project]));
 ---
 
@@ -31,17 +32,16 @@ const projectsById = new Map(projects.map((project) => [project.id, project]));
           <h2>Find an output</h2>
         </div>
         <p class="section-note">
-          The catalogue can link to DOI pages, GitHub, institutional
-          repositories, dataset archives and video platforms.
+          Datasets, software, repositories, videos and guides are linked from
+          their authoritative host platforms.
         </p>
       </div>
       <div class="resource-grid">
         {
-          resources.map((resource) => (
+          publishedResources.map((resource) => (
             <article class="resource-card">
               <div class="card-meta">
                 <span>{resource.data.type}</span>
-                {resource.data.demo && <DemoBadge />}
               </div>
               <h3>{resource.data.title}</h3>
               <p>{resource.data.summary}</p>
@@ -70,6 +70,13 @@ const projectsById = new Map(projects.map((project) => [project.id, project]));
             </article>
           ))
         }
+        {
+          publishedResources.length === 0 && (
+            <p class="empty-state">
+              Research resources will appear here as they are published.
+            </p>
+          )
+        }
       </div>
     </div>
   </section>
@@ -77,19 +84,17 @@ const projectsById = new Map(projects.map((project) => [project.id, project]));
   <section class="section section--tint">
     <div class="shell split-layout">
       <div>
-        <p class="eyebrow">Repository principle</p>
-        <h2>Keep the website light.</h2>
+        <p class="eyebrow">Accessing research outputs</p>
+        <h2>Research resources, hosted where they belong.</h2>
       </div>
       <div class="prose lead-prose">
         <p>
-          The source repository stores the pages, structured records and modest
-          web assets needed to publish the site. Large datasets, software
-          releases and videos should stay in services designed for those
-          materials.
+          Large datasets, software releases and videos remain in services
+          designed for long-term research access and preservation.
         </p>
         <p>
-          This separation keeps website deployment quick while preserving clear
-          routes to the research itself.
+          ARISE provides clear routes to those authoritative repositories,
+          archives and publisher platforms.
         </p>
       </div>
     </div>

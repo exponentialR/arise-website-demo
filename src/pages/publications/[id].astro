@@ -1,7 +1,6 @@
 ---
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import DemoBadge from "../../components/DemoBadge.astro";
 import { sitePath } from "../../lib/site";
 
 export async function getStaticPaths() {
@@ -41,7 +40,6 @@ const fundersById = new Map(funders.map((funder) => [funder.id, funder]));
       </p>
       <div class="card-meta">
         <span>{publication.data.type}</span>
-        {publication.data.demo && <DemoBadge />}
       </div>
       <h1>{publication.data.title}</h1>
       <p class="page-hero__intro">

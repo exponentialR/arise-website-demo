@@ -1,7 +1,6 @@
 ---
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import DemoBadge from "../../components/DemoBadge.astro";
 import ProjectCard from "../../components/ProjectCard.astro";
 import PublicationItem from "../../components/PublicationItem.astro";
 import { refIds, uniqueById } from "../../lib/content";
@@ -96,7 +95,6 @@ const photoUrl = person.data.photo
             >/</span
           >{person.data.name}
         </p>
-        {person.data.demo && <DemoBadge />}
         <h1>{person.data.name}</h1>
         <p class="profile-role">{person.data.role}</p>
         {
@@ -142,7 +140,7 @@ const photoUrl = person.data.photo
                 ))}
               </ul>
             ) : (
-              <p>Verified links have not yet been supplied.</p>
+              <p>No external profile link is currently available.</p>
             )
           }
         </div>
@@ -157,11 +155,11 @@ const photoUrl = person.data.photo
     <div class="shell">
       <div class="section-heading section-heading--row">
         <div>
-          <p class="eyebrow">Connected automatically</p>
+          <p class="eyebrow">Research portfolio</p>
           <h2 id="profile-projects-heading">Related research</h2>
         </div>
         <p class="section-note">
-          Projects appear here when their content records reference this person.
+          Research connected through verified project records.
         </p>
       </div>
       {
@@ -188,8 +186,7 @@ const photoUrl = person.data.photo
           <h2 id="profile-publications-heading">Related publications</h2>
         </div>
         <p class="section-note">
-          Author links are read from each publication record; citation data is
-          not copied into this profile.
+          Publications connected through verified authorship records.
         </p>
       </div>
       {
