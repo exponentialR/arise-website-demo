@@ -54,7 +54,6 @@ const linkedResources = uniqueById([
 const linkedMedia = media.filter(
   (item) => item.data.project?.id === project.id,
 );
-const peopleById = new Map(people.map((person) => [person.id, person]));
 const projectNames = [project.data.title];
 ---
 
@@ -180,8 +179,7 @@ const projectNames = [project.data.title];
               <PublicationItem
                 publication={publication}
                 authorNames={publication.data.authors.map(
-                  (reference) =>
-                    peopleById.get(reference.id)?.data.name ?? reference.id,
+                  (author) => author.name,
                 )}
                 projectNames={projectNames}
               />

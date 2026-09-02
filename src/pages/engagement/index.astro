@@ -1,0 +1,149 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import { sitePath } from "../../lib/site";
+
+const [engagement, publications] = await Promise.all([
+  getCollection("engagement"),
+  getCollection("publications"),
+]);
+engagement.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const publicationsById = new Map(
+  publications.map((publication) => [publication.id, publication]),
+);
+---
+
+<BaseLayout
+  title="Engagement"
+  description="Verified ARISE presentations, exhibitions, workshops and outreach activity."
+>
+  <PageHeader
+    eyebrow="Engagement"
+    title="Presentations, outreach and research exchange."
+    intro="This area gives public-facing activity its own structured record, connected to the relevant people, publications and research where evidence supports those links."
+  />
+
+  <section class="section">
+    <div class="shell">
+      <div class="section-heading section-heading--row">
+        <div>
+          <p class="eyebrow">Verified activity</p>
+          <h2>Recorded engagement</h2>
+        </div>
+        <p class="section-note">
+          Presenter names and exact session dates are omitted when the source
+          does not establish them.
+        </p>
+      </div>
+      <div class="engagement-list">
+        {
+          engagement.map((item) => (
+            <article class="engagement-item">
+              <div>
+                <p class="engagement-item__date">
+                  {item.data.date.toLocaleDateString("en-GB", {
+                    month: "short",
+                    year: "numeric",
+                  })}
+                </p>
+                <p class="engagement-item__type">{item.data.type}</p>
+              </div>
+              <div>
+                <h3>
+                  <a href={sitePath(`/engagement/${item.id}/`)}>
+                    {item.data.title}
+                  </a>
+                </h3>
+                <p class="engagement-item__event">{item.data.event}</p>
+                {item.data.location && <p>{item.data.location}</p>}
+                <p>{item.data.summary}</p>
+                {item.data.publications.length > 0 && (
+                  <p class="engagement-item__links">
+                    Related output:{" "}
+                    {item.data.publications.map((reference, index) => {
+                      const publication = publicationsById.get(reference.id);
+                      return publication ? (
+                        <>
+                          {index > 0 && ", "}
+                          <a
+                            href={sitePath(`/publications/${publication.id}/`)}
+                          >
+                            {publication.data.title}
+                          </a>
+                        </>
+                      ) : null;
+                    })}
+                  </p>
+                )}
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section
+    class="section section--navy"
+    aria-labelledby="planned-engagement-heading"
+  >
+    <div class="shell split-layout">
+      <div>
+        <p class="eyebrow">Award-level intent</p>
+        <h2 id="planned-engagement-heading">Planned engagement routes</h2>
+      </div>
+      <div class="lead-prose engagement-plan">
+        <p>
+          The public NSF award abstract describes planned technical
+          dissemination through webinars and workshops, together with
+          educational outreach for K–12 students through national-level student
+          competitions.
+        </p>
+        <p>
+          These are shown as planned routes—not as completed activity. Verified
+          events can be added here as evidence becomes available.
+        </p>
+        <a
+          class="text-link text-link--light"
+          href="https://api.nsf.gov/services/v1/awards/2222815.json"
+        >
+          Read the official NSF award record <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <div class="section-heading">
+        <p class="eyebrow">A scalable content model</p>
+        <h2>What belongs here</h2>
+      </div>
+      <div class="principle-grid engagement-types">
+        <article>
+          <span class="principle-grid__number">01</span><h3>
+            Research exchange
+          </h3><p>
+            Conference presentations, invited talks, seminars and webinars.
+          </p>
+        </article>
+        <article>
+          <span class="principle-grid__number">02</span><h3>
+            Industry engagement
+          </h3><p>
+            Exhibitions, demonstrations, workshops and practitioner events.
+          </p>
+        </article>
+        <article>
+          <span class="principle-grid__number">03</span><h3>
+            Public outreach
+          </h3><p>
+            School activity, competitions, public events and accessible
+            resources.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

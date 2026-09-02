@@ -18,12 +18,14 @@ interface Props {
 
 const { publication } = Astro.props;
 const { Content } = await render(publication);
-const [people, projects] = await Promise.all([
+const [people, projects, funders] = await Promise.all([
   getCollection("people"),
   getCollection("projects"),
+  getCollection("funders"),
 ]);
 const peopleById = new Map(people.map((person) => [person.id, person]));
 const projectsById = new Map(projects.map((project) => [project.id, project]));
+const fundersById = new Map(funders.map((funder) => [funder.id, funder]));
 ---
 
 <BaseLayout
@@ -43,14 +45,7 @@ const projectsById = new Map(projects.map((project) => [project.id, project]));
       </div>
       <h1>{publication.data.title}</h1>
       <p class="page-hero__intro">
-        {
-          publication.data.authors
-            .map(
-              (reference) =>
-                peopleById.get(reference.id)?.data.name ?? reference.id,
-            )
-            .join(", ")
-        }
+        {publication.data.authors.map((author) => author.name).join(", ")}
       </p>
     </div>
   </section>
@@ -78,35 +73,68 @@ const projectsById = new Map(projects.map((project) => [project.id, project]));
           <p class="detail-label">Authors</p>
           <ul class="plain-list">
             {
-              publication.data.authors.map((reference) => {
-                const person = peopleById.get(reference.id);
-                return person ? (
+              publication.data.authors.map((author) => {
+                const person = author.person
+                  ? peopleById.get(author.person.id)
+                  : undefined;
+                return (
                   <li>
-                    <a href={sitePath(`/people/${person.id}/`)}>
-                      {person.data.name}
-                    </a>
+                    {person ? (
+                      <a href={sitePath(`/people/${person.id}/`)}>
+                        {author.name}
+                      </a>
+                    ) : (
+                      author.name
+                    )}
                   </li>
-                ) : null;
+                );
               })
             }
           </ul>
         </div>
+        {
+          publication.data.funding.length > 0 && (
+            <div class="detail-sidebar__block">
+              <p class="detail-label">Funding evidence</p>
+              <ul class="plain-list funding-reference-list">
+                {publication.data.funding.map((reference) => {
+                  const funder = fundersById.get(reference.funder.id);
+                  return funder ? (
+                    <li>
+                      <a href={sitePath(`/funding/${funder.id}/`)}>
+                        {funder.data.shortName} {reference.award}
+                      </a>
+                      <small>{reference.evidence}</small>
+                      <a class="evidence-link" href={reference.evidenceUrl}>
+                        View evidence <span aria-hidden="true">↗</span>
+                      </a>
+                    </li>
+                  ) : null;
+                })}
+              </ul>
+            </div>
+          )
+        }
         <div class="detail-sidebar__block">
           <p class="detail-label">Related projects</p>
-          <ul class="plain-list">
-            {
-              publication.data.projects.map((reference) => {
-                const project = projectsById.get(reference.id);
-                return project ? (
-                  <li>
-                    <a href={sitePath(`/research/${project.id}/`)}>
-                      {project.data.title}
-                    </a>
-                  </li>
-                ) : null;
-              })
-            }
-          </ul>
+          {
+            publication.data.projects.length > 0 ? (
+              <ul class="plain-list">
+                {publication.data.projects.map((reference) => {
+                  const project = projectsById.get(reference.id);
+                  return project ? (
+                    <li>
+                      <a href={sitePath(`/research/${project.id}/`)}>
+                        {project.data.title}
+                      </a>
+                    </li>
+                  ) : null;
+                })}
+              </ul>
+            ) : (
+              <p>No project-level relationship is asserted.</p>
+            )
+          }
         </div>
         {
           (publication.data.doi || publication.data.externalUrl) && (

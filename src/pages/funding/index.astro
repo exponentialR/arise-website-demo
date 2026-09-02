@@ -1,0 +1,127 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import { sitePath } from "../../lib/site";
+
+const [funders, publications] = await Promise.all([
+  getCollection("funders"),
+  getCollection("publications"),
+]);
+
+funders.sort((a, b) => (a.data.order ?? 999) - (b.data.order ?? 999));
+
+const linkedPublications = (funderId: string) =>
+  publications.filter((publication) =>
+    publication.data.funding.some(
+      (reference) => reference.funder.id === funderId,
+    ),
+  );
+---
+
+<BaseLayout
+  title="Funding"
+  description="Verified ARISE funding routes, award identifiers and linked research outputs."
+>
+  <PageHeader
+    eyebrow="Funding"
+    title="Funding evidence, kept distinct from university participation."
+    intro="This demonstrator links each award to the outputs supported by public award, publisher or proceedings evidence. It does not infer contractual relationships beyond those sources."
+  />
+
+  <section class="section">
+    <div class="shell">
+      <div class="evidence-key" aria-labelledby="evidence-key-heading">
+        <div>
+          <p class="eyebrow">How to read this catalogue</p>
+          <h2 id="evidence-key-heading">Three evidence levels</h2>
+        </div>
+        <dl>
+          <div>
+            <dt>Acknowledged by publication</dt>
+            <dd>The paper itself names the award in its funding statement.</dd>
+          </div>
+          <div>
+            <dt>Publisher funding metadata</dt>
+            <dd>The publisher-deposited metadata associates the award.</dd>
+          </div>
+          <div>
+            <dt>Reported by funder</dt>
+            <dd>
+              The official funder record lists the paper as an award output.
+            </dd>
+          </div>
+        </dl>
+      </div>
+
+      <div class="section-heading section-heading--row funding-heading">
+        <div>
+          <p class="eyebrow">Award routes</p>
+          <h2>United States, Ireland and Northern Ireland</h2>
+        </div>
+        <p class="section-note">
+          Historic award names are retained. Current agency naming is explained
+          without rewriting the original grant metadata.
+        </p>
+      </div>
+
+      <div class="funder-grid">
+        {
+          funders.map((funder) => {
+            const outputs = linkedPublications(funder.id);
+            return (
+              <article class="funder-card">
+                <div class="funder-card__mark" aria-hidden="true">
+                  {funder.data.shortName}
+                </div>
+                <p class="funder-card__jurisdiction">
+                  {funder.data.jurisdiction}
+                </p>
+                <h3>
+                  <a href={sitePath(`/funding/${funder.id}/`)}>
+                    {funder.data.name}
+                  </a>
+                </h3>
+                <p>{funder.data.summary}</p>
+                <div class="funder-card__award">
+                  <span>Award</span>
+                  <strong>{funder.data.awards[0]?.identifier}</strong>
+                </div>
+                <p class="funder-card__count">
+                  {outputs.length} linked output
+                  {outputs.length === 1 ? "" : "s"}
+                </p>
+                <a class="card-link" href={sitePath(`/funding/${funder.id}/`)}>
+                  View award evidence and outputs{" "}
+                  <span aria-hidden="true">→</span>
+                </a>
+              </article>
+            );
+          })
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tint">
+    <div class="shell split-layout">
+      <div>
+        <p class="eyebrow">Evidence-safe by design</p>
+        <h2>
+          One output can carry more than one verified funding relationship.
+        </h2>
+      </div>
+      <div class="lead-prose">
+        <p>
+          Funding is stored on the publication record, not copied into a page by
+          hand. The same relationship can therefore appear on this index, the
+          funder page and the publication page without drifting apart.
+        </p>
+        <p class="verification-note">
+          Consortium review is still required for official programme narrative,
+          sponsor ordering, logo use and contractual wording.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

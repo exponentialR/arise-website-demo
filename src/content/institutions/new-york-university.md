@@ -2,11 +2,13 @@
 name: "New York University"
 shortName: "NYU"
 kind: "University"
+relationship: "Named programme collaborator"
 countryOrRegion: "United States"
-summary: "Debra Laefer's affiliation with NYU Tandon is verified through her official university profile and the publisher records catalogued here. Formal programme relationship wording remains subject to consortium approval."
+summary: "New York University is the awardee institution for NSF award 2222815 and the verified affiliation of Debra Laefer and Ludovic Righetti."
 website: "https://www.nyu.edu/"
-statusNote: "Researcher affiliation is verified; programme-level wording is pending consortium approval."
+evidenceUrl: "https://api.nsf.gov/services/v1/awards/2222815.json"
+statusNote: "The NSF awardee relationship is verified; detailed programme wording remains subject to consortium approval."
 order: 2
 ---
 
-New York University is represented here through verified researcher affiliation and publication metadata. This page does not attempt to define the university's complete or formal ARISE role.
+The official NSF award record names New York University as the awardee for award 2222815. This record also uses official university profiles to verify researcher affiliations; it does not attempt to define every institutional responsibility within ARISE.

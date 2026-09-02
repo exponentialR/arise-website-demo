@@ -14,4 +14,4 @@ photo:
 order: 7
 ---
 
-Ibukun Awolusi works in Civil and Environmental Engineering, and Construction Management at UT San Antonio. His verified connection in this catalogue is authorship of the linked 2025 ISARC paper; no wider ARISE role is asserted.
+Ibukun Awolusi works in Civil and Environmental Engineering, and Construction Management at UT San Antonio. The NSF award record names him as a co-principal investigator on award 2222815, and the linked publication records establish his authorship; no broader ARISE title is asserted here.

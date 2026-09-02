@@ -14,6 +14,29 @@ const profilePhoto = z.object({
   sourceLabel: z.string(),
 });
 
+const institutionLogo = z.object({
+  url: z.string().regex(/^\/images\/institutions\//),
+  alt: z.string(),
+  sourceUrl: z.url(),
+  sourceLabel: z.string(),
+});
+
+const publicationAuthor = z.object({
+  name: z.string(),
+  person: reference("people").optional(),
+});
+
+const fundingReference = z.object({
+  funder: reference("funders"),
+  award: z.string(),
+  evidence: z.enum([
+    "Acknowledged by publication",
+    "Publisher funding metadata",
+    "Reported by funder",
+  ]),
+  evidenceUrl: z.url(),
+});
+
 const people = defineCollection({
   loader: glob({ base: "./src/content/people", pattern: "**/*.md" }),
   schema: z.object({
@@ -35,16 +58,40 @@ const institutions = defineCollection({
   schema: z.object({
     name: z.string(),
     shortName: z.string().optional(),
-    kind: z.enum([
-      "University",
-      "Funding / collaboration context",
-      "Demonstration placeholder",
+    kind: z.enum(["University", "Other research institution"]),
+    relationship: z.enum([
+      "Named programme collaborator",
+      "Contributor affiliation",
     ]),
     countryOrRegion: z.string().optional(),
     summary: z.string(),
     website: z.url().optional(),
+    evidenceUrl: z.url(),
+    logo: institutionLogo.optional(),
     statusNote: z.string().optional(),
     demo: z.boolean().default(false),
+    order: z.number().int().optional(),
+  }),
+});
+
+const funders = defineCollection({
+  loader: glob({ base: "./src/content/funders", pattern: "**/*.md" }),
+  schema: z.object({
+    name: z.string(),
+    shortName: z.string(),
+    jurisdiction: z.string(),
+    summary: z.string(),
+    website: z.url(),
+    awards: z.array(
+      z.object({
+        identifier: z.string(),
+        scheme: z.string(),
+        recipient: z.string().optional(),
+        evidenceUrl: z.url(),
+        evidenceLabel: z.string(),
+        note: z.string().optional(),
+      }),
+    ),
     order: z.number().int().optional(),
   }),
 });
@@ -77,20 +124,47 @@ const publications = defineCollection({
   schema: z.object({
     title: z.string(),
     year: z.number().int(),
-    authors: z.array(reference("people")).default([]),
+    authors: z.array(publicationAuthor).default([]),
     projects: z.array(reference("projects")).default([]),
+    funding: z.array(fundingReference).default([]),
     venue: z.string().optional(),
     type: z.enum([
       "Journal article",
       "Conference paper",
       "Report",
       "Book chapter",
+      "Preprint",
       "Other",
       "Demonstration record",
     ]),
     doi: z.string().optional(),
     externalUrl: z.url().optional(),
     summary: z.string().optional(),
+    demo: z.boolean().default(false),
+  }),
+});
+
+const engagement = defineCollection({
+  loader: glob({ base: "./src/content/engagement", pattern: "**/*.md" }),
+  schema: z.object({
+    title: z.string(),
+    date: z.coerce.date(),
+    type: z.enum([
+      "Presentation",
+      "Exhibition",
+      "Workshop",
+      "Public outreach",
+      "Webinar",
+      "Other",
+    ]),
+    event: z.string(),
+    location: z.string().optional(),
+    summary: z.string(),
+    people: z.array(reference("people")).default([]),
+    projects: z.array(reference("projects")).default([]),
+    publications: z.array(reference("publications")).default([]),
+    externalUrl: z.url(),
+    evidenceLabel: z.string(),
     demo: z.boolean().default(false),
   }),
 });
@@ -141,8 +215,10 @@ const resources = defineCollection({
 export const collections = {
   people,
   institutions,
+  funders,
   projects,
   publications,
+  engagement,
   news,
   media,
   resources,

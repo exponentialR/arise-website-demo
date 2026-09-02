@@ -1,0 +1,19 @@
+---
+title: "Verified activity title"
+date: 2026-09-02
+type: "Presentation"
+event: "Verified event name"
+location: "Verified location"
+summary: "Concise factual description of the public-facing activity."
+people:
+  - "person-record-id"
+projects:
+  - "project-record-id"
+publications:
+  - "publication-record-id"
+externalUrl: "https://event.example/official-record"
+evidenceLabel: "Official event record"
+demo: false
+---
+
+Add only details established by the source. Omit presenter, session or project references if the evidence does not establish them.

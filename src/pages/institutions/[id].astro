@@ -4,6 +4,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import DemoBadge from "../../components/DemoBadge.astro";
 import PersonCard from "../../components/PersonCard.astro";
 import ProjectCard from "../../components/ProjectCard.astro";
+import InstitutionMark from "../../components/InstitutionMark.astro";
 import { sitePath } from "../../lib/site";
 
 export async function getStaticPaths() {
@@ -41,7 +42,7 @@ const linkedProjects = projects.filter((project) =>
   <section class="page-hero">
     <div class="shell page-hero__inner">
       <p class="breadcrumb">
-        <a href={sitePath("/partners-contact/")}>Partners / Contact</a><span
+        <a href={sitePath("/partners-contact/")}>Institutions / Contact</a><span
           aria-hidden="true">/</span
         >Institution
       </p>
@@ -49,6 +50,7 @@ const linkedProjects = projects.filter((project) =>
         <span>{institution.data.kind}</span>
         {institution.data.demo && <DemoBadge />}
       </div>
+      <InstitutionMark institution={institution} showApprovalNote />
       <h1>{institution.data.name}</h1>
       <p class="page-hero__intro">{institution.data.summary}</p>
     </div>
@@ -59,8 +61,8 @@ const linkedProjects = projects.filter((project) =>
       <article class="prose"><Content /></article>
       <aside class="detail-sidebar" aria-label="Institution details">
         <div class="detail-sidebar__block">
-          <p class="detail-label">Type</p>
-          <p>{institution.data.kind}</p>
+          <p class="detail-label">Relationship</p>
+          <p>{institution.data.relationship}</p>
         </div>
         {
           institution.data.countryOrRegion && (
@@ -85,6 +87,9 @@ const linkedProjects = projects.filter((project) =>
             </a>
           )
         }
+        <a href={institution.data.evidenceUrl}>
+          View relationship evidence <span aria-hidden="true">↗</span>
+        </a>
       </aside>
     </div>
   </section>

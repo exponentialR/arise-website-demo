@@ -7,9 +7,15 @@ interface Props {
   publication: CollectionEntry<"publications">;
   authorNames: string[];
   projectNames?: string[];
+  fundingEvidence?: Array<{ label: string; url: string }>;
 }
 
-const { publication, authorNames, projectNames = [] } = Astro.props;
+const {
+  publication,
+  authorNames,
+  projectNames = [],
+  fundingEvidence = [],
+} = Astro.props;
 ---
 
 <article class="publication-item">
@@ -38,6 +44,20 @@ const { publication, authorNames, projectNames = [] } = Astro.props;
       projectNames.length > 0 && (
         <p class="publication-item__projects">
           Related research: {projectNames.join(", ")}
+        </p>
+      )
+    }
+    {
+      fundingEvidence.length > 0 && (
+        <p class="publication-item__funding">
+          {fundingEvidence.map((evidence, index) => (
+            <>
+              {index > 0 && " · "}
+              <a href={evidence.url}>
+                {evidence.label} <span aria-hidden="true">↗</span>
+              </a>
+            </>
+          ))}
         </p>
       )
     }

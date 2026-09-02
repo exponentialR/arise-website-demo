@@ -1,0 +1,130 @@
+---
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PublicationItem from "../../components/PublicationItem.astro";
+import { sitePath } from "../../lib/site";
+
+export async function getStaticPaths() {
+  const items = await getCollection("engagement");
+  return items.map((item) => ({
+    params: { id: item.id },
+    props: { item },
+  }));
+}
+
+interface Props {
+  item: CollectionEntry<"engagement">;
+}
+
+const { item } = Astro.props;
+const { Content } = await render(item);
+const [people, projects, publications] = await Promise.all([
+  getCollection("people"),
+  getCollection("projects"),
+  getCollection("publications"),
+]);
+const peopleById = new Map(people.map((person) => [person.id, person]));
+const projectsById = new Map(projects.map((project) => [project.id, project]));
+const publicationsById = new Map(
+  publications.map((publication) => [publication.id, publication]),
+);
+const linkedPublications = item.data.publications
+  .map((reference) => publicationsById.get(reference.id))
+  .filter((publication) => publication !== undefined);
+---
+
+<BaseLayout title={item.data.title} description={item.data.summary}>
+  <section class="page-hero">
+    <div class="shell page-hero__inner">
+      <p class="breadcrumb">
+        <a href={sitePath("/engagement/")}>Engagement</a><span
+          aria-hidden="true">/</span
+        >{item.data.type}
+      </p>
+      <p class="eyebrow">{item.data.event}</p>
+      <h1>{item.data.title}</h1>
+      <p class="page-hero__intro">{item.data.summary}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell detail-layout">
+      <article class="prose"><Content /></article>
+      <aside class="detail-sidebar" aria-label="Engagement details">
+        <div class="detail-sidebar__block">
+          <p class="detail-label">Type</p>
+          <p>{item.data.type}</p>
+        </div>
+        <div class="detail-sidebar__block">
+          <p class="detail-label">Event period</p>
+          <p>
+            {
+              item.data.date.toLocaleDateString("en-GB", {
+                month: "long",
+                year: "numeric",
+              })
+            }
+          </p>
+        </div>
+        {
+          item.data.location && (
+            <div class="detail-sidebar__block">
+              <p class="detail-label">Location</p>
+              <p>{item.data.location}</p>
+            </div>
+          )
+        }
+        {
+          item.data.people.length > 0 && (
+            <div class="detail-sidebar__block">
+              <p class="detail-label">People</p>
+              <ul class="plain-list">
+                {item.data.people.map((reference) => {
+                  const person = peopleById.get(reference.id);
+                  return person ? (
+                    <li>
+                      <a href={sitePath(`/people/${person.id}/`)}>
+                        {person.data.name}
+                      </a>
+                    </li>
+                  ) : null;
+                })}
+              </ul>
+            </div>
+          )
+        }
+        <a href={item.data.externalUrl}>
+          {item.data.evidenceLabel}
+          <span aria-hidden="true">↗</span>
+        </a>
+      </aside>
+    </div>
+  </section>
+
+  {
+    linkedPublications.length > 0 && (
+      <section class="section section--tint">
+        <div class="shell">
+          <div class="section-heading">
+            <p class="eyebrow">Connected record</p>
+            <h2>Related publication</h2>
+          </div>
+          <div class="publication-list">
+            {linkedPublications.map((publication) => (
+              <PublicationItem
+                publication={publication}
+                authorNames={publication.data.authors.map(
+                  (author) => author.name,
+                )}
+                projectNames={publication.data.projects.map(
+                  (reference) =>
+                    projectsById.get(reference.id)?.data.title ?? reference.id,
+                )}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+</BaseLayout>

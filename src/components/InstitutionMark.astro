@@ -1,0 +1,34 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { sitePath } from "../lib/site";
+
+interface Props {
+  institution: CollectionEntry<"institutions">;
+  showApprovalNote?: boolean;
+}
+
+const { institution, showApprovalNote = false } = Astro.props;
+const logoUrl = institution.data.logo
+  ? sitePath(institution.data.logo.url)
+  : undefined;
+---
+
+<div class="institution-mark">
+  {
+    institution.data.logo ? (
+      <img
+        src={logoUrl}
+        alt={institution.data.logo.alt}
+        loading="lazy"
+        decoding="async"
+      />
+    ) : (
+      <span>{institution.data.shortName ?? institution.data.name}</span>
+    )
+  }
+  {
+    showApprovalNote && !institution.data.logo && (
+      <small>Typographic mark · official logo approval pending</small>
+    )
+  }
+</div>

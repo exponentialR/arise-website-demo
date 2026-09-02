@@ -11,7 +11,7 @@ This repository is a prototype under Samuel Adebayo's personal GitHub account. I
 ## What the demonstrator proves
 
 - an international research programme can have a credible, accessible public site;
-- people, institutions, projects, publications, news, media and resources can be structured and related;
+- people, institutions, funders, projects, publications, engagement, news, media and resources can be structured and related;
 - a record entered once can be reused across every relevant page;
 - content changes can be validated, built and deployed automatically;
 - the public site can run as static files without a database, server or paid CMS.
@@ -74,6 +74,8 @@ Collections live in `src/content/` and their validation schemas live in `src/con
 
 ```text
 src/content/
+├── engagement/
+├── funders/
 ├── institutions/
 ├── media/
 ├── news/
@@ -95,7 +97,15 @@ Add only verified name, role, affiliation, biography and profile links. Set `ins
 
 ### Add an institution
 
-Create `src/content/institutions/institution-id.md` with `name`, `kind`, `summary` and optional region, website and status note. Add an approved description in the Markdown body.
+Create `src/content/institutions/institution-id.md` with `name`, `kind`, `relationship`, `summary`, official evidence URL and optional region, website and status note. Add an approved description in the Markdown body. Official logos are optional and should be added only after confirming the institution's brand-use requirements.
+
+### Add a funder or award
+
+```bash
+cp src/content/funders/_template.md.example src/content/funders/funder-id.md
+```
+
+Funders are deliberately separate from universities. Record the official body, jurisdiction, scheme, award identifier and primary evidence source.
 
 ### Add a project
 
@@ -111,14 +121,23 @@ Reference existing people and institutions by ID. Publications and resources tha
 cp src/content/publications/_template.md.example src/content/publications/publication-id.md
 ```
 
-Verify the title, year, authors, venue, type, DOI and external URL. The `authors` and `projects` arrays reference existing record IDs.
+Verify the title, year, exact published author names, venue, type, DOI and external URL. Each author entry stores the published name and may also reference a verified person record. `projects` and `funding` are separate optional relationships: do not infer a project from an award acknowledgement.
 
 Once added, one publication record can appear on:
 
 - the publications index and year grouping;
 - its publication detail page;
 - every referenced project page;
-- every referenced author profile.
+- every referenced author profile;
+- every referenced funder page.
+
+### Add engagement
+
+```bash
+cp src/content/engagement/_template.md.example src/content/engagement/activity-id.md
+```
+
+Use this collection for verified presentations, exhibitions, workshops, webinars and outreach. It can reference people, projects and publications. Leave a relationship empty when the event source does not establish it.
 
 ### Add news or media
 
@@ -145,11 +164,13 @@ Person ───── Institution
   ├──────── Project
   │            │
   └ Publication┤
-               ├ Resource
-               └ Media
+       │       ├ Resource
+       │       └ Media
+       ├────── Funding award
+       └────── Engagement
 ```
 
-A missing or mistyped referenced ID causes the content check/build to fail before deployment.
+A missing or mistyped referenced ID causes the content check/build to fail before deployment. See [research-audit.md](docs/research-audit.md) for the dated funding/publication evidence method and its completeness limits.
 
 ## Deployment
 

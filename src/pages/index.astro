@@ -6,17 +6,26 @@ import PublicationItem from "../components/PublicationItem.astro";
 import NewsCard from "../components/NewsCard.astro";
 import DemoBadge from "../components/DemoBadge.astro";
 import HeroResearchVisual from "../components/HeroResearchVisual.astro";
+import InstitutionMark from "../components/InstitutionMark.astro";
 import { sitePath } from "../lib/site";
 
-const [projects, publications, people, news, resources, institutions] =
-  await Promise.all([
-    getCollection("projects"),
-    getCollection("publications"),
-    getCollection("people"),
-    getCollection("news"),
-    getCollection("resources"),
-    getCollection("institutions"),
-  ]);
+const [
+  projects,
+  publications,
+  news,
+  resources,
+  institutions,
+  funders,
+  engagement,
+] = await Promise.all([
+  getCollection("projects"),
+  getCollection("publications"),
+  getCollection("news"),
+  getCollection("resources"),
+  getCollection("institutions"),
+  getCollection("funders"),
+  getCollection("engagement"),
+]);
 
 const featuredProjects = projects
   .filter((project) => project.data.featured)
@@ -32,11 +41,20 @@ const latestNews = news
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 3);
 const featuredResources = resources.slice(0, 3);
-const peopleById = new Map(people.map((person) => [person.id, person]));
 const projectsById = new Map(projects.map((project) => [project.id, project]));
 const orderedInstitutions = institutions.sort(
   (a, b) => (a.data.order ?? 999) - (b.data.order ?? 999),
 );
+const programmeInstitutions = orderedInstitutions.filter(
+  (institution) =>
+    institution.data.relationship === "Named programme collaborator",
+);
+const orderedFunders = funders.sort(
+  (a, b) => (a.data.order ?? 999) - (b.data.order ?? 999),
+);
+const latestEngagement = engagement
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
 ---
 
 <BaseLayout
@@ -75,21 +93,52 @@ const orderedInstitutions = institutions.sort(
     <div class="shell">
       <div class="section-heading compact">
         <p class="eyebrow">Programme context supplied for this demonstrator</p>
-        <h2 id="context-heading">Institutions and collaboration context</h2>
+        <h2 id="context-heading">Collaborating universities</h2>
       </div>
       <div class="name-grid">
         {
-          orderedInstitutions.map((institution) => (
-            <a href={sitePath(`/institutions/${institution.id}/`)}>
-              {institution.data.shortName ?? institution.data.name}
+          programmeInstitutions.map((institution) => (
+            <a
+              class="institution-tile"
+              href={sitePath(`/institutions/${institution.id}/`)}
+            >
+              <InstitutionMark institution={institution} />
             </a>
           ))
         }
       </div>
       <p class="verification-note">
-        Official roles, relationships and naming are to be confirmed before
-        launch.
+        Named collaboration is evidenced by public university and award records;
+        detailed institutional wording remains subject to consortium review.
       </p>
+    </div>
+  </section>
+
+  <section class="funding-strip" aria-labelledby="funding-strip-heading">
+    <div class="shell funding-strip__grid">
+      <div>
+        <p class="eyebrow">Tri-jurisdictional funding</p>
+        <h2 id="funding-strip-heading">
+          Funding is shown separately from institutions.
+        </h2>
+        <p class="section-note">
+          Award identifiers and linked outputs are drawn from official award,
+          publisher and proceedings records.
+        </p>
+        <a class="text-link" href={sitePath("/funding/")}
+          >See funding evidence <span aria-hidden="true">→</span></a
+        >
+      </div>
+      <div class="funder-mini-grid">
+        {
+          orderedFunders.map((funder) => (
+            <a href={sitePath(`/funding/${funder.id}/`)}>
+              <span>{funder.data.shortName}</span>
+              <small>{funder.data.jurisdiction}</small>
+            </a>
+          ))
+        }
+      </div>
     </div>
   </section>
 
@@ -133,14 +182,50 @@ const orderedInstitutions = institutions.sort(
             <PublicationItem
               publication={publication}
               authorNames={publication.data.authors.map(
-                (reference) =>
-                  peopleById.get(reference.id)?.data.name ?? reference.id,
+                (author) => author.name,
               )}
               projectNames={publication.data.projects.map(
                 (reference) =>
                   projectsById.get(reference.id)?.data.title ?? reference.id,
               )}
             />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="engagement-heading">
+    <div class="shell">
+      <div class="section-heading section-heading--row">
+        <div>
+          <p class="eyebrow">Presentations and outreach</p>
+          <h2 id="engagement-heading">Research in public</h2>
+        </div>
+        <div>
+          <p class="section-note">
+            A structured home for verified talks, exhibitions, workshops and
+            public engagement.
+          </p>
+          <a class="text-link" href={sitePath("/engagement/")}
+            >Explore engagement <span aria-hidden="true">→</span></a
+          >
+        </div>
+      </div>
+      <div class="engagement-grid">
+        {
+          latestEngagement.map((item) => (
+            <article class="engagement-card">
+              <p class="engagement-card__meta">
+                {item.data.type} · {item.data.date.getFullYear()}
+              </p>
+              <h3>
+                <a href={sitePath(`/engagement/${item.id}/`)}>
+                  {item.data.title}
+                </a>
+              </h3>
+              <p>{item.data.summary}</p>
+            </article>
           ))
         }
       </div>

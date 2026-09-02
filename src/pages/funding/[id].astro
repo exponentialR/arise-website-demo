@@ -1,0 +1,146 @@
+---
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PublicationItem from "../../components/PublicationItem.astro";
+import { sitePath } from "../../lib/site";
+
+export async function getStaticPaths() {
+  const funders = await getCollection("funders");
+  return funders.map((funder) => ({
+    params: { id: funder.id },
+    props: { funder },
+  }));
+}
+
+interface Props {
+  funder: CollectionEntry<"funders">;
+}
+
+const { funder } = Astro.props;
+const { Content } = await render(funder);
+const [publications, projects] = await Promise.all([
+  getCollection("publications"),
+  getCollection("projects"),
+]);
+const projectsById = new Map(projects.map((project) => [project.id, project]));
+const linkedPublications = publications
+  .filter((publication) =>
+    publication.data.funding.some(
+      (reference) => reference.funder.id === funder.id,
+    ),
+  )
+  .sort(
+    (a, b) =>
+      b.data.year - a.data.year || a.data.title.localeCompare(b.data.title),
+  );
+const evidenceCounts = linkedPublications.reduce<Record<string, number>>(
+  (counts, publication) => {
+    publication.data.funding
+      .filter((reference) => reference.funder.id === funder.id)
+      .forEach((reference) => {
+        counts[reference.evidence] = (counts[reference.evidence] ?? 0) + 1;
+      });
+    return counts;
+  },
+  {},
+);
+---
+
+<BaseLayout title={funder.data.name} description={funder.data.summary}>
+  <section class="page-hero funder-hero">
+    <div class="shell page-hero__inner">
+      <p class="breadcrumb">
+        <a href={sitePath("/funding/")}>Funding</a><span aria-hidden="true"
+          >/</span
+        >{funder.data.shortName}
+      </p>
+      <div class="funder-hero__mark" aria-hidden="true">
+        {funder.data.shortName}
+      </div>
+      <p class="eyebrow">{funder.data.jurisdiction}</p>
+      <h1>{funder.data.name}</h1>
+      <p class="page-hero__intro">{funder.data.summary}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell detail-layout">
+      <article class="prose">
+        <Content />
+        <h2>Evidence basis</h2>
+        <p>
+          The catalogue currently contains {linkedPublications.length} output{
+            linkedPublications.length === 1 ? "" : "s"
+          } linked to this funder.
+        </p>
+        <ul>
+          {
+            Object.entries(evidenceCounts).map(([label, count]) => (
+              <li>
+                {label}: {count}
+              </li>
+            ))
+          }
+        </ul>
+      </article>
+      <aside class="detail-sidebar" aria-label="Funder and award details">
+        {
+          funder.data.awards.map((award) => (
+            <div class="detail-sidebar__block">
+              <p class="detail-label">Award {award.identifier}</p>
+              <p>{award.scheme}</p>
+              {award.recipient && <p>Recipient: {award.recipient}</p>}
+              {award.note && <p class="verification-note">{award.note}</p>}
+              <a href={award.evidenceUrl}>
+                {award.evidenceLabel} <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          ))
+        }
+        <a href={funder.data.website}>
+          Visit funder website <span aria-hidden="true">↗</span>
+        </a>
+      </aside>
+    </div>
+  </section>
+
+  <section
+    class="section section--tint"
+    aria-labelledby="funded-outputs-heading"
+  >
+    <div class="shell">
+      <div class="section-heading section-heading--row">
+        <div>
+          <p class="eyebrow">Connected automatically</p>
+          <h2 id="funded-outputs-heading">Linked research outputs</h2>
+        </div>
+        <p class="section-note">
+          Each item links back to the source that establishes its award
+          relationship.
+        </p>
+      </div>
+      <div class="publication-list">
+        {
+          linkedPublications.map((publication) => (
+            <PublicationItem
+              publication={publication}
+              authorNames={publication.data.authors.map(
+                (author) => author.name,
+              )}
+              projectNames={publication.data.projects.map(
+                (reference) =>
+                  projectsById.get(reference.id)?.data.title ?? reference.id,
+              )}
+              fundingEvidence={publication.data.funding
+                .filter((reference) => reference.funder.id === funder.id)
+                .map((reference) => ({
+                  label: reference.evidence,
+                  url: reference.evidenceUrl,
+                }))}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>

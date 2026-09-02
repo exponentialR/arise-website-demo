@@ -1,0 +1,17 @@
+---
+name: "Official funder name"
+shortName: "Short name"
+jurisdiction: "Jurisdiction"
+summary: "Concise, source-supported description of the funding relationship."
+website: "https://funder.example/"
+awards:
+  - identifier: "verified-award-id"
+    scheme: "Official scheme name"
+    recipient: "Verified recipient, if known"
+    evidenceUrl: "https://funder.example/official-award-record"
+    evidenceLabel: "Official award record"
+    note: "Optional evidence caveat."
+order: 10
+---
+
+Add only wording supported by the official award record or published acknowledgements.

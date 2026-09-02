@@ -21,8 +21,7 @@ interface Props {
 
 const { person } = Astro.props;
 const { Content } = await render(person);
-const [people, institutions, projects, publications] = await Promise.all([
-  getCollection("people"),
+const [institutions, projects, publications] = await Promise.all([
   getCollection("institutions"),
   getCollection("projects"),
   getCollection("publications"),
@@ -37,7 +36,7 @@ const linkedProjects = uniqueById([
 ]);
 const linkedPublications = uniqueById([
   ...publications.filter((publication) =>
-    publication.data.authors.some((reference) => reference.id === person.id),
+    publication.data.authors.some((author) => author.person?.id === person.id),
   ),
   ...publications.filter((publication) =>
     forwardPublicationIds.has(publication.id),
@@ -46,7 +45,6 @@ const linkedPublications = uniqueById([
 const institution = person.data.institution
   ? institutions.find((entry) => entry.id === person.data.institution?.id)
   : undefined;
-const peopleById = new Map(people.map((entry) => [entry.id, entry]));
 const projectsById = new Map(projects.map((entry) => [entry.id, entry]));
 const initials = person.data.name
   .split(" ")
@@ -201,8 +199,7 @@ const photoUrl = person.data.photo
               <PublicationItem
                 publication={publication}
                 authorNames={publication.data.authors.map(
-                  (reference) =>
-                    peopleById.get(reference.id)?.data.name ?? reference.id,
+                  (author) => author.name,
                 )}
                 projectNames={publication.data.projects.map(
                   (reference) =>

@@ -3,41 +3,41 @@ import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHeader from "../components/PageHeader.astro";
 import DemoBadge from "../components/DemoBadge.astro";
+import InstitutionMark from "../components/InstitutionMark.astro";
 import { sitePath } from "../lib/site";
 
 const institutions = (await getCollection("institutions")).sort(
   (a, b) => (a.data.order ?? 999) - (b.data.order ?? 999),
 );
-const universities = institutions.filter(
-  (item) =>
-    item.data.kind === "University" ||
-    item.data.kind === "Demonstration placeholder",
+const programmeInstitutions = institutions.filter(
+  (item) => item.data.relationship === "Named programme collaborator",
 );
-const contextBodies = institutions.filter(
-  (item) => item.data.kind === "Funding / collaboration context",
+const contributorInstitutions = institutions.filter(
+  (item) => item.data.relationship === "Contributor affiliation",
 );
 ---
 
 <BaseLayout
-  title="Partners / Contact"
-  description="Institutions, collaboration context and contact information for the ARISE website demonstrator."
+  title="Institutions / Contact"
+  description="Verified institutional relationships and contact information for the ARISE website demonstrator."
 >
   <PageHeader
-    eyebrow="Partners / Contact"
+    eyebrow="Institutions / Contact"
     title="An international programme needs shared ownership and clear routes in."
-    intro="This page demonstrates how confirmed institutions, funders and collaborators can be represented once official roles and wording have been approved."
+    intro="Universities are presented here through evidenced programme collaboration or researcher affiliation. Funding bodies have their own page so the two relationships are not conflated."
   />
 
   <section class="section">
     <div class="shell">
       <div class="section-heading">
-        <p class="eyebrow">Institutional context</p>
-        <h2>Universities named in the supplied context</h2>
+        <p class="eyebrow">Programme collaboration</p>
+        <h2>Named collaborating universities</h2>
       </div>
       <div class="institution-grid">
         {
-          universities.map((institution) => (
+          programmeInstitutions.map((institution) => (
             <article class="institution-card">
+              <InstitutionMark institution={institution} showApprovalNote />
               {institution.data.demo && <DemoBadge />}
               <h3>
                 <a href={sitePath(`/institutions/${institution.id}/`)}>
@@ -67,22 +67,33 @@ const contextBodies = institutions.filter(
     <div class="shell">
       <div class="section-heading section-heading--row">
         <div>
-          <p class="eyebrow">Funding / collaboration context</p>
-          <h2>Organisations named in the supplied brief</h2>
+          <p class="eyebrow">Publication network</p>
+          <h2>Other verified contributor affiliations</h2>
         </div>
         <p class="section-note">
-          No detailed funding or contractual relationship is asserted here.
+          An author affiliation does not by itself imply programme membership.
         </p>
       </div>
-      <div class="context-card-grid">
+      <div class="institution-grid institution-grid--compact">
         {
-          contextBodies.map((institution) => (
-            <article>
-              <h3>{institution.data.name}</h3>
+          contributorInstitutions.map((institution) => (
+            <article class="institution-card">
+              <InstitutionMark institution={institution} showApprovalNote />
+              <h3>
+                <a href={sitePath(`/institutions/${institution.id}/`)}>
+                  {institution.data.name}
+                </a>
+              </h3>
               <p>{institution.data.summary}</p>
               {institution.data.statusNote && (
                 <p class="verification-note">{institution.data.statusNote}</p>
               )}
+              <a
+                class="card-link"
+                href={sitePath(`/institutions/${institution.id}/`)}
+              >
+                View record <span aria-hidden="true">→</span>
+              </a>
             </article>
           ))
         }
@@ -91,6 +102,27 @@ const contextBodies = institutions.filter(
   </section>
 
   <section class="section">
+    <div class="shell logo-governance">
+      <div>
+        <p class="eyebrow">Institutional identity</p>
+        <h2>Official logos can be added after brand approval.</h2>
+      </div>
+      <div>
+        <p>
+          The content model includes a governed logo field with alt text and a
+          source record. Until each institution confirms permission and the
+          correct asset variant, the public demonstrator uses restrained
+          typographic marks instead of copied logos.
+        </p>
+        <p class="verification-note">
+          This is particularly important because institutional brand guidance
+          may require explicit permission for third-party partnership use.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tint">
     <div class="shell contact-panel">
       <div>
         <p class="eyebrow">Contact</p>

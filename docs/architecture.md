@@ -24,7 +24,7 @@ Public website
 
 ## Why this fits ARISE
 
-The expected public material—people, institutions, projects, publications, news, media coverage and resource links—is structured and relatively low frequency. It can be validated and assembled during a build rather than requested from a continuously running database.
+The expected public material—people, institutions, funders, projects, publications, engagement, news, media coverage and resource links—is structured and relatively low frequency. It can be validated and assembled during a build rather than requested from a continuously running database.
 
 The production website therefore requires:
 

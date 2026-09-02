@@ -2,9 +2,15 @@
 title: "Verified publication title"
 year: 2026
 authors:
-  - "person-record-id"
+  - name: "Author name as published"
+    person: "person-record-id"
 projects:
   - "project-record-id"
+funding:
+  - funder: "funder-record-id"
+    award: "verified-award-id"
+    evidence: "Acknowledged by publication"
+    evidenceUrl: "https://publisher.example/full-record-or-paper"
 venue: "Verified journal, conference or publisher"
 type: "Journal article"
 doi: "10.xxxx/verified-doi"
@@ -13,4 +19,4 @@ summary: "Optional approved abstract or plain-language summary."
 demo: false
 ---
 
-Optional additional approved description. Verify every bibliographic field before publication.
+Optional additional approved description. Omit `person`, `projects` or `funding` when a relationship is not established. Verify every bibliographic and funding field before publication.
