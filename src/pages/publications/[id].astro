@@ -1,36 +1,56 @@
 ---
-import { getCollection, render, type CollectionEntry } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import DemoBadge from '../../components/DemoBadge.astro';
-import { sitePath } from '../../lib/site';
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import DemoBadge from "../../components/DemoBadge.astro";
+import { sitePath } from "../../lib/site";
 
 export async function getStaticPaths() {
-  const publications = await getCollection('publications');
-  return publications.map((publication) => ({ params: { id: publication.id }, props: { publication } }));
+  const publications = await getCollection("publications");
+  return publications.map((publication) => ({
+    params: { id: publication.id },
+    props: { publication },
+  }));
 }
 
 interface Props {
-  publication: CollectionEntry<'publications'>;
+  publication: CollectionEntry<"publications">;
 }
 
 const { publication } = Astro.props;
 const { Content } = await render(publication);
-const [people, projects] = await Promise.all([getCollection('people'), getCollection('projects')]);
+const [people, projects] = await Promise.all([
+  getCollection("people"),
+  getCollection("projects"),
+]);
 const peopleById = new Map(people.map((person) => [person.id, person]));
 const projectsById = new Map(projects.map((project) => [project.id, project]));
 ---
 
-<BaseLayout title={publication.data.title} description={publication.data.summary ?? publication.data.title}>
+<BaseLayout
+  title={publication.data.title}
+  description={publication.data.summary ?? publication.data.title}
+>
   <section class="page-hero page-hero--publication">
     <div class="shell page-hero__inner">
-      <p class="breadcrumb"><a href={sitePath('/publications/')}>Publications</a><span aria-hidden="true">/</span>{publication.data.year}</p>
+      <p class="breadcrumb">
+        <a href={sitePath("/publications/")}>Publications</a><span
+          aria-hidden="true">/</span
+        >{publication.data.year}
+      </p>
       <div class="card-meta">
         <span>{publication.data.type}</span>
         {publication.data.demo && <DemoBadge />}
       </div>
       <h1>{publication.data.title}</h1>
       <p class="page-hero__intro">
-        {publication.data.authors.map((reference) => peopleById.get(reference.id)?.data.name ?? reference.id).join(', ')}
+        {
+          publication.data.authors
+            .map(
+              (reference) =>
+                peopleById.get(reference.id)?.data.name ?? reference.id,
+            )
+            .join(", ")
+        }
       </p>
     </div>
   </section>
@@ -38,7 +58,11 @@ const projectsById = new Map(projects.map((project) => [project.id, project]));
   <section class="section">
     <div class="shell detail-layout">
       <article class="prose">
-        {publication.data.summary && <p class="lede">{publication.data.summary}</p>}
+        {
+          publication.data.summary && (
+            <p class="lede">{publication.data.summary}</p>
+          )
+        }
         <Content />
       </article>
       <aside class="detail-sidebar" aria-label="Publication metadata">
@@ -48,34 +72,57 @@ const projectsById = new Map(projects.map((project) => [project.id, project]));
         </div>
         <div class="detail-sidebar__block">
           <p class="detail-label">Venue</p>
-          <p>{publication.data.venue ?? 'Not supplied'}</p>
+          <p>{publication.data.venue ?? "Not supplied"}</p>
         </div>
         <div class="detail-sidebar__block">
           <p class="detail-label">Authors</p>
           <ul class="plain-list">
-            {publication.data.authors.map((reference) => {
-              const person = peopleById.get(reference.id);
-              return person ? <li><a href={sitePath(`/people/${person.id}/`)}>{person.data.name}</a></li> : null;
-            })}
+            {
+              publication.data.authors.map((reference) => {
+                const person = peopleById.get(reference.id);
+                return person ? (
+                  <li>
+                    <a href={sitePath(`/people/${person.id}/`)}>
+                      {person.data.name}
+                    </a>
+                  </li>
+                ) : null;
+              })
+            }
           </ul>
         </div>
         <div class="detail-sidebar__block">
           <p class="detail-label">Related projects</p>
           <ul class="plain-list">
-            {publication.data.projects.map((reference) => {
-              const project = projectsById.get(reference.id);
-              return project ? <li><a href={sitePath(`/research/${project.id}/`)}>{project.data.title}</a></li> : null;
-            })}
+            {
+              publication.data.projects.map((reference) => {
+                const project = projectsById.get(reference.id);
+                return project ? (
+                  <li>
+                    <a href={sitePath(`/research/${project.id}/`)}>
+                      {project.data.title}
+                    </a>
+                  </li>
+                ) : null;
+              })
+            }
           </ul>
         </div>
-        {(publication.data.doi || publication.data.externalUrl) && (
-          <div class="detail-sidebar__block">
-            <p class="detail-label">External record</p>
-            <a href={publication.data.externalUrl ?? `https://doi.org/${publication.data.doi}`}>
-              View publication <span aria-hidden="true">↗</span>
-            </a>
-          </div>
-        )}
+        {
+          (publication.data.doi || publication.data.externalUrl) && (
+            <div class="detail-sidebar__block">
+              <p class="detail-label">External record</p>
+              <a
+                href={
+                  publication.data.externalUrl ??
+                  `https://doi.org/${publication.data.doi}`
+                }
+              >
+                View publication <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          )
+        }
       </aside>
     </div>
   </section>

@@ -1,10 +1,13 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import PageHeader from '../components/PageHeader.astro';
-import { sitePath } from '../lib/site';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import { sitePath } from "../lib/site";
 ---
 
-<BaseLayout title="About" description="About the ARISE research programme website demonstrator and the content still to be agreed.">
+<BaseLayout
+  title="About"
+  description="About the ARISE research programme website demonstrator and the content still to be agreed."
+>
   <PageHeader
     eyebrow="About the programme"
     title="A shared public home for an international research community."
@@ -19,12 +22,16 @@ import { sitePath } from '../lib/site';
       </div>
       <div class="prose lead-prose">
         <p>
-          A research-programme website needs to answer a few simple questions well: what is the programme, who is
-          involved, what research is under way, and where can people find the resulting publications and resources?
+          A research-programme website needs to answer a few simple questions
+          well: what is the programme, who is involved, what research is under
+          way, and where can people find the resulting publications and
+          resources?
         </p>
         <p>
-          This vertical slice shows those answers as structured, reusable content. It is a working basis for a
-          consortium conversation about official ownership, branding, content approval and long-term maintenance.
+          This vertical slice shows those answers as structured, reusable
+          content. It is a working basis for a consortium conversation about
+          official ownership, branding, content approval and long-term
+          maintenance.
         </p>
       </div>
     </div>
@@ -34,23 +41,34 @@ import { sitePath } from '../lib/site';
     <div class="shell">
       <div class="section-heading">
         <p class="eyebrow">Evidence boundary</p>
-        <h2 id="known-heading">What this demonstrator does—and does not—claim</h2>
+        <h2 id="known-heading">
+          What this demonstrator does—and does not—claim
+        </h2>
       </div>
       <div class="principle-grid">
         <article>
           <span class="principle-grid__number">01</span>
           <h3>Supplied context</h3>
-          <p>ARISE is an international, multi-institutional collaboration, and Debra Laefer is identified as overall global lead.</p>
+          <p>
+            ARISE is an international, multi-institutional collaboration, and
+            Debra Laefer is identified as overall global lead.
+          </p>
         </article>
         <article>
           <span class="principle-grid__number">02</span>
           <h3>Visible placeholders</h3>
-          <p>Unverified biographies, publication data and project detail are clearly marked instead of being filled with invented claims.</p>
+          <p>
+            Unverified biographies, publication data and project detail are
+            clearly marked instead of being filled with invented claims.
+          </p>
         </article>
         <article>
           <span class="principle-grid__number">03</span>
           <h3>Decisions still needed</h3>
-          <p>Official wording, branding, institutional roles, editorial ownership and the permanent domain remain consortium decisions.</p>
+          <p>
+            Official wording, branding, institutional roles, editorial ownership
+            and the permanent domain remain consortium decisions.
+          </p>
         </article>
       </div>
     </div>
@@ -63,8 +81,13 @@ import { sitePath } from '../lib/site';
         <h2>See how one project connects the site.</h2>
       </div>
       <div>
-        <p>ISC-XR is used as a representative project record, with demonstration links to people and outputs.</p>
-        <a class="button" href={sitePath('/research/isc-xr/')}>Open the ISC-XR example</a>
+        <p>
+          ISC-XR is used as a representative project record, with demonstration
+          links to people and outputs.
+        </p>
+        <a class="button" href={sitePath("/research/isc-xr/")}
+          >Open the ISC-XR example</a
+        >
       </div>
     </div>
   </section>

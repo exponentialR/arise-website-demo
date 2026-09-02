@@ -4,15 +4,15 @@
 
 Astro validates seven build-time content collections in `src/content.config.ts`.
 
-| Collection | Purpose | Important relationships |
-| --- | --- | --- |
-| `people` | Researcher and leadership profiles | institution; optionally curated projects/publications |
-| `institutions` | Universities and other programme context | referenced by people and projects |
-| `projects` | Research activity | people, institutions; optional curated publications/resources |
-| `publications` | Bibliographic records | authors and projects |
-| `news` | Programme updates | optional projects |
-| `media` | Links to external coverage | optional project |
-| `resources` | Dataset, software, repository, video and guide catalogue | projects and external location |
+| Collection     | Purpose                                                  | Important relationships                                       |
+| -------------- | -------------------------------------------------------- | ------------------------------------------------------------- |
+| `people`       | Researcher and leadership profiles                       | institution; optionally curated projects/publications         |
+| `institutions` | Universities and other programme context                 | referenced by people and projects                             |
+| `projects`     | Research activity                                        | people, institutions; optional curated publications/resources |
+| `publications` | Bibliographic records                                    | authors and projects                                          |
+| `news`         | Programme updates                                        | optional projects                                             |
+| `media`        | Links to external coverage                               | optional project                                              |
+| `resources`    | Dataset, software, repository, video and guide catalogue | projects and external location                                |
 
 ## Relationship shape
 

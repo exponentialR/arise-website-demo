@@ -41,14 +41,14 @@ This does not prevent ARISE adding an editing interface later. A future CMS coul
 
 For this public demonstrator:
 
-| Item | Demonstrator model |
-| --- | --- |
-| Hosting/server | £0 via GitHub Pages |
-| Database | Not required |
-| CMS licence | Not required |
-| SSL/HTTPS | Provided by GitHub Pages |
-| Deployment | Automated by GitHub Actions |
-| Framework | Astro, open source |
+| Item           | Demonstrator model          |
+| -------------- | --------------------------- |
+| Hosting/server | £0 via GitHub Pages         |
+| Database       | Not required                |
+| CMS licence    | Not required                |
+| SSL/HTTPS      | Provided by GitHub Pages    |
+| Deployment     | Automated by GitHub Actions |
+| Framework      | Astro, open source          |
 
 This is an architecture and cost model, not a contractual promise about future third-party terms. It excludes staff time, optional domain registration and any future services chosen by the consortium.
 

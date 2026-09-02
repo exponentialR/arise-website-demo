@@ -1,13 +1,18 @@
 ---
-import { getCollection } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import PageHeader from '../../components/PageHeader.astro';
-import NewsCard from '../../components/NewsCard.astro';
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import NewsCard from "../../components/NewsCard.astro";
 
-const news = (await getCollection('news')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const news = (await getCollection("news")).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
 ---
 
-<BaseLayout title="News" description="News and updates from the ARISE research programme website demonstrator.">
+<BaseLayout
+  title="News"
+  description="News and updates from the ARISE research programme website demonstrator."
+>
   <PageHeader
     eyebrow="News"
     title="Updates from across the programme."
@@ -21,9 +26,14 @@ const news = (await getCollection('news')).sort((a, b) => b.data.date.valueOf() 
           <p class="eyebrow">Latest updates</p>
           <h2>Programme news</h2>
         </div>
-        <p class="section-note">Current entries are demonstration content until official news is approved.</p>
+        <p class="section-note">
+          Current entries are demonstration content until official news is
+          approved.
+        </p>
       </div>
-      <div class="news-grid">{news.map((item) => <NewsCard item={item} />)}</div>
+      <div class="news-grid">
+        {news.map((item) => <NewsCard item={item} />)}
+      </div>
     </div>
   </section>
 </BaseLayout>

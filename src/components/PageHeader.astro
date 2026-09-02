@@ -9,7 +9,7 @@ interface Props {
 const { eyebrow, title, intro, compact = false } = Astro.props;
 ---
 
-<section class:list={['page-hero', { 'page-hero--compact': compact }]}> 
+<section class:list={["page-hero", { "page-hero--compact": compact }]}>
   <div class="shell page-hero__inner">
     <p class="eyebrow">{eyebrow}</p>
     <h1>{title}</h1>

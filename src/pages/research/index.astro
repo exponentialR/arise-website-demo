@@ -1,15 +1,18 @@
 ---
-import { getCollection } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import PageHeader from '../../components/PageHeader.astro';
-import ProjectCard from '../../components/ProjectCard.astro';
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
 
-const projects = (await getCollection('projects')).sort(
+const projects = (await getCollection("projects")).sort(
   (a, b) => (a.data.order ?? 999) - (b.data.order ?? 999),
 );
 ---
 
-<BaseLayout title="Research" description="Explore ARISE research projects and their connected people, institutions and outputs.">
+<BaseLayout
+  title="Research"
+  description="Explore ARISE research projects and their connected people, institutions and outputs."
+>
   <PageHeader
     eyebrow="Research"
     title="Projects are the meeting point for people, institutions and outputs."
@@ -21,9 +24,16 @@ const projects = (await getCollection('projects')).sort(
       <div class="section-heading section-heading--row">
         <div>
           <p class="eyebrow">Project directory</p>
-          <h2>{projects.length} representative project{projects.length === 1 ? '' : 's'}</h2>
+          <h2>
+            {projects.length} representative project{
+              projects.length === 1 ? "" : "s"
+            }
+          </h2>
         </div>
-        <p class="section-note">Additional projects can be added as individual Markdown records after content approval.</p>
+        <p class="section-note">
+          Additional projects can be added as individual Markdown records after
+          content approval.
+        </p>
       </div>
       <div class="project-grid">
         {projects.map((project) => <ProjectCard project={project} />)}

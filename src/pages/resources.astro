@@ -1,16 +1,22 @@
 ---
-import { getCollection } from 'astro:content';
-import BaseLayout from '../layouts/BaseLayout.astro';
-import PageHeader from '../components/PageHeader.astro';
-import DemoBadge from '../components/DemoBadge.astro';
-import { sitePath } from '../lib/site';
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import DemoBadge from "../components/DemoBadge.astro";
+import { sitePath } from "../lib/site";
 
-const [resources, projects] = await Promise.all([getCollection('resources'), getCollection('projects')]);
+const [resources, projects] = await Promise.all([
+  getCollection("resources"),
+  getCollection("projects"),
+]);
 resources.sort((a, b) => a.data.title.localeCompare(b.data.title));
 const projectsById = new Map(projects.map((project) => [project.id, project]));
 ---
 
-<BaseLayout title="Resources" description="A catalogue of ARISE datasets, software, repositories, videos and guides.">
+<BaseLayout
+  title="Resources"
+  description="A catalogue of ARISE datasets, software, repositories, videos and guides."
+>
   <PageHeader
     eyebrow="Research resources"
     title="A front door to datasets, software and practical outputs."
@@ -24,32 +30,46 @@ const projectsById = new Map(projects.map((project) => [project.id, project]));
           <p class="eyebrow">Resource catalogue</p>
           <h2>Find an output</h2>
         </div>
-        <p class="section-note">The catalogue can link to DOI pages, GitHub, institutional repositories, dataset archives and video platforms.</p>
+        <p class="section-note">
+          The catalogue can link to DOI pages, GitHub, institutional
+          repositories, dataset archives and video platforms.
+        </p>
       </div>
       <div class="resource-grid">
-        {resources.map((resource) => (
-          <article class="resource-card">
-            <div class="card-meta">
-              <span>{resource.data.type}</span>
-              {resource.data.demo && <DemoBadge />}
-            </div>
-            <h3>{resource.data.title}</h3>
-            <p>{resource.data.summary}</p>
-            {resource.data.projects.length > 0 && (
-              <p class="resource-card__projects">
-                Related research: {resource.data.projects.map((reference) => {
-                  const project = projectsById.get(reference.id);
-                  return project ? <a href={sitePath(`/research/${project.id}/`)}>{project.data.title}</a> : null;
-                })}
-              </p>
-            )}
-            {resource.data.externalUrl ? (
-              <a class="card-link" href={resource.data.externalUrl}>Open resource <span aria-hidden="true">↗</span></a>
-            ) : (
-              <span class="pending-link">External link pending verification</span>
-            )}
-          </article>
-        ))}
+        {
+          resources.map((resource) => (
+            <article class="resource-card">
+              <div class="card-meta">
+                <span>{resource.data.type}</span>
+                {resource.data.demo && <DemoBadge />}
+              </div>
+              <h3>{resource.data.title}</h3>
+              <p>{resource.data.summary}</p>
+              {resource.data.projects.length > 0 && (
+                <p class="resource-card__projects">
+                  Related research:{" "}
+                  {resource.data.projects.map((reference) => {
+                    const project = projectsById.get(reference.id);
+                    return project ? (
+                      <a href={sitePath(`/research/${project.id}/`)}>
+                        {project.data.title}
+                      </a>
+                    ) : null;
+                  })}
+                </p>
+              )}
+              {resource.data.externalUrl ? (
+                <a class="card-link" href={resource.data.externalUrl}>
+                  Open resource <span aria-hidden="true">↗</span>
+                </a>
+              ) : (
+                <span class="pending-link">
+                  External link pending verification
+                </span>
+              )}
+            </article>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -62,10 +82,15 @@ const projectsById = new Map(projects.map((project) => [project.id, project]));
       </div>
       <div class="prose lead-prose">
         <p>
-          The source repository stores the pages, structured records and modest web assets needed to publish the
-          site. Large datasets, software releases and videos should stay in services designed for those materials.
+          The source repository stores the pages, structured records and modest
+          web assets needed to publish the site. Large datasets, software
+          releases and videos should stay in services designed for those
+          materials.
         </p>
-        <p>This separation keeps website deployment quick while preserving clear routes to the research itself.</p>
+        <p>
+          This separation keeps website deployment quick while preserving clear
+          routes to the research itself.
+        </p>
       </div>
     </div>
   </section>

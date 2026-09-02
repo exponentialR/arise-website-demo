@@ -1,33 +1,50 @@
 ---
-import { getCollection, render, type CollectionEntry } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import DemoBadge from '../../components/DemoBadge.astro';
-import PersonCard from '../../components/PersonCard.astro';
-import ProjectCard from '../../components/ProjectCard.astro';
-import { sitePath } from '../../lib/site';
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import DemoBadge from "../../components/DemoBadge.astro";
+import PersonCard from "../../components/PersonCard.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
+import { sitePath } from "../../lib/site";
 
 export async function getStaticPaths() {
-  const institutions = await getCollection('institutions');
-  return institutions.map((institution) => ({ params: { id: institution.id }, props: { institution } }));
+  const institutions = await getCollection("institutions");
+  return institutions.map((institution) => ({
+    params: { id: institution.id },
+    props: { institution },
+  }));
 }
 
 interface Props {
-  institution: CollectionEntry<'institutions'>;
+  institution: CollectionEntry<"institutions">;
 }
 
 const { institution } = Astro.props;
 const { Content } = await render(institution);
-const [people, projects] = await Promise.all([getCollection('people'), getCollection('projects')]);
-const linkedPeople = people.filter((person) => person.data.institution?.id === institution.id);
+const [people, projects] = await Promise.all([
+  getCollection("people"),
+  getCollection("projects"),
+]);
+const linkedPeople = people.filter(
+  (person) => person.data.institution?.id === institution.id,
+);
 const linkedProjects = projects.filter((project) =>
-  project.data.institutions.some((reference) => reference.id === institution.id),
+  project.data.institutions.some(
+    (reference) => reference.id === institution.id,
+  ),
 );
 ---
 
-<BaseLayout title={institution.data.name} description={institution.data.summary}>
+<BaseLayout
+  title={institution.data.name}
+  description={institution.data.summary}
+>
   <section class="page-hero">
     <div class="shell page-hero__inner">
-      <p class="breadcrumb"><a href={sitePath('/partners-contact/')}>Partners / Contact</a><span aria-hidden="true">/</span>Institution</p>
+      <p class="breadcrumb">
+        <a href={sitePath("/partners-contact/")}>Partners / Contact</a><span
+          aria-hidden="true">/</span
+        >Institution
+      </p>
       <div class="card-meta">
         <span>{institution.data.kind}</span>
         {institution.data.demo && <DemoBadge />}
@@ -45,37 +62,60 @@ const linkedProjects = projects.filter((project) =>
           <p class="detail-label">Type</p>
           <p>{institution.data.kind}</p>
         </div>
-        {institution.data.countryOrRegion && (
-          <div class="detail-sidebar__block">
-            <p class="detail-label">Location</p>
-            <p>{institution.data.countryOrRegion}</p>
-          </div>
-        )}
-        {institution.data.statusNote && (
-          <div class="detail-sidebar__block">
-            <p class="detail-label">Record status</p>
-            <p>{institution.data.statusNote}</p>
-          </div>
-        )}
-        {institution.data.website && <a href={institution.data.website}>Visit official website <span aria-hidden="true">↗</span></a>}
+        {
+          institution.data.countryOrRegion && (
+            <div class="detail-sidebar__block">
+              <p class="detail-label">Location</p>
+              <p>{institution.data.countryOrRegion}</p>
+            </div>
+          )
+        }
+        {
+          institution.data.statusNote && (
+            <div class="detail-sidebar__block">
+              <p class="detail-label">Record status</p>
+              <p>{institution.data.statusNote}</p>
+            </div>
+          )
+        }
+        {
+          institution.data.website && (
+            <a href={institution.data.website}>
+              Visit official website <span aria-hidden="true">↗</span>
+            </a>
+          )
+        }
       </aside>
     </div>
   </section>
 
-  {(linkedPeople.length > 0 || linkedProjects.length > 0) && (
-    <section class="section section--tint">
-      <div class="shell">
-        <div class="section-heading">
-          <p class="eyebrow">Connected records</p>
-          <h2>People and research</h2>
+  {
+    (linkedPeople.length > 0 || linkedProjects.length > 0) && (
+      <section class="section section--tint">
+        <div class="shell">
+          <div class="section-heading">
+            <p class="eyebrow">Connected records</p>
+            <h2>People and research</h2>
+          </div>
+          {linkedPeople.length > 0 && (
+            <div class="people-grid">
+              {linkedPeople.map((person) => (
+                <PersonCard
+                  person={person}
+                  institutionName={institution.data.name}
+                />
+              ))}
+            </div>
+          )}
+          {linkedProjects.length > 0 && (
+            <div class="project-grid related-grid">
+              {linkedProjects.map((project) => (
+                <ProjectCard project={project} />
+              ))}
+            </div>
+          )}
         </div>
-        {linkedPeople.length > 0 && (
-          <div class="people-grid">{linkedPeople.map((person) => <PersonCard person={person} institutionName={institution.data.name} />)}</div>
-        )}
-        {linkedProjects.length > 0 && (
-          <div class="project-grid related-grid">{linkedProjects.map((project) => <ProjectCard project={project} />)}</div>
-        )}
-      </div>
-    </section>
-  )}
+      </section>
+    )
+  }
 </BaseLayout>

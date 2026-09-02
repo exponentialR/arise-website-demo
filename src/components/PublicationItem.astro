@@ -1,10 +1,10 @@
 ---
-import type { CollectionEntry } from 'astro:content';
-import DemoBadge from './DemoBadge.astro';
-import { sitePath } from '../lib/site';
+import type { CollectionEntry } from "astro:content";
+import DemoBadge from "./DemoBadge.astro";
+import { sitePath } from "../lib/site";
 
 interface Props {
-  publication: CollectionEntry<'publications'>;
+  publication: CollectionEntry<"publications">;
   authorNames: string[];
   projectNames?: string[];
 }
@@ -19,9 +19,27 @@ const { publication, authorNames, projectNames = [] } = Astro.props;
       <span>{publication.data.type}</span>
       {publication.data.demo && <DemoBadge />}
     </div>
-    <h3><a href={sitePath(`/publications/${publication.id}/`)}>{publication.data.title}</a></h3>
-    {authorNames.length > 0 && <p class="publication-item__authors">{authorNames.join(', ')}</p>}
-    {publication.data.venue && <p class="publication-item__venue">{publication.data.venue}</p>}
-    {projectNames.length > 0 && <p class="publication-item__projects">Related research: {projectNames.join(', ')}</p>}
+    <h3>
+      <a href={sitePath(`/publications/${publication.id}/`)}
+        >{publication.data.title}</a
+      >
+    </h3>
+    {
+      authorNames.length > 0 && (
+        <p class="publication-item__authors">{authorNames.join(", ")}</p>
+      )
+    }
+    {
+      publication.data.venue && (
+        <p class="publication-item__venue">{publication.data.venue}</p>
+      )
+    }
+    {
+      projectNames.length > 0 && (
+        <p class="publication-item__projects">
+          Related research: {projectNames.join(", ")}
+        </p>
+      )
+    }
   </div>
 </article>

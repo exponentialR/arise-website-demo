@@ -1,22 +1,32 @@
 ---
-import { getCollection } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import PageHeader from '../../components/PageHeader.astro';
-import PublicationItem from '../../components/PublicationItem.astro';
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import PublicationItem from "../../components/PublicationItem.astro";
 
 const [publications, people, projects] = await Promise.all([
-  getCollection('publications'),
-  getCollection('people'),
-  getCollection('projects'),
+  getCollection("publications"),
+  getCollection("people"),
+  getCollection("projects"),
 ]);
-publications.sort((a, b) => b.data.year - a.data.year || a.data.title.localeCompare(b.data.title));
+publications.sort(
+  (a, b) =>
+    b.data.year - a.data.year || a.data.title.localeCompare(b.data.title),
+);
 const peopleById = new Map(people.map((person) => [person.id, person]));
 const projectsById = new Map(projects.map((project) => [project.id, project]));
-const years = [...new Set(publications.map((publication) => publication.data.year))].sort((a, b) => b - a);
-const types = [...new Set(publications.map((publication) => publication.data.type))].sort();
+const years = [
+  ...new Set(publications.map((publication) => publication.data.year)),
+].sort((a, b) => b - a);
+const types = [
+  ...new Set(publications.map((publication) => publication.data.type)),
+].sort();
 ---
 
-<BaseLayout title="Publications" description="ARISE publications and research outputs, connected to author and project records.">
+<BaseLayout
+  title="Publications"
+  description="ARISE publications and research outputs, connected to author and project records."
+>
   <PageHeader
     eyebrow="Publications"
     title="Research outputs, connected to the people and projects behind them."
@@ -28,42 +38,60 @@ const types = [...new Set(publications.map((publication) => publication.data.typ
       <div class="filter-panel" aria-label="Publication groupings">
         <div>
           <p class="detail-label">Browse by year</p>
-          <div class="filter-links">{years.map((year) => <a href={`#year-${year}`}>{year}</a>)}</div>
+          <div class="filter-links">
+            {years.map((year) => <a href={`#year-${year}`}>{year}</a>)}
+          </div>
         </div>
         <div>
           <p class="detail-label">Types represented</p>
-          <div class="filter-links">{types.map((type) => <span>{type}</span>)}</div>
+          <div class="filter-links">
+            {types.map((type) => <span>{type}</span>)}
+          </div>
         </div>
       </div>
 
       <div class="section-heading section-heading--row publication-heading">
         <div>
           <p class="eyebrow">Research catalogue</p>
-          <h2>{publications.length} record{publications.length === 1 ? '' : 's'} in this demonstrator</h2>
+          <h2>
+            {publications.length} record{publications.length === 1 ? "" : "s"} in
+            this demonstrator
+          </h2>
         </div>
-        <p class="section-note">The visible demonstration record below is not an academic citation.</p>
+        <p class="section-note">
+          The visible demonstration record below is not an academic citation.
+        </p>
       </div>
 
-      {years.map((year) => (
-        <section class="year-group" id={`year-${year}`} aria-labelledby={`year-${year}-heading`}>
-          <h3 id={`year-${year}-heading`}>{year}</h3>
-          <div class="publication-list">
-            {publications
-              .filter((publication) => publication.data.year === year)
-              .map((publication) => (
-                <PublicationItem
-                  publication={publication}
-                  authorNames={publication.data.authors.map(
-                    (reference) => peopleById.get(reference.id)?.data.name ?? reference.id,
-                  )}
-                  projectNames={publication.data.projects.map(
-                    (reference) => projectsById.get(reference.id)?.data.title ?? reference.id,
-                  )}
-                />
-              ))}
-          </div>
-        </section>
-      ))}
+      {
+        years.map((year) => (
+          <section
+            class="year-group"
+            id={`year-${year}`}
+            aria-labelledby={`year-${year}-heading`}
+          >
+            <h3 id={`year-${year}-heading`}>{year}</h3>
+            <div class="publication-list">
+              {publications
+                .filter((publication) => publication.data.year === year)
+                .map((publication) => (
+                  <PublicationItem
+                    publication={publication}
+                    authorNames={publication.data.authors.map(
+                      (reference) =>
+                        peopleById.get(reference.id)?.data.name ?? reference.id,
+                    )}
+                    projectNames={publication.data.projects.map(
+                      (reference) =>
+                        projectsById.get(reference.id)?.data.title ??
+                        reference.id,
+                    )}
+                  />
+                ))}
+            </div>
+          </section>
+        ))
+      }
     </div>
   </section>
 </BaseLayout>

@@ -1,27 +1,34 @@
 ---
-import { sitePath } from '../lib/site';
+import { sitePath } from "../lib/site";
 ---
 
 <footer class="site-footer">
   <div class="shell footer-grid">
     <div>
       <p class="footer-wordmark">ARISE</p>
-      <p class="footer-note">A working website demonstrator for consortium discussion.</p>
+      <p class="footer-note">
+        A working website demonstrator for consortium discussion.
+      </p>
     </div>
     <div>
       <p class="footer-heading">Explore</p>
-      <a href={sitePath('/research/')}>Research</a>
-      <a href={sitePath('/people/')}>People</a>
-      <a href={sitePath('/publications/')}>Publications</a>
+      <a href={sitePath("/research/")}>Research</a>
+      <a href={sitePath("/people/")}>People</a>
+      <a href={sitePath("/publications/")}>Publications</a>
     </div>
     <div>
       <p class="footer-heading">Demonstrator</p>
-      <a href={sitePath('/demo/architecture/')}>How this site works</a>
-      <a href="https://github.com/exponentialR/arise-website-demo">View source on GitHub</a>
+      <a href={sitePath("/demo/architecture/")}>How this site works</a>
+      <a href="https://github.com/exponentialR/arise-website-demo"
+        >View source on GitHub</a
+      >
     </div>
   </div>
   <div class="shell footer-base">
-    <p>Prototype content must be verified and approved before official publication.</p>
+    <p>
+      Prototype content must be verified and approved before official
+      publication.
+    </p>
     <p>&copy; {new Date().getFullYear()} ARISE website demonstrator</p>
   </div>
 </footer>

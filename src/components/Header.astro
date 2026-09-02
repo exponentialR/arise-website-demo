@@ -1,22 +1,24 @@
 ---
-import { sitePath } from '../lib/site';
+import { sitePath } from "../lib/site";
 
 const pathname = Astro.url.pathname;
 const items = [
-  { label: 'Home', href: '/' },
-  { label: 'About', href: '/about/' },
-  { label: 'Research', href: '/research/' },
-  { label: 'People', href: '/people/' },
-  { label: 'Publications', href: '/publications/' },
-  { label: 'News', href: '/news/' },
-  { label: 'In the Media', href: '/media/' },
-  { label: 'Resources', href: '/resources/' },
-  { label: 'Partners / Contact', href: '/partners-contact/' },
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about/" },
+  { label: "Research", href: "/research/" },
+  { label: "People", href: "/people/" },
+  { label: "Publications", href: "/publications/" },
+  { label: "News", href: "/news/" },
+  { label: "In the Media", href: "/media/" },
+  { label: "Resources", href: "/resources/" },
+  { label: "Partners / Contact", href: "/partners-contact/" },
 ];
 
 const isCurrent = (href: string) => {
   const resolved = sitePath(href);
-  return href === '/' ? pathname === resolved || pathname === `${resolved}/` : pathname.startsWith(resolved);
+  return href === "/"
+    ? pathname === resolved || pathname === `${resolved}/`
+    : pathname.startsWith(resolved);
 };
 ---
 
@@ -29,32 +31,42 @@ const isCurrent = (href: string) => {
 </div>
 <header class="site-header">
   <div class="shell masthead">
-    <a class="brand" href={sitePath('/')} aria-label="ARISE home">
+    <a class="brand" href={sitePath("/")} aria-label="ARISE home">
       <span class="brand__wordmark">ARISE</span>
       <span class="brand__descriptor">Research programme demonstrator</span>
     </a>
     <nav class="desktop-nav" aria-label="Primary navigation">
       <ul>
-        {items.map((item) => (
-          <li>
-            <a href={sitePath(item.href)} aria-current={isCurrent(item.href) ? 'page' : undefined}>
-              {item.label}
-            </a>
-          </li>
-        ))}
+        {
+          items.map((item) => (
+            <li>
+              <a
+                href={sitePath(item.href)}
+                aria-current={isCurrent(item.href) ? "page" : undefined}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
       </ul>
     </nav>
     <details class="mobile-nav">
       <summary>Menu</summary>
       <nav aria-label="Mobile navigation">
         <ul>
-          {items.map((item) => (
-            <li>
-              <a href={sitePath(item.href)} aria-current={isCurrent(item.href) ? 'page' : undefined}>
-                {item.label}
-              </a>
-            </li>
-          ))}
+          {
+            items.map((item) => (
+              <li>
+                <a
+                  href={sitePath(item.href)}
+                  aria-current={isCurrent(item.href) ? "page" : undefined}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
         </ul>
       </nav>
     </details>
