@@ -1,0 +1,21 @@
+---
+title: "Project title"
+shortTitle: "Short title"
+summary: "Approved one-paragraph project summary."
+status: "Active"
+people:
+  - "person-record-id"
+institutions:
+  - "institution-record-id"
+featured: false
+demo: false
+order: 10
+---
+
+## About the project
+
+Add approved aims, methods and context here.
+
+## Research questions
+
+Add approved project detail here.

@@ -1,0 +1,10 @@
+---
+title: "Approved news headline"
+date: 2026-09-02
+summary: "Short standfirst shown on listing pages."
+projects:
+  - "project-record-id"
+demo: false
+---
+
+Write the approved news article here.

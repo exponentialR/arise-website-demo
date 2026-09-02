@@ -1,0 +1,16 @@
+---
+title: "Verified publication title"
+year: 2026
+authors:
+  - "person-record-id"
+projects:
+  - "project-record-id"
+venue: "Verified journal, conference or publisher"
+type: "Journal article"
+doi: "10.xxxx/verified-doi"
+externalUrl: "https://doi.org/10.xxxx/verified-doi"
+summary: "Optional approved abstract or plain-language summary."
+demo: false
+---
+
+Optional additional approved description. Verify every bibliographic field before publication.

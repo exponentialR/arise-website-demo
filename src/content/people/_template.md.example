@@ -1,0 +1,13 @@
+---
+name: "Full name"
+role: "Approved role title"
+institution: "institution-record-id"
+summary: "Short approved profile summary."
+profileLinks:
+  - label: "Institutional profile"
+    url: "https://example.edu/profile"
+demo: false
+order: 10
+---
+
+Approved biography text goes here. Do not publish unverified affiliations, credentials or project relationships.
