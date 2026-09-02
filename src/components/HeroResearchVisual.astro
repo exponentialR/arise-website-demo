@@ -1,0 +1,104 @@
+---
+import { sitePath } from "../lib/site";
+---
+
+<aside class="research-visual" aria-labelledby="research-visual-title">
+  <div class="research-visual__header">
+    <p>Structures · robotics · perception</p>
+    <span aria-hidden="true">ARISE / 01</span>
+  </div>
+
+  <svg
+    class="research-visual__diagram"
+    viewBox="0 0 420 390"
+    role="img"
+    aria-labelledby="assembly-visual-title assembly-visual-description"
+  >
+    <title id="assembly-visual-title">
+      Conceptual intermeshed steel assembly
+    </title>
+    <desc id="assembly-visual-description">
+      Two toothed steel profiles move together while a perception scan crosses
+      the connection zone. A simplified robotic manipulator appears above.
+    </desc>
+
+    <defs>
+      <pattern
+        id="assembly-grid"
+        width="28"
+        height="28"
+        patternUnits="userSpaceOnUse"
+      >
+        <path d="M 28 0 L 0 0 0 28" fill="none" stroke="currentColor"></path>
+      </pattern>
+    </defs>
+
+    <rect
+      class="research-visual__grid"
+      width="420"
+      height="390"
+      fill="url(#assembly-grid)"></rect>
+
+    <g class="research-visual__robot" aria-hidden="true">
+      <path d="M350 44v23h-30"></path>
+      <circle cx="350" cy="44" r="8"></circle>
+      <circle cx="319" cy="67" r="8"></circle>
+      <path d="m319 67-42 31"></path>
+      <circle cx="277" cy="98" r="8"></circle>
+      <path d="m277 98-29 23"></path>
+      <path d="m241 116 14 11m-19-4 12 10"></path>
+    </g>
+
+    <g class="research-visual__member research-visual__member--left">
+      <path d="M44 112h110v18h56v24h-56v24h56v24h-56v24h56v24h-56v24H44Z"
+      ></path>
+      <path class="research-visual__member-line" d="M72 112v162"></path>
+    </g>
+
+    <g class="research-visual__member research-visual__member--right">
+      <path d="M376 112H266v42h-56v24h56v24h-56v24h56v24h-56v24h166Z"></path>
+      <path class="research-visual__member-line" d="M348 112v162"></path>
+    </g>
+
+    <g class="research-visual__target" aria-hidden="true">
+      <path d="M177 137v-15h15m51 0h15v15M177 249v15h15m51 0h15v-15"></path>
+      <circle cx="210" cy="193" r="31"></circle>
+      <circle cx="210" cy="193" r="4"></circle>
+    </g>
+
+    <g class="research-visual__scan" aria-hidden="true">
+      <line x1="36" y1="193" x2="384" y2="193"></line>
+      <rect x="36" y="189" width="348" height="8" rx="4"></rect>
+    </g>
+
+    <g class="research-visual__axis" aria-hidden="true">
+      <path d="M112 316h196"></path>
+      <path d="m112 316 12-7v14Zm196 0-12-7v14Z"></path>
+    </g>
+
+    <text class="research-visual__label" x="44" y="304">STEEL MEMBER</text>
+    <text class="research-visual__label" x="376" y="304" text-anchor="end"
+      >STEEL MEMBER</text
+    >
+    <text
+      class="research-visual__axis-label"
+      x="210"
+      y="344"
+      text-anchor="middle">ASSEMBLY AXIS</text
+    >
+  </svg>
+
+  <div class="research-visual__copy">
+    <p class="research-visual__eyebrow">Conceptual research visual</p>
+    <h2 id="research-visual-title">
+      Connecting structure, robotics and perception.
+    </h2>
+    <p>
+      A visual shorthand for research around intermeshed steel connection
+      assembly—not an official technical drawing.
+    </p>
+    <a href={sitePath("/research/isc-xr/")}
+      >Explore ISC-XR <span aria-hidden="true">→</span></a
+    >
+  </div>
+</aside>

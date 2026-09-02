@@ -5,6 +5,7 @@ import ProjectCard from "../components/ProjectCard.astro";
 import PublicationItem from "../components/PublicationItem.astro";
 import NewsCard from "../components/NewsCard.astro";
 import DemoBadge from "../components/DemoBadge.astro";
+import HeroResearchVisual from "../components/HeroResearchVisual.astro";
 import { sitePath } from "../lib/site";
 
 const [projects, publications, people, news, resources, institutions] =
@@ -66,19 +67,7 @@ const orderedInstitutions = institutions.sort(
           and content remain subject to consortium review.
         </p>
       </div>
-      <aside class="network-panel" aria-label="How ARISE content connects">
-        <p class="network-panel__kicker">One programme · connected knowledge</p>
-        <div class="network-panel__focus">ARISE</div>
-        <div class="network-panel__links" aria-hidden="true">
-          <span>People</span>
-          <span>Projects</span>
-          <span>Institutions</span>
-          <span>Outputs</span>
-        </div>
-        <p class="network-panel__caption">
-          Structured records keep every relationship consistent across the site.
-        </p>
-      </aside>
+      <HeroResearchVisual />
     </div>
   </section>
 
