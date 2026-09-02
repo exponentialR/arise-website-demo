@@ -7,6 +7,7 @@ import NewsCard from "../components/NewsCard.astro";
 import DemoBadge from "../components/DemoBadge.astro";
 import HeroResearchVisual from "../components/HeroResearchVisual.astro";
 import InstitutionMark from "../components/InstitutionMark.astro";
+import FunderMark from "../components/FunderMark.astro";
 import { sitePath } from "../lib/site";
 
 const [
@@ -133,7 +134,7 @@ const latestEngagement = engagement
         {
           orderedFunders.map((funder) => (
             <a href={sitePath(`/funding/${funder.id}/`)}>
-              <span>{funder.data.shortName}</span>
+              <FunderMark funder={funder} compact />
               <small>{funder.data.jurisdiction}</small>
             </a>
           ))

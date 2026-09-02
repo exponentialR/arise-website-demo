@@ -1,0 +1,42 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { sitePath } from "../lib/site";
+
+interface Props {
+  funder: CollectionEntry<"funders">;
+  showUsageNote?: boolean;
+  compact?: boolean;
+}
+
+const { funder, showUsageNote = false, compact = false } = Astro.props;
+const logoUrl = funder.data.logo ? sitePath(funder.data.logo.url) : undefined;
+---
+
+<div class:list={["funder-mark", { "funder-mark--compact": compact }]}>
+  {
+    funder.data.logo ? (
+      <span
+        class:list={[
+          "funder-mark__canvas",
+          `funder-mark__canvas--${funder.data.logo.background}`,
+        ]}
+      >
+        <img
+          src={logoUrl}
+          alt={funder.data.logo.alt}
+          loading="lazy"
+          decoding="async"
+        />
+      </span>
+    ) : (
+      <span class="funder-mark__fallback" aria-hidden="true">
+        {funder.data.shortName}
+      </span>
+    )
+  }
+  {
+    showUsageNote && funder.data.logo && (
+      <small>{funder.data.logo.usageNote}</small>
+    )
+  }
+</div>

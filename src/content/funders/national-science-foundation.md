@@ -4,6 +4,13 @@ shortName: "NSF"
 jurisdiction: "United States"
 summary: "The official NSF award record identifies award 2222815 for ARISE, with New York University as the awardee institution."
 website: "https://www.nsf.gov/"
+logo:
+  url: "/images/funders/nsf.png"
+  alt: "U.S. National Science Foundation"
+  sourceUrl: "https://www.nsf.gov/policies/brand"
+  sourceLabel: "NSF policy on brand standards"
+  background: "light"
+  usageNote: "Award acknowledgement · follow NSF brand standards"
 awards:
   - identifier: "2222815"
     scheme: "Future of Work at the Human-Technology Frontier Research (FW-HTF-R)"

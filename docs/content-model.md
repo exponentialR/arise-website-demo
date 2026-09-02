@@ -65,7 +65,7 @@ These labels prevent a funder-reported output from being presented as though the
 
 ## Institution identity and logos
 
-Institution records distinguish a **named programme collaborator** from a **contributor affiliation**. They also support an optional local `logo` block, but the demonstrator currently uses restrained typographic marks. Before adding a logo, obtain any required brand approval, store an approved asset in `public/images/institutions/`, record its source and provide accurate alt text.
+Institution records distinguish a **named programme collaborator** from a **contributor affiliation**. They support a governed local `logo` block containing the asset path, accurate alt text, official source, light/dark presentation and a visible usage note. The demonstrator now includes official-source marks provisionally; the consortium must confirm any required third-party or partnership approval before an official launch. Asset provenance and status are recorded in [`brand-assets.md`](brand-assets.md).
 
 ## Engagement
 
@@ -82,7 +82,7 @@ Before an official launch:
 3. verify official funding and collaboration wording;
 4. verify every publication field and external link;
 5. obtain permission and alt text for supplied imagery;
-6. confirm institutional-logo permissions before publishing official marks;
+6. confirm institutional and funder logo permissions and approved variants before official launch;
 7. run `npm run check` and `npm run build`.
 
 ## Templates

@@ -7,6 +7,13 @@ countryOrRegion: "Northern Ireland"
 summary: "Queen's University Belfast is named on the university's public ARISE project page and is the verified affiliation of several researchers represented in this catalogue."
 website: "https://www.qub.ac.uk/"
 evidenceUrl: "https://www.qub.ac.uk/courses/postgraduate-research/phd-opportunities/assembly-and-robotics-innovation-in-steel-building-erection-arise.html"
+logo:
+  url: "/images/institutions/queens-university-belfast.png"
+  alt: "Queen's University Belfast"
+  sourceUrl: "https://www.qub.ac.uk/brand/"
+  sourceLabel: "Queen's University Belfast brand guidance"
+  background: "dark"
+  usageNote: "Official-source mark · partnership approval required"
 statusNote: "Named programme relationship and researcher affiliations are verified; detailed programme wording remains subject to consortium approval."
 order: 1
 ---

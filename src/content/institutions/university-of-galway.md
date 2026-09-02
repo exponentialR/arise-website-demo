@@ -7,6 +7,13 @@ countryOrRegion: "Ireland"
 summary: "University of Galway is named as a collaborating university in the public ARISE project context and is the verified affiliation of Patrick McGetrick."
 website: "https://www.universityofgalway.ie/"
 evidenceUrl: "https://www.qub.ac.uk/courses/postgraduate-research/phd-opportunities/assembly-and-robotics-innovation-in-steel-building-erection-arise.html"
+logo:
+  url: "/images/institutions/university-of-galway.png"
+  alt: "University of Galway"
+  sourceUrl: "https://www.universityofgalway.ie/internal/marketing/brand/"
+  sourceLabel: "University of Galway brand guidance"
+  background: "light"
+  usageNote: "Official-source mark · programme use to be confirmed"
 statusNote: "Named collaboration and researcher affiliation are verified; detailed programme wording remains subject to consortium approval."
 order: 3
 ---

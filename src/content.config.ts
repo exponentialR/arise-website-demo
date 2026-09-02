@@ -14,11 +14,20 @@ const profilePhoto = z.object({
   sourceLabel: z.string(),
 });
 
-const institutionLogo = z.object({
-  url: z.string().regex(/^\/images\/institutions\//),
+const brandLogo = z.object({
   alt: z.string(),
   sourceUrl: z.url(),
   sourceLabel: z.string(),
+  background: z.enum(["light", "dark"]).default("light"),
+  usageNote: z.string(),
+});
+
+const institutionLogo = brandLogo.extend({
+  url: z.string().regex(/^\/images\/institutions\//),
+});
+
+const funderLogo = brandLogo.extend({
+  url: z.string().regex(/^\/images\/funders\//),
 });
 
 const publicationAuthor = z.object({
@@ -82,6 +91,7 @@ const funders = defineCollection({
     jurisdiction: z.string(),
     summary: z.string(),
     website: z.url(),
+    logo: funderLogo.optional(),
     awards: z.array(
       z.object({
         identifier: z.string(),

@@ -104,6 +104,6 @@ Ask Debra to help establish:
 4. who needs repository access;
 5. the preferred domain route;
 6. the public programme contact;
-7. permission to use each institution's official logo.
+7. permission to use each institution and funder's official identity mark.
 
 Close by noting that the repository can be transferred to an official ARISE organisation later without rebuilding the website.

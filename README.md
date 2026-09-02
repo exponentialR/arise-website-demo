@@ -97,7 +97,7 @@ Add only verified name, role, affiliation, biography and profile links. Set `ins
 
 ### Add an institution
 
-Create `src/content/institutions/institution-id.md` with `name`, `kind`, `relationship`, `summary`, official evidence URL and optional region, website and status note. Add an approved description in the Markdown body. Official logos are optional and should be added only after confirming the institution's brand-use requirements.
+Create `src/content/institutions/institution-id.md` with `name`, `kind`, `relationship`, `summary`, official evidence URL and optional region, website and status note. Add an approved description in the Markdown body. A logo record must point to a local official-source asset, name the source, provide alt text and record the approval status. The current marks are provisional demonstrator assets; see [`docs/brand-assets.md`](docs/brand-assets.md).
 
 ### Add a funder or award
 

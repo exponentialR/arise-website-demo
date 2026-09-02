@@ -2,6 +2,7 @@
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PublicationItem from "../../components/PublicationItem.astro";
+import FunderMark from "../../components/FunderMark.astro";
 import { sitePath } from "../../lib/site";
 
 export async function getStaticPaths() {
@@ -54,9 +55,7 @@ const evidenceCounts = linkedPublications.reduce<Record<string, number>>(
           >/</span
         >{funder.data.shortName}
       </p>
-      <div class="funder-hero__mark" aria-hidden="true">
-        {funder.data.shortName}
-      </div>
+      <FunderMark funder={funder} showUsageNote />
       <p class="eyebrow">{funder.data.jurisdiction}</p>
       <h1>{funder.data.name}</h1>
       <p class="page-hero__intro">{funder.data.summary}</p>
@@ -100,6 +99,13 @@ const evidenceCounts = linkedPublications.reduce<Record<string, number>>(
         <a href={funder.data.website}>
           Visit funder website <span aria-hidden="true">↗</span>
         </a>
+        {
+          funder.data.logo && (
+            <a href={funder.data.logo.sourceUrl}>
+              {funder.data.logo.sourceLabel} <span aria-hidden="true">↗</span>
+            </a>
+          )
+        }
       </aside>
     </div>
   </section>

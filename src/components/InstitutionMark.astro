@@ -16,19 +16,32 @@ const logoUrl = institution.data.logo
 <div class="institution-mark">
   {
     institution.data.logo ? (
-      <img
-        src={logoUrl}
-        alt={institution.data.logo.alt}
-        loading="lazy"
-        decoding="async"
-      />
+      <span
+        class:list={[
+          "institution-mark__canvas",
+          `institution-mark__canvas--${institution.data.logo.background}`,
+        ]}
+      >
+        <img
+          src={logoUrl}
+          alt={institution.data.logo.alt}
+          loading="lazy"
+          decoding="async"
+        />
+      </span>
     ) : (
-      <span>{institution.data.shortName ?? institution.data.name}</span>
+      <span class="institution-mark__fallback">
+        {institution.data.shortName ?? institution.data.name}
+      </span>
     )
   }
   {
-    showApprovalNote && !institution.data.logo && (
-      <small>Typographic mark · official logo approval pending</small>
+    showApprovalNote && (
+      <small>
+        {institution.data.logo
+          ? institution.data.logo.usageNote
+          : "Typographic mark · official logo approval pending"}
+      </small>
     )
   }
 </div>

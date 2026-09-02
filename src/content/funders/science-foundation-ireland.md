@@ -4,6 +4,13 @@ shortName: "SFI"
 jurisdiction: "Ireland"
 summary: "Published ARISE acknowledgements cite Science Foundation Ireland award 21/US/3797. SFI's functions were amalgamated into Research Ireland in 2024."
 website: "https://www.researchireland.ie/"
+logo:
+  url: "/images/funders/science-foundation-ireland.svg"
+  alt: "Science Foundation Ireland"
+  sourceUrl: "https://www.sfi.ie/sfi-logo-and-guidelines/"
+  sourceLabel: "Archived SFI logo and guidelines"
+  background: "light"
+  usageNote: "Historic award identity · consortium review required"
 awards:
   - identifier: "21/US/3797"
     scheme: "US-Ireland R&D Partnership Programme"

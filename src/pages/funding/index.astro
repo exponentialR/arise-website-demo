@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PageHeader from "../../components/PageHeader.astro";
+import FunderMark from "../../components/FunderMark.astro";
 import { sitePath } from "../../lib/site";
 
 const [funders, publications] = await Promise.all([
@@ -71,9 +72,7 @@ const linkedPublications = (funderId: string) =>
             const outputs = linkedPublications(funder.id);
             return (
               <article class="funder-card">
-                <div class="funder-card__mark" aria-hidden="true">
-                  {funder.data.shortName}
-                </div>
+                <FunderMark funder={funder} />
                 <p class="funder-card__jurisdiction">
                   {funder.data.jurisdiction}
                 </p>
@@ -119,7 +118,8 @@ const linkedPublications = (funderId: string) =>
         </p>
         <p class="verification-note">
           Consortium review is still required for official programme narrative,
-          sponsor ordering, logo use and contractual wording.
+          sponsor ordering, contractual wording and final permission to use each
+          identity mark.
         </p>
       </div>
     </div>

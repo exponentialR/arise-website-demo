@@ -4,6 +4,13 @@ shortName: "DfE"
 jurisdiction: "Northern Ireland"
 summary: "Published ARISE acknowledgements cite Department for the Economy grant USI-218 within the Northern Ireland route of the US-Ireland R&D Partnership."
 website: "https://www.economy-ni.gov.uk/"
+logo:
+  url: "/images/funders/department-for-economy.svg"
+  alt: "Department for the Economy / An Roinn Geilleagair"
+  sourceUrl: "https://www.economy-ni.gov.uk/publications/corporate-identity-guidelines"
+  sourceLabel: "Department for the Economy corporate identity guidelines"
+  background: "light"
+  usageNote: "Official-source mark · owner approval required"
 awards:
   - identifier: "USI-218"
     scheme: "US-Ireland R&D Partnership"

@@ -90,6 +90,14 @@ const linkedProjects = projects.filter((project) =>
         <a href={institution.data.evidenceUrl}>
           View relationship evidence <span aria-hidden="true">↗</span>
         </a>
+        {
+          institution.data.logo && (
+            <a href={institution.data.logo.sourceUrl}>
+              {institution.data.logo.sourceLabel}{" "}
+              <span aria-hidden="true">↗</span>
+            </a>
+          )
+        }
       </aside>
     </div>
   </section>

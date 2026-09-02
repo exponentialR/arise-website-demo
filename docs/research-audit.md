@@ -33,4 +33,4 @@ The site exposes these distinctions rather than silently treating them as equiva
 - The catalogue does not imply that the ARISE award was an output's only support.
 - Exact author names are retained even when the demonstrator has no verified person profile for that author.
 - The engagement record omits presenter and exact session details where the official source does not provide them.
-- Institution logos are withheld pending confirmation of the applicable brand permissions.
+- Official-source institution and funder marks are included provisionally for the demonstrator. Their sources and approval caveats are recorded in `docs/brand-assets.md`; final programme use remains subject to the relevant brand owners and consortium review.

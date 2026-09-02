@@ -4,6 +4,13 @@ shortName: "Short name"
 jurisdiction: "Jurisdiction"
 summary: "Concise, source-supported description of the funding relationship."
 website: "https://funder.example/"
+logo:
+  url: "/images/funders/funder-id.svg"
+  alt: "Official funder name"
+  sourceUrl: "https://funder.example/brand-guidance"
+  sourceLabel: "Official brand guidance"
+  background: "light"
+  usageNote: "Official-source mark · approval status"
 awards:
   - identifier: "verified-award-id"
     scheme: "Official scheme name"
