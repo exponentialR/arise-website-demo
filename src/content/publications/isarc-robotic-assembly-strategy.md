@@ -16,8 +16,7 @@ authors:
     person: "ibukun-awolusi"
   - name: "Debra Laefer"
     person: "debra-laefer"
-projects:
-  - "isc-xr"
+projects: []
 funding:
   - funder: "national-science-foundation"
     award: "2222815"

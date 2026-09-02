@@ -29,7 +29,7 @@ The site exposes these distinctions rather than silently treating them as equiva
 
 ## Deliberate limits
 
-- An output is linked to `isc-xr` only when that narrower relationship is supported; wider award outputs are not forced onto the project page.
+- Funding evidence does not automatically assign an output to a named project.
 - The catalogue does not imply that the ARISE award was an output's only support.
 - Exact author names are retained even when the demonstrator has no verified person profile for that author.
 - The engagement record omits presenter and exact session details where the official source does not provide them.

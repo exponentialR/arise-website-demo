@@ -21,4 +21,4 @@ summary: "A reinforcement-learning method coupling local and global world models
 demo: false
 ---
 
-The title, author list and preprint status are verified from arXiv. The paper acknowledges NSF award 2222815. It is catalogued as a preprint and is not assigned to ISC-XR.
+The title, author list and preprint status are verified from arXiv. The paper acknowledges NSF award 2222815 and is catalogued here as a preprint.

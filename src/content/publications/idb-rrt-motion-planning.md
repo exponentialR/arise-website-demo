@@ -22,4 +22,4 @@ summary: "A kinodynamic motion-planning method combining motion primitives, samp
 demo: false
 ---
 
-The paper's funding statement includes NSF award 2222815 alongside other support. It is catalogued as a wider award output and is not presented as an ISC-XR publication.
+The paper's funding statement includes NSF award 2222815 alongside other support. It is catalogued as a wider award output.

@@ -25,4 +25,4 @@ summary: "A conference paper connecting building-information modelling and safet
 demo: false
 ---
 
-The official CIB proceedings record verifies the title, authors, DOI and in-person presentation status. The NSF award record lists the paper as a research product reported against award 2222815. No ISC-XR relationship is inferred.
+The official CIB proceedings record verifies the title, authors, DOI and in-person presentation status. The NSF award record lists the paper as a research product reported against award 2222815.

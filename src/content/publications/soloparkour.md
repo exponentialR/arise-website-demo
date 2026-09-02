@@ -21,4 +21,4 @@ summary: "A robotics paper on constrained reinforcement learning for vision-base
 demo: false
 ---
 
-The NSF Public Access Repository and award record associate this paper with award 2222815. It is catalogued as a wider award output and is not presented as an ISC-XR publication.
+The NSF Public Access Repository and award record associate this paper with award 2222815. It is catalogued as a wider award output.

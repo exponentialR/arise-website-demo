@@ -6,35 +6,35 @@ Allow about 12–15 minutes for the walkthrough and leave the rest of the meetin
 
 Open <https://exponentialR.github.io/arise-website-demo/>.
 
-Frame it as a working vertical slice, not the final or official ARISE website. Point out the persistent demonstrator notice and evidence-safe placeholders.
+Frame it as a working vertical slice, not the final or official ARISE website. The public pages present ARISE directly; the separate internal architecture page explains the demonstrator and its evidence limits.
 
 ## 2. Show the homepage
 
 Use the hero and the sections below it to explain the public purpose: one coherent route into the programme, collaborating universities, funding, research, publications, engagement, news and resources. Note that the visual direction is intentionally scholarly rather than product/startup styled.
 
-## 3. Open ISC-XR
+## 3. Open Research
 
-Open **Research → ISC-XR**.
+Open **Research**.
 
-Explain that ISC-XR is the supplied representative ARISE-related project. Its linked publications and authors are now verified from publisher and proceedings records, while the project's complete scope, team and approved programme wording remain clearly labelled for consortium review.
+Explain how the page presents connected areas of enquiry without labelling them as formal work packages. Named projects can be added later when their approved identity, scope and relationships are available.
 
-## 4. Show the connected records
+## 4. Open a verified publication
 
-On the ISC-XR page, scroll through **Project people**, **Linked publications**, and **Resources and coverage**. Explain that these are generated from content relationships, not copied into the page.
+Open **Publications → ConPose**. Point out its verified author list, journal, DOI, publisher link and funding evidence.
 
 ## 5. Open a person profile
 
-Open **Samuel Adebayo** from the project page. Show that his institutional profile is concise, while the related research and publications are derived from project and publication records rather than copied into his profile.
+Open **Samuel Adebayo** from the ConPose author list. Show that his institutional profile is concise, while related publications are derived from publication authorship rather than copied into his profile.
 
 ## 6. Open Publications
 
-Open **Publications** and show the year grouping, output type and linked project. Open **ConPose** and point out its verified author list, journal, DOI and publisher link.
+Open **Publications** and show the year grouping, output type, authorship and funding evidence. Explain that project links are optional and are only added where a named project relationship is independently supported.
 
 ## 7. Show one raw content record
 
 Open [`src/content/publications/conpose.md`](https://github.com/exponentialR/arise-website-demo/blob/main/src/content/publications/conpose.md) in GitHub.
 
-Point to `authors` and `projects`. Explain the maintenance story:
+Point to `authors`, `funding` and `projects`. Explain the maintenance story:
 
 ```text
 Add publication record
@@ -45,12 +45,12 @@ GitHub Actions rebuilds
         ↓
 Publication appears on the site
         ↓
-Project and author pages update automatically
+Author and funding pages update automatically
 ```
 
 ## 8. Explain “entered once, reused”
 
-The ConPose record owns its citation metadata and references. The publication index, detail page, ISC-XR page, each author profile and grouping views all query that one record.
+The ConPose record owns its citation metadata and references. The publication index, detail page, author profiles, funding pages and grouping views all query that one record.
 
 The relationship to demonstrate is:
 
@@ -61,14 +61,14 @@ publication index
         ↓
 author profiles
         ↓
-relevant project page
+relevant funding pages
 ```
 
 ## 9. Separate funders from institutions
 
 Open **Funding**. Show that NSF, SFI and DfE are funding bodies with award records—not university cards. Open NSF to show the award identifier, evidence labels and the wider set of research outputs reported against or acknowledging the award.
 
-Stress that a funding relationship and an ISC-XR project relationship are separate fields. The catalogue does not force every award output onto the ISC-XR page.
+Stress that funding evidence and project relationships are separate fields. The catalogue does not force an award output into a named project.
 
 ## 10. Show engagement as connected content
 

@@ -61,7 +61,7 @@ Funders are not institution records. A funder record stores the official body, s
 - **Publisher funding metadata:** publisher-deposited metadata identifies the award;
 - **Reported by funder:** an official funder record lists the output against the award.
 
-These labels prevent a funder-reported output from being presented as though the paper itself contained the acknowledgement. Funding does not imply an ISC-XR project relationship; `projects` remains empty unless that narrower link is evidenced.
+These labels prevent a funder-reported output from being presented as though the paper itself contained the acknowledgement. Funding does not imply a project relationship; `projects` remains empty unless that narrower link is evidenced.
 
 ## Institution identity and logos
 

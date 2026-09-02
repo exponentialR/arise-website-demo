@@ -148,35 +148,31 @@ const photoUrl = person.data.photo
     </div>
   </section>
 
-  <section
-    class="section section--tint"
-    aria-labelledby="profile-projects-heading"
-  >
-    <div class="shell">
-      <div class="section-heading section-heading--row">
-        <div>
-          <p class="eyebrow">Research portfolio</p>
-          <h2 id="profile-projects-heading">Related research</h2>
-        </div>
-        <p class="section-note">
-          Research connected through verified project records.
-        </p>
-      </div>
-      {
-        linkedProjects.length > 0 ? (
+  {
+    linkedProjects.length > 0 && (
+      <section
+        class="section section--tint"
+        aria-labelledby="profile-projects-heading"
+      >
+        <div class="shell">
+          <div class="section-heading section-heading--row">
+            <div>
+              <p class="eyebrow">Research portfolio</p>
+              <h2 id="profile-projects-heading">Related research</h2>
+            </div>
+            <p class="section-note">
+              Research connected through verified project records.
+            </p>
+          </div>
           <div class="project-grid">
             {linkedProjects.map((project) => (
               <ProjectCard project={project} />
             ))}
           </div>
-        ) : (
-          <p class="empty-state">
-            No verified project relationship is currently recorded.
-          </p>
-        )
-      }
-    </div>
-  </section>
+        </div>
+      </section>
+    )
+  }
 
   <section class="section" aria-labelledby="profile-publications-heading">
     <div class="shell">

@@ -22,4 +22,4 @@ summary: "A robotics paper presenting a risk-sensitive formulation of the extend
 demo: false
 ---
 
-The official NSF award record lists this publication as a research product reported against award 2222815. No ISC-XR relationship is assigned.
+The official NSF award record lists this publication as a research product reported against award 2222815.

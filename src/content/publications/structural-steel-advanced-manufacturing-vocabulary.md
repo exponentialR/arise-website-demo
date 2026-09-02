@@ -29,4 +29,4 @@ summary: "A conference contribution examining the vocabulary needed where struct
 demo: false
 ---
 
-The official NSF award record lists this publication as a research product reported against award 2222815. This catalogue entry does not infer an ISC-XR relationship or claim that NSF was the paper's only source of support.
+The official NSF award record lists this publication as a research product reported against award 2222815. This catalogue entry does not claim that NSF was the paper's only source of support.

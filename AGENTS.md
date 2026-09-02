@@ -26,7 +26,7 @@ Model relationships between these content types. Publications may reference peop
 Create Home, About, Projects, individual project pages, People, individual person pages, Publications, News, In the Media, and Partners/Contact.
 
 ## Demo content
-Include ISC-XR as one representative project. Use realistic structure, but do not invent achievements, funding claims, people, affiliations or publication details that are not explicitly provided. Use obvious placeholders where necessary.
+Do not present unpublished work in progress as a project or create a publication record for it until its verified title, authorship and status are supplied. Use realistic structure, but do not invent achievements, funding claims, people, affiliations or publication details that are not explicitly provided. Use obvious placeholders where necessary.
 
 ## Design
 Professional international academic/research-programme aesthetic. White/light backgrounds, restrained blue/grey palette, generous spacing, strong accessible typography, responsive layouts. Avoid startup-style gradients, glassmorphism, excessive animation or generic AI imagery.

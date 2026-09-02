@@ -113,10 +113,10 @@ const fundersById = new Map(funders.map((funder) => [funder.id, funder]));
             </div>
           )
         }
-        <div class="detail-sidebar__block">
-          <p class="detail-label">Related projects</p>
-          {
-            publication.data.projects.length > 0 ? (
+        {
+          publication.data.projects.length > 0 && (
+            <div class="detail-sidebar__block">
+              <p class="detail-label">Related projects</p>
               <ul class="plain-list">
                 {publication.data.projects.map((reference) => {
                   const project = projectsById.get(reference.id);
@@ -129,11 +129,9 @@ const fundersById = new Map(funders.map((funder) => [funder.id, funder]));
                   ) : null;
                 })}
               </ul>
-            ) : (
-              <p>No project-level relationship is asserted.</p>
-            )
-          }
-        </div>
+            </div>
+          )
+        }
         {
           (publication.data.doi || publication.data.externalUrl) && (
             <div class="detail-sidebar__block">

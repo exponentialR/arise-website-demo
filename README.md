@@ -85,7 +85,7 @@ src/content/
 └── resources/
 ```
 
-Each filename is its stable record ID. For example, `src/content/projects/isc-xr.md` becomes the project ID `isc-xr` and the page `/research/isc-xr/`.
+Each filename is its stable record ID. For example, `src/content/publications/conpose.md` becomes the publication ID `conpose` and the page `/publications/conpose/`.
 
 ### Add a person
 

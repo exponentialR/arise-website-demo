@@ -30,4 +30,4 @@ summary: "A conceptual framework for integrating an intermeshed steel connection
 demo: false
 ---
 
-The title, authors, venue and DOI are recorded in the official ISEC proceedings. The paper acknowledges NSF award 2222815. It is included as a grant-linked output, but is not assigned to ISC-XR because that narrower project relationship was not established by the source.
+The title, authors, venue and DOI are recorded in the official ISEC proceedings. The paper acknowledges NSF award 2222815 and is included as a grant-linked output.

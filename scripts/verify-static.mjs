@@ -68,7 +68,7 @@ for (const file of htmlFiles) {
 const requiredPages = [
   "index.html",
   "about/index.html",
-  "research/isc-xr/index.html",
+  "research/index.html",
   "people/samuel-adebayo/index.html",
   "people/debra-laefer/index.html",
   "people/david-hester/index.html",

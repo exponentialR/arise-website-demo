@@ -25,4 +25,4 @@ summary: "A conceptual framework examining worker-safety and ergonomics consider
 demo: false
 ---
 
-The publisher metadata records online publication in 2025 within the proceedings titled _Computing in Civil Engineering 2024_. The official NSF award record reports this paper against award 2222815. No ISC-XR relationship is inferred.
+The publisher metadata records online publication in 2025 within the proceedings titled _Computing in Civil Engineering 2024_. The official NSF award record reports this paper against award 2222815.

@@ -1,12 +1,7 @@
 ---
-import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PageHeader from "../../components/PageHeader.astro";
-import ProjectCard from "../../components/ProjectCard.astro";
-
-const projects = (await getCollection("projects")).sort(
-  (a, b) => (a.data.order ?? 999) - (b.data.order ?? 999),
-);
+import { sitePath } from "../../lib/site";
 ---
 
 <BaseLayout
@@ -23,21 +18,65 @@ const projects = (await getCollection("projects")).sort(
     <div class="shell">
       <div class="section-heading section-heading--row">
         <div>
-          <p class="eyebrow">Project directory</p>
-          <h2>Research projects</h2>
+          <p class="eyebrow">Connected areas of enquiry</p>
+          <h2>Research across the assembly system</h2>
         </div>
         <p class="section-note">
-          Each project brings together its researchers, institutions and related
-          outputs.
+          These areas describe the current public research landscape; they are
+          not presented as formal work packages.
         </p>
       </div>
-      <div
-        class:list={[
-          "project-grid",
-          { "project-grid--single": projects.length === 1 },
-        ]}
-      >
-        {projects.map((project) => <ProjectCard project={project} />)}
+      <div class="research-area-grid">
+        <article>
+          <p class="research-area-grid__number">01</p>
+          <h3>Structural systems</h3>
+          <p>
+            Research into connection concepts, structural behaviour and the
+            performance of steel assembly systems.
+          </p>
+        </article>
+        <article>
+          <p class="research-area-grid__number">02</p>
+          <h3>Manufacturing and assembly</h3>
+          <p>
+            Research connecting structural design with fabrication, assembly
+            methods and building erection.
+          </p>
+        </article>
+        <article>
+          <p class="research-area-grid__number">03</p>
+          <h3>Robotics and perception</h3>
+          <p>
+            Computer vision, datasets, manipulation, planning and control for
+            robotic construction tasks.
+          </p>
+        </article>
+        <article>
+          <p class="research-area-grid__number">04</p>
+          <h3>Implementation and safety</h3>
+          <p>
+            Worker safety, ergonomics and the human dimensions of adopting new
+            construction technologies.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tint">
+    <div class="shell callout-panel">
+      <div>
+        <p class="eyebrow">Published research</p>
+        <h2>Explore the evidence behind these areas.</h2>
+      </div>
+      <div>
+        <p>
+          Browse verified publications and follow their authors, funding
+          acknowledgements and institutional affiliations.
+        </p>
+        <a class="button" href={sitePath("/publications/")}
+          >Browse publications</a
+        >
       </div>
     </div>
   </section>
