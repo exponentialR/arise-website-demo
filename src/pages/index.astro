@@ -7,6 +7,7 @@ import NewsCard from "../components/NewsCard.astro";
 import HeroResearchVisual from "../components/HeroResearchVisual.astro";
 import InstitutionMark from "../components/InstitutionMark.astro";
 import FunderMark from "../components/FunderMark.astro";
+import HomePersonCard from "../components/HomePersonCard.astro";
 import { sitePath } from "../lib/site";
 
 const [
@@ -17,6 +18,7 @@ const [
   institutions,
   funders,
   engagement,
+  people,
 ] = await Promise.all([
   getCollection("projects"),
   getCollection("publications"),
@@ -25,6 +27,7 @@ const [
   getCollection("institutions"),
   getCollection("funders"),
   getCollection("engagement"),
+  getCollection("people"),
 ]);
 
 const featuredProjects = projects
@@ -58,6 +61,22 @@ const orderedFunders = funders.sort(
 const latestEngagement = engagement
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 3);
+const institutionsById = new Map(
+  institutions.map((institution) => [institution.id, institution]),
+);
+const peopleById = new Map(people.map((person) => [person.id, person]));
+const featuredPeopleIds = [
+  "debra-laefer",
+  "david-hester",
+  "daniel-mcpolin",
+  "karen-rafferty",
+  "samuel-adebayo",
+  "miftahur-rahman",
+];
+const featuredPeople = featuredPeopleIds.flatMap((id) => {
+  const person = peopleById.get(id);
+  return person ? [person] : [];
+});
 ---
 
 <BaseLayout
@@ -67,8 +86,8 @@ const latestEngagement = engagement
   <section class="hero">
     <div class="shell hero__grid">
       <div class="hero__copy">
-        <p class="eyebrow">Assembly and robotics in steel building erection</p>
-        <h1>Researching the future of steel building assembly.</h1>
+        <p class="eyebrow">International research programme</p>
+        <h1>Reimagining how steel buildings come together.</h1>
         <p class="hero__intro">
           ARISE—Assembly and Robotics Innovation in Steel Building
           Erection—brings together interdisciplinary research spanning
@@ -86,13 +105,46 @@ const latestEngagement = engagement
       </div>
       <HeroResearchVisual />
     </div>
+    <div class="shell hero-themes" aria-label="ARISE research themes">
+      <span>Structural systems</span>
+      <span>Advanced manufacturing</span>
+      <span>Robotics &amp; perception</span>
+      <span>Human-centred adoption</span>
+    </div>
+  </section>
+
+  <section class="programme-intro" aria-labelledby="programme-intro-heading">
+    <div class="shell programme-intro__grid">
+      <div>
+        <p class="eyebrow">A connected research challenge</p>
+        <h2 id="programme-intro-heading">
+          From engineered connections to the people and systems that assemble
+          them.
+        </h2>
+      </div>
+      <div class="programme-intro__body">
+        <p>
+          ARISE connects structural engineering, construction, robotics and
+          technology research across an international university partnership.
+          The programme examines steel building erection as a whole system—not
+          as a single technical problem.
+        </p>
+        <ol class="research-thread-list">
+          <li><span>01</span> Design connections for new assembly methods</li>
+          <li><span>02</span> Develop perception and robotic capabilities</li>
+          <li><span>03</span> Study implementation in construction practice</li>
+        </ol>
+      </div>
+    </div>
   </section>
 
   <section class="context-strip" aria-labelledby="context-heading">
     <div class="shell">
-      <div class="section-heading compact">
-        <p class="eyebrow">International collaboration</p>
-        <h2 id="context-heading">Collaborating universities</h2>
+      <div class="institution-rail__heading">
+        <p id="context-heading">A US–Ireland research collaboration</p>
+        <a href={sitePath("/partners-contact/")}
+          >Institutions <span aria-hidden="true">→</span></a
+        >
       </div>
       <div class="name-grid">
         {
@@ -109,45 +161,17 @@ const latestEngagement = engagement
     </div>
   </section>
 
-  <section class="funding-strip" aria-labelledby="funding-strip-heading">
-    <div class="shell funding-strip__grid">
-      <div>
-        <p class="eyebrow">Tri-jurisdictional funding</p>
-        <h2 id="funding-strip-heading">
-          Supporting research across three jurisdictions.
-        </h2>
-        <p class="section-note">
-          Award identifiers and linked outputs are drawn from official award,
-          publisher and proceedings records.
-        </p>
-        <a class="text-link" href={sitePath("/funding/")}
-          >See funding evidence <span aria-hidden="true">→</span></a
-        >
-      </div>
-      <div class="funder-mini-grid">
-        {
-          orderedFunders.map((funder) => (
-            <a href={sitePath(`/funding/${funder.id}/`)}>
-              <FunderMark funder={funder} compact />
-              <small>{funder.data.jurisdiction}</small>
-            </a>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <section class="section" aria-labelledby="research-heading">
+  <section class="section research-feature" aria-labelledby="research-heading">
     <div class="shell">
       <div class="section-heading section-heading--row">
         <div>
-          <p class="eyebrow">Featured research</p>
-          <h2 id="research-heading">Research in focus</h2>
+          <p class="eyebrow">Research in focus</p>
+          <h2 id="research-heading">Rethinking the steel connection.</h2>
         </div>
         <div>
           <p class="section-note">
-            Explore research through connected project, people and output
-            records.
+            Follow a line of research through its people, publications and
+            supporting resources.
           </p>
           <a class="text-link" href={sitePath("/research/")}
             >View all research <span aria-hidden="true">→</span></a
@@ -161,6 +185,41 @@ const latestEngagement = engagement
         ]}
       >
         {featuredProjects.map((project) => <ProjectCard project={project} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section people-feature" aria-labelledby="people-heading">
+    <div class="shell">
+      <div class="section-heading section-heading--row">
+        <div>
+          <p class="eyebrow">Research community</p>
+          <h2 id="people-heading">People shaping the work.</h2>
+        </div>
+        <div>
+          <p class="section-note">
+            Researchers across structures, construction, robotics and emerging
+            technology.
+          </p>
+          <a class="text-link" href={sitePath("/people/")}
+            >Meet the full team <span aria-hidden="true">→</span></a
+          >
+        </div>
+      </div>
+      <div class="home-people-grid">
+        {
+          featuredPeople.map((person, index) => (
+            <HomePersonCard
+              person={person}
+              position={index}
+              institutionName={
+                person.data.institution
+                  ? institutionsById.get(person.data.institution.id)?.data.name
+                  : undefined
+              }
+            />
+          ))
+        }
       </div>
     </div>
   </section>
@@ -189,6 +248,34 @@ const latestEngagement = engagement
                   projectsById.get(reference.id)?.data.title ?? reference.id,
               )}
             />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="funding-strip" aria-labelledby="funding-strip-heading">
+    <div class="shell funding-strip__grid">
+      <div>
+        <p class="eyebrow">Publicly funded research</p>
+        <h2 id="funding-strip-heading">
+          Supporting collaboration across three jurisdictions.
+        </h2>
+        <p class="section-note">
+          Award identifiers and linked outputs are drawn from official award,
+          publisher and proceedings records.
+        </p>
+        <a class="text-link" href={sitePath("/funding/")}
+          >View funding and awards <span aria-hidden="true">→</span></a
+        >
+      </div>
+      <div class="funder-mini-grid">
+        {
+          orderedFunders.map((funder) => (
+            <a href={sitePath(`/funding/${funder.id}/`)}>
+              <FunderMark funder={funder} compact />
+              <small>{funder.data.jurisdiction}</small>
+            </a>
           ))
         }
       </div>
@@ -300,25 +387,4 @@ const latestEngagement = engagement
       </section>
     )
   }
-
-  <section class="section home-final">
-    <div class="shell home-final__grid">
-      <div>
-        <p class="eyebrow">Explore ARISE</p>
-        <h2>People, projects and outputs in one connected programme.</h2>
-      </div>
-      <div>
-        <p class="lede">
-          Discover the researchers contributing to ARISE, the institutions they
-          work with and the publications emerging from connected research.
-        </p>
-        <div class="button-row">
-          <a class="button" href={sitePath("/people/")}>Explore people</a>
-          <a class="text-link" href={sitePath("/publications/")}
-            >Browse publications <span aria-hidden="true">→</span></a
-          >
-        </div>
-      </div>
-    </div>
-  </section>
 </BaseLayout>

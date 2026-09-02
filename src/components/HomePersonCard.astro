@@ -1,0 +1,57 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { sitePath } from "../lib/site";
+
+interface Props {
+  person: CollectionEntry<"people">;
+  institutionName?: string;
+  position: number;
+}
+
+const { person, institutionName, position } = Astro.props;
+const photoUrl = person.data.photo
+  ? person.data.photo.url.startsWith("http")
+    ? person.data.photo.url
+    : sitePath(person.data.photo.url)
+  : undefined;
+const initials = person.data.name
+  .split(" ")
+  .map((part) => part[0])
+  .join("")
+  .slice(0, 2);
+---
+
+<article class="home-person">
+  <a
+    class="home-person__image-link"
+    href={sitePath(`/people/${person.id}/`)}
+    aria-label={`View ${person.data.name}'s profile`}
+  >
+    {
+      photoUrl ? (
+        <img
+          src={photoUrl}
+          alt=""
+          width="640"
+          height="760"
+          loading="eager"
+          decoding="async"
+        />
+      ) : (
+        <span class="home-person__initials" aria-hidden="true">
+          {initials}
+        </span>
+      )
+    }
+    <span class="home-person__index" aria-hidden="true">
+      {String(position + 1).padStart(2, "0")}
+    </span>
+  </a>
+  <div class="home-person__body">
+    <h3>
+      <a href={sitePath(`/people/${person.id}/`)}>{person.data.name}</a>
+    </h3>
+    <p>{person.data.role}</p>
+    {institutionName && <small>{institutionName}</small>}
+  </div>
+</article>
