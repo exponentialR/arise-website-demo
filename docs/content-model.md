@@ -44,7 +44,7 @@ Project and person schemas also permit optional curated forward references. Deta
 
 ## Profile photographs
 
-A person record may include an optional `photo` block with `url`, `alt`, `sourceUrl` and `sourceLabel`. The source fields make the image's public institutional origin visible on the profile page. If no appropriate verified photograph is available, the templates render the person's initials instead of inventing or substituting a likeness. Image selection and reuse permission must be confirmed before an official launch.
+A person record may include an optional `photo` block with `url`, `alt`, `sourceLabel` and an optional `sourceUrl`. A supplied local image uses a root-relative `/images/people/...` path; an externally hosted image uses its full URL. The source information is shown on the profile page. If no appropriate verified photograph is available, the templates render the person's initials instead of inventing or substituting a likeness. Image selection and reuse permission must be confirmed before an official launch.
 
 ## Demonstration records
 

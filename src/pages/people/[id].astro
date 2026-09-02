@@ -53,6 +53,11 @@ const initials = person.data.name
   .map((part) => part[0])
   .join("")
   .slice(0, 2);
+const photoUrl = person.data.photo
+  ? person.data.photo.url.startsWith("http")
+    ? person.data.photo.url
+    : sitePath(person.data.photo.url)
+  : undefined;
 ---
 
 <BaseLayout title={person.data.name} description={person.data.summary}>
@@ -63,7 +68,7 @@ const initials = person.data.name
           <figure class="profile-hero__media">
             <img
               class="profile-hero__portrait profile-hero__portrait--image"
-              src={person.data.photo.url}
+              src={photoUrl}
               alt={person.data.photo.alt}
               width="640"
               height="640"
@@ -72,9 +77,13 @@ const initials = person.data.name
             />
             <figcaption>
               Photo source:{" "}
-              <a href={person.data.photo.sourceUrl}>
-                {person.data.photo.sourceLabel}
-              </a>
+              {person.data.photo.sourceUrl ? (
+                <a href={person.data.photo.sourceUrl}>
+                  {person.data.photo.sourceLabel}
+                </a>
+              ) : (
+                person.data.photo.sourceLabel
+              )}
             </figcaption>
           </figure>
         ) : (

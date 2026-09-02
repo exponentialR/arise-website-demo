@@ -8,9 +8,9 @@ const profileLink = z.object({
 });
 
 const profilePhoto = z.object({
-  url: z.url(),
+  url: z.union([z.url(), z.string().regex(/^\/images\//)]),
   alt: z.string(),
-  sourceUrl: z.url(),
+  sourceUrl: z.url().optional(),
   sourceLabel: z.string(),
 });
 

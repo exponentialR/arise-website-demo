@@ -7,10 +7,9 @@ profileLinks:
   - label: "Queen's University Belfast profile"
     url: "https://pure.qub.ac.uk/en/persons/david-hester/"
 photo:
-  url: "https://pure.qub.ac.uk/files-asset/2178348/095d477c2074ce841d461be0553b575c.jpg?w=640&f=jpg"
+  url: "/images/people/david-hester.jpg"
   alt: "Portrait of David Hester"
-  sourceUrl: "https://pure.qub.ac.uk/en/persons/david-hester/"
-  sourceLabel: "Queen's University Belfast profile"
+  sourceLabel: "supplied for this demonstrator"
 order: 3
 ---
 

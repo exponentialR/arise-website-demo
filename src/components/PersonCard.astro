@@ -14,6 +14,11 @@ const initials = person.data.name
   .map((part) => part[0])
   .join("")
   .slice(0, 2);
+const photoUrl = person.data.photo
+  ? person.data.photo.url.startsWith("http")
+    ? person.data.photo.url
+    : sitePath(person.data.photo.url)
+  : undefined;
 ---
 
 <article class="person-card">
@@ -21,7 +26,7 @@ const initials = person.data.name
     person.data.photo ? (
       <img
         class="person-card__portrait person-card__portrait--image"
-        src={person.data.photo.url}
+        src={photoUrl}
         alt=""
         width="640"
         height="640"
