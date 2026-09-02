@@ -10,7 +10,7 @@ photo:
   url: "/images/people/david-hester.jpg"
   alt: "Portrait of David Hester"
   sourceLabel: "supplied for this demonstrator"
-order: 3
+order: 2
 ---
 
 David Hester's official university profile describes research spanning structural engineering, bridge structural-health monitoring, instrumentation, signal processing and decision support. His connection to the work catalogued here is also evidenced through the linked publication records.

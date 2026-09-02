@@ -10,7 +10,7 @@ photo:
   url: "/images/people/samuel-adebayo.jpg"
   alt: "Portrait of Samuel Adebayo"
   sourceLabel: "supplied for this demonstrator"
-order: 2
+order: 5
 ---
 
 Samuel Adebayo's research context in this demonstrator is machine learning and computer vision, robotics, and perception for intermeshed steel connection assembly. Publications below are generated automatically from verified author references in the publication records.

@@ -5,10 +5,10 @@ summary: "A representative ARISE-related project entry cataloguing verified ISC-
 status: "Details to be confirmed"
 people:
   - "debra-laefer"
-  - "samuel-adebayo"
   - "david-hester"
   - "daniel-mcpolin"
   - "karen-rafferty"
+  - "samuel-adebayo"
   - "miftahur-rahman"
   - "ibukun-awolusi"
   - "dorian-acevedo-mejia"

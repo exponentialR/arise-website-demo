@@ -6,6 +6,10 @@ summary: "Co-author of ISC-Perception; the publisher record affiliates him with 
 profileLinks:
   - label: "ISC-Perception publisher record"
     url: "https://www.mdpi.com/2075-5309/16/17/3407"
+photo:
+  url: "/images/people/dorian-acevedo-mejia.png"
+  alt: "Portrait of Dorian A. Acevedo-Mejia"
+  sourceLabel: "supplied for this demonstrator"
 order: 8
 ---
 

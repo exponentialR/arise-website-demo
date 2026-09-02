@@ -11,7 +11,7 @@ photo:
   alt: "Portrait of Karen Rafferty"
   sourceUrl: "https://pure.qub.ac.uk/en/persons/karen-rafferty/"
   sourceLabel: "Queen's University Belfast profile"
-order: 5
+order: 4
 ---
 
 Karen Rafferty's official university profile describes research leadership in AI-informed visualisation for decision-making and teaching interests in virtual and augmented reality. Her connection to the work catalogued here is evidenced through the linked project and publication records.

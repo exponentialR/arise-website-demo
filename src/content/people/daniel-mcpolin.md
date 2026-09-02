@@ -11,7 +11,7 @@ photo:
   alt: "Portrait of Daniel McPolin"
   sourceUrl: "https://pure.qub.ac.uk/en/persons/daniel-mcpolin/"
   sourceLabel: "Queen's University Belfast profile"
-order: 4
+order: 3
 ---
 
 Daniel McPolin's official university profile records work on structural design, testing and performance, concrete durability, timber engineering and sensor development. The profile also identifies him as principal investigator for Queen's ARISE research record.
